@@ -1,56 +1,97 @@
 // JAVASCRIPT FUNDAMENTALS
 // ============================================================
 
-// JavaScript is an object-based programming language.
+// JavaScript is a high-level, dynamically typed programming language.
 //
-// JavaScript is a scripting language.
-// It is executed by a JavaScript engine.
+// It is commonly described as a scripting language because it can
+// be embedded in and executed by host environments such as browsers
+// and Node.js.
+//
+// JavaScript code is executed by a JavaScript engine.
 // Modern JavaScript engines use JIT (Just-In-Time) compilation.
 //
-// JavaScript generally executes statements sequentially,
-// from top to bottom, while following the language's
-// evaluation rules.
+// JavaScript generally executes statements sequentially, from top
+// to bottom, while following the language's evaluation rules.
 //
 // JavaScript can be integrated with HTML.
 //
-// JavaScript is case-sensitive.
+// JavaScript is CASE-SENSITIVE.
 //
 // Example:
+//
 // myName !== MyName
+//
+// "myName" and "MyName" are different identifiers.
 
 // ============================================================
 // JAVASCRIPT IN HTML
 // ============================================================
 
-// 1. External JavaScript
+// 1. EXTERNAL JAVASCRIPT
+//
 // JavaScript is written in a separate .js file
 // and connected to the HTML document.
 //
-// 2. Internal JavaScript
-// JavaScript is written inside a <script> element
+// Example:
+//
+// <script src="script.js"></script>
+
+// 2. INTERNAL JAVASCRIPT
+//
+// JavaScript is written directly inside a <script> element
 // in the HTML document.
 //
+// Example:
+//
+// <script>
+//   console.log("Hello");
+// </script>
+//
 // A <script> element can be placed in the <head> or <body>.
-// Its position, and attributes such as defer and async,
-// affect when the script is downloaded and executed.
+//
+// Attributes such as defer and async affect when an external
+// script is downloaded and executed.
+//
+// defer:
+// → Downloads the script while HTML is being parsed.
+// → Executes it after HTML parsing is complete.
+//
+// async:
+// → Downloads the script while HTML is being parsed.
+// → Executes it as soon as it finishes downloading.
+//
+// Note:
+// The exact execution behavior depends on how the script
+// is included in the document.
 
 // ============================================================
 // PROGRAM
 // ============================================================
 
-// A program is a set of instructions designed
-// to perform a specific task.
+// A program is a set of instructions designed to perform
+// one or more specific tasks.
 
 // ============================================================
 // NULL
 // ============================================================
 
-// null represents the intentional absence of an object value.
+// null represents an intentional absence of a value.
 //
-// It is commonly used to indicate that a variable is intentionally
-// empty or that an object/value is currently absent.
+// It is commonly used when a variable should explicitly
+// contain "no value".
 
 var user = null;
+
+console.log(user); // null
+
+// IMPORTANT:
+//
+// typeof null returns "object".
+//
+// This is a historical behavior in JavaScript.
+//
+// typeof null;
+// → "object"
 
 // ============================================================
 // OBJECTS
@@ -58,13 +99,13 @@ var user = null;
 
 // An object can be understood conceptually as having:
 //
-// 1. State
+// 1. STATE
 //    → The data/values stored in the object.
 //
-// 2. Identity
+// 2. IDENTITY
 //    → The specific object itself.
 //
-// Variables that contain objects hold references to those objects.
+// Variables that contain objects hold REFERENCES to those objects.
 //
 // Simplified mental model:
 //
@@ -75,9 +116,10 @@ var user = null;
 //     object → actual object data
 //
 // NOTE:
-// The stack/heap model is useful for understanding references,
-// but it is a simplified mental model rather than a strict
-// description of how every JavaScript engine implements memory.
+//
+// The stack/heap model is a useful mental model for understanding
+// references, but it is simplified. JavaScript does not require
+// every engine to implement memory exactly this way.
 
 // ============================================================
 // PRIMITIVE VALUES
@@ -102,11 +144,15 @@ console.log(typeof myvar); // "number"
 
 var myvarone = new Number(10);
 
-// new Number(10) creates a Number object.
+// new Number(10) creates a Number OBJECT.
+//
+// It does NOT create a primitive number.
 
 console.log(myvarone);
 console.log(typeof myvarone); // "object"
 
+// Compare:
+//
 // 10
 // → primitive number
 //
@@ -123,15 +169,15 @@ console.log(typeof myvarone); // "object"
 var arr1 = [10, 20, 30];
 var arr2 = [10, 20, 50];
 
-// arr1 and arr2 refer to two different array objects.
+// arr1 and arr2 refer to two DIFFERENT array objects.
 //
-// Even though the arrays contain some equal values,
-// they have different identities/references.
+// Even if two arrays contain exactly the same values,
+// they are still different objects.
 
 console.log(arr1 == arr2); // false
 console.log(arr1 === arr2); // false
 
-// The values at index 0 are both the primitive number 10.
+// The values at index 0 are both primitive numbers.
 
 console.log(arr1[0] == arr2[0]); // true
 console.log(arr1[0] === arr2[0]); // true
@@ -144,7 +190,7 @@ arr1 = arr2;
 
 // arr1 does NOT receive a copy of the array.
 //
-// Instead, arr1 receives the same reference as arr2.
+// Instead, arr1 receives the SAME reference as arr2.
 //
 // Both variables now refer to the same array object.
 
@@ -158,13 +204,13 @@ console.log(arr1 === arr2); // true
 //       [10, 20, 50]
 //           ↑
 // arr2 ─────┘
-
+//
 // Important:
 //
 // Assigning an object variable to another object variable
-// copies the reference, not the object itself.
+// copies the REFERENCE, not the object itself.
 //
-// If the old object is no longer referenced by anything,
+// If the old object is no longer reachable,
 // it becomes eligible for garbage collection.
 
 // ============================================================
@@ -176,19 +222,33 @@ console.log(arr1 === arr2); // true
 // 1. Global scope
 // 2. Function scope
 // 3. Block scope
+//
+// var:
+// → Function-scoped.
+//
+// let / const:
+// → Block-scoped.
 
 // ============================================================
 // IMPLICIT GLOBAL VARIABLES
 // ============================================================
 
-// In non-strict mode, assigning to an undeclared identifier
-// can create a global property.
+// In non-strict mode, assigning a value to an undeclared
+// identifier can create a property on the global object.
 //
 // This is BAD PRACTICE and should be avoided.
 
-name = "Ahmed";
-
-// In strict mode, this produces a ReferenceError.
+// Example:
+//
+// name = "Ahmed";
+//
+// In strict mode:
+//
+// "use strict";
+//
+// name = "Ahmed";
+//
+// → ReferenceError
 //
 // Always declare variables using:
 //
@@ -211,16 +271,25 @@ console.log(fname);
 // In non-strict mode, because fname was not declared,
 // the assignment can create an implicit global.
 //
-// This is NOT because of hoisting.
+// This is NOT caused by hoisting.
 //
-// In strict mode, this would produce a ReferenceError.
+// Scope and hoisting are different concepts.
+//
+// In strict mode, this produces a ReferenceError.
+//
+// Better:
+//
+// function myname() {
+//   var fname = "Ahmed";
+// }
 
 // ============================================================
 // HOISTING
 // ============================================================
 
-// Hoisting means that declarations are processed
-// before the code is executed.
+// Hoisting is the behavior in which declarations are processed
+// during the creation of an execution context before execution
+// reaches the corresponding line of code.
 //
 // Example:
 
@@ -228,18 +297,41 @@ console.log(x); // undefined
 
 var x = 10;
 
-// Conceptually:
+// Conceptually, this behaves like:
 
 var x;
+
 console.log(x); // undefined
+
 x = 10;
 
 // IMPORTANT:
 //
-// Hoisting does NOT make local variables accessible
-// from the global scope.
+// Only the declaration is hoisted.
+// The assignment is NOT hoisted.
 //
-// Scope and hoisting are different concepts.
+// var x;
+// → declaration
+//
+// x = 10;
+// → assignment
+
+// ============================================================
+// let / const AND HOISTING
+// ============================================================
+
+// let and const declarations are also processed before execution,
+// but they cannot be accessed before their declaration is reached.
+//
+// This period is called the TEMPORAL DEAD ZONE (TDZ).
+//
+// Example:
+//
+// console.log(y); // ReferenceError
+// let y = 10;
+//
+// console.log(z); // ReferenceError
+// const z = 10;
 
 // ============================================================
 // NUMBER TYPE
@@ -278,8 +370,8 @@ console.log(sum(10, "Ahmed")); // "10Ahmed"
 // 1. Numeric addition
 // 2. String concatenation
 //
-// When one operand is a string,
-// the other operand can be converted to a string.
+// When one operand is a string, the other operand may be
+// converted to a string.
 
 // ============================================================
 // NUMBER OBJECT METHODS
@@ -324,17 +416,22 @@ console.log((11111.234).toFixed(2));
 // ============================================================
 
 // Primitive values can use methods such as toFixed().
+//
+// Conceptually, JavaScript temporarily provides access to
+// appropriate wrapper-object behavior.
+//
+// Example:
 
 var j = 10.5656;
 
 console.log(j.toFixed(1));
 // "10.6"
 
-// Conceptually, JavaScript allows primitive values
-// to access methods through corresponding wrapper objects.
+// IMPORTANT:
 //
-// This is a useful mental model for understanding
-// why primitives can have methods.
+// This does NOT mean that j becomes a Number object.
+//
+// j remains a primitive number.
 
 // ============================================================
 // OBJECT LITERAL
@@ -351,7 +448,7 @@ test.myfunc = function () {
 
 console.log(test);
 
-// test now contains:
+// test now contains a property:
 //
 // {
 //   myfunc: function
@@ -401,7 +498,7 @@ console.log(0.1 + 0.2 == 0.3);
 console.log(0.1 + 0.2);
 // 0.30000000000000004
 
-// The problem is NOT caused by adding a double to a float.
+// The issue is NOT caused by adding a double to a float.
 //
 // JavaScript Number values use double-precision
 // floating-point representation.
@@ -423,20 +520,28 @@ console.log(Number.MAX_SAFE_INTEGER);
 // 9007199254740991
 
 // MAX_VALUE:
+//
 // → Largest finite Number.
 //
 // MAX_SAFE_INTEGER:
+//
 // → Largest integer that can be represented safely
 //   with exact integer precision.
 
 console.log(Number.MIN_VALUE);
+
 // Smallest positive non-zero Number value.
 //
-// NOTE:
+// IMPORTANT:
+//
 // MIN_VALUE is NOT the most negative number.
 
 console.log(-Number.MAX_VALUE);
+
 // Smallest finite Number.
+
+console.log(Number.MIN_SAFE_INTEGER);
+// -9007199254740991
 
 // ============================================================
 // INFINITY
@@ -476,12 +581,14 @@ console.log(f == s);
 // ============================================================
 
 // ==
+//
 // → Loose equality
 // → May perform type coercion
-//
+
 // ===
+//
 // → Strict equality
-// → Does not perform type coercion.
+// → Does NOT perform type coercion.
 
 console.log("1" == 1);
 // true
@@ -499,7 +606,7 @@ console.log("1" === 1);
 console.log(3 * "2");
 // 6
 
-// The * operator converts appropriate operands to numbers.
+// The * operator converts operands to numbers when possible.
 
 console.log(3 + 2);
 // 5
@@ -540,8 +647,8 @@ console.log(false === 0);
 // EXPLICIT TYPE CONVERSION
 // ============================================================
 
-// Explicit conversion means intentionally
-// converting one type into another.
+// Explicit conversion means intentionally converting
+// one type into another.
 
 // ------------------------------------------------------------
 // parseInt()
@@ -550,8 +657,8 @@ console.log(false === 0);
 console.log(Number.parseInt("1234.45adas"));
 // 1234
 
-// parseInt() reads an integer from the beginning
-// of a string and stops when the numeric part ends.
+// parseInt() reads an integer from the beginning of a string
+// and stops when the numeric part ends.
 
 console.log(Number.parseInt("dsfsdf45"));
 // NaN
@@ -582,10 +689,12 @@ console.log(typeof +"34");
 // PROMPT
 // ============================================================
 
-// prompt() returns:
+// prompt() is a browser API.
 //
-// → a string if the user enters a value and clicks OK
-// → null if the user clicks Cancel
+// It returns:
+//
+// → a STRING if the user enters a value and clicks OK.
+// → null if the user clicks Cancel.
 
 const pr = () => prompt();
 
@@ -596,6 +705,11 @@ const pr = () => prompt();
 //
 // User clicks Cancel:
 // prompt() → null
+//
+// IMPORTANT:
+//
+// Even if the user enters a number,
+// prompt() returns a STRING.
 
 // ============================================================
 // NaN
@@ -661,7 +775,8 @@ console.log(isNaN("   "));
 // false
 //
 // "   " → 0
-// 0 is not NaN
+//
+// 0 is not NaN.
 
 // ============================================================
 // WHITESPACE STRING CONVERSION
@@ -678,11 +793,11 @@ console.log("   " === 0);
 // "   " → 0
 // 0 == 0
 // → true
-
+//
 // With ===:
 //
-// "   " is a string
-// 0 is a number
+// "   " is a string.
+// 0 is a number.
 // → false
 
 // ============================================================
@@ -715,10 +830,12 @@ console.log(Number(" "));
 // Number("4545abc")
 // → NaN
 //
-// parseInt() parses the numeric prefix.
+// parseInt():
+// → Parses the numeric prefix.
 //
-// Number() requires the entire trimmed string
-// to represent a valid number.
+// Number():
+// → Requires the entire trimmed string to represent
+//   a valid number.
 
 // ============================================================
 // STRINGS
@@ -742,6 +859,7 @@ console.log(mystr.length);
 // 17
 
 // The last valid index is:
+//
 // length - 1
 
 console.log(mystr[mystr.length - 1]);
@@ -761,7 +879,7 @@ console.log(mystr[mystr.length]);
 // lastIndexOf()
 // substring()
 // slice()
-// substr()     // legacy; prefer slice()
+// substr()       // legacy
 // replace()
 // split()
 // toLowerCase()
@@ -821,9 +939,12 @@ console.log(mystr.slice(-3));
 // substr()
 // ============================================================
 
+// Syntax:
+//
 // substr(start, length)
 //
 // NOTE:
+//
 // substr() is a legacy method.
 // Prefer slice() in modern JavaScript.
 
@@ -837,7 +958,7 @@ console.log(mystr.substr(-4, 4));
 // STRING IMMUTABILITY
 // ============================================================
 
-// Strings are immutable.
+// Strings are IMMUTABLE.
 //
 // String methods do NOT modify the original string.
 //
@@ -849,6 +970,10 @@ mystr.toUpperCase();
 
 console.log(mystr);
 // Original value is unchanged.
+
+// If you want to store the result:
+//
+// mystr = mystr.toUpperCase();
 
 // ============================================================
 // indexOf()
@@ -878,7 +1003,8 @@ console.log(mystr.lastIndexOf("u"));
 // replace()
 // ============================================================
 
-// By default, replace() changes only the first matching occurrence.
+// By default, replace() changes only the FIRST
+// matching occurrence.
 
 console.log(mystr.replace("a", "@"));
 
@@ -920,6 +1046,7 @@ console.log(mystr.split(""));
 console.log(mystr.split(" "));
 
 console.log(mystr.split("k"));
+
 // If the separator does not exist,
 // the result is an array containing the original string.
 
@@ -939,13 +1066,16 @@ for (var i = 0; i < mystr.length; i++) {
 
 console.log(resStr);
 
-// The loop creates a new string instead of modifying mystr.
-//
 // Original:
+//
 // "Amazing Nasr City"
 //
 // Result:
+//
 // "aMAZING nASR cITY"
+//
+// The loop creates a NEW string.
+// It does not modify mystr.
 
 // ============================================================
 // ARRAYS
@@ -961,8 +1091,6 @@ console.log(resStr);
 // Value:  10  20  30  40
 //
 // JavaScript arrays can contain values of different types.
-//
-// Example:
 
 var mixed = [10, "Ahmed", true, null];
 
@@ -989,8 +1117,8 @@ console.log(typeof myarr2);
 // ============================================================
 
 // new Array(5)
-// creates an array with length 5
-// containing empty slots.
+//
+// Creates an array with length 5 containing empty slots.
 
 var myarr3 = new Array(5);
 
@@ -1009,7 +1137,7 @@ console.log(myarr4);
 // Usually, array literals are clearer:
 //
 // []
-
+//
 // or:
 //
 // [1, 2, 3]
@@ -1089,14 +1217,18 @@ console.log(myarr4.length);
 // ============================================================
 
 // push()
-// → adds elements to the END.
+//
+// → Adds elements to the END.
+// → Returns the new array length.
 
 myarr4.push(70);
 
 console.log(myarr4);
 
 // unshift()
-// → adds elements to the BEGINNING.
+//
+// → Adds elements to the BEGINNING.
+// → Returns the new array length.
 
 myarr4.unshift(10);
 
@@ -1114,9 +1246,9 @@ console.log(myarr4);
 //
 // array.splice(start, deleteCount, item1, item2, ...)
 
-// -------------------------
-// Insert
-// -------------------------
+// ------------------------------------------------------------
+// INSERT
+// ------------------------------------------------------------
 
 myarr4.splice(1, 0, 25);
 
@@ -1126,9 +1258,9 @@ console.log(myarr4);
 // deleteCount = 0
 // 25 = value to insert
 
-// -------------------------
-// Remove
-// -------------------------
+// ------------------------------------------------------------
+// REMOVE
+// ------------------------------------------------------------
 
 myarr4.splice(1, 2);
 
@@ -1137,38 +1269,50 @@ console.log(myarr4);
 // start = 1
 // deleteCount = 2
 
-// -------------------------
-// Replace
-// -------------------------
+// ------------------------------------------------------------
+// REPLACE
+// ------------------------------------------------------------
 
 myarr4.splice(1, 10, 100, 200, 300);
 
 console.log(myarr4);
 
 // Starting at index 1:
-// → remove up to 10 elements
-// → insert 100, 200, and 300
-
+//
+// → Remove up to 10 elements.
+// → Insert 100, 200, and 300.
+//
 // splice() modifies the original array.
+//
+// splice() also returns an array containing
+// the elements that were removed.
 
 // ============================================================
 // ARRAY REMOVAL METHODS
 // ============================================================
 
 // pop()
-// → removes the last element.
+//
+// → Removes the last element.
+// → Returns the removed element.
 //
 // shift()
-// → removes the first element.
+//
+// → Removes the first element.
+// → Returns the removed element.
 //
 // splice()
-// → removes/replaces elements at any position.
+//
+// → Removes/replaces elements at any position.
 
 // ============================================================
-// ARRAY METHODS: MUTATING VS NON-MUTATING
+// ARRAY METHODS:
+// MUTATING VS NON-MUTATING
 // ============================================================
 
-// Some array methods modify the original array.
+// MUTATING METHODS:
+//
+// These modify the original array.
 //
 // Examples:
 //
@@ -1177,11 +1321,12 @@ console.log(myarr4);
 // shift()
 // unshift()
 // splice()
+// reverse()
+// sort()
+
+// NON-MUTATING METHODS:
 //
-// These are MUTATING methods.
-//
-// Other methods return new arrays/values without
-// modifying the original array.
+// These do not modify the original array.
 //
 // Examples:
 //
@@ -1189,106 +1334,430 @@ console.log(myarr4);
 // concat()
 // map()
 // filter()
+// reduce()
 //
-// Always check whether a method mutates the original
-// array before using it.
+// Always check whether a method mutates the original array.
 
-// Array methods that mutate original object
-myarr2.reverse(); //?
+// ============================================================
+// reverse()
+// ============================================================
 
-console.log(myarr2); //?
+myarr2.reverse();
 
-// Sorting algorithm in JS
-myarr2.sort(); //?
-myarr2.reverse(); //?
-// Sort by ASCII --> can sort string well but number maybe problematic
+console.log(myarr2);
+
+// reverse() MODIFIES the original array.
+//
+// It reverses the order of the elements.
+
+// ============================================================
+// sort()
+// ============================================================
+
+// sort() MODIFIES the original array.
+//
+// By default, sort() converts elements to strings
+// and compares their UTF-16 code units.
+//
+// Therefore, numeric sorting requires a compare function.
+
+myarr2.sort();
+
+console.log(myarr2);
+
+// Example:
+//
+// [10, 2, 5].sort()
+//
+// → [10, 2, 5]
+//
+// This is because the values are compared as strings:
+//
+// "10"
+// "2"
+// "5"
+
+// Numeric sorting:
 
 function mysorter(x, y) {
   return x - y;
 }
 
-myarr2.sort(mysorter); //?
+myarr2.sort(mysorter);
+
+// Or:
+//
+// myarr2.sort((x, y) => x - y);
+//
+// x - y < 0
+// → x comes before y
+//
+// x - y > 0
+// → y comes before x
+//
+// x - y === 0
+// → relative order remains unchanged
+
+// ============================================================
+// filter()
+// ============================================================
+
+// filter() creates a NEW ARRAY.
+//
+// It keeps elements for which the callback
+// returns a truthy value.
 
 function isOdd(x) {
   return x % 2;
 }
 
-myarr2.filter(isOdd); //?
+console.log(myarr2.filter(isOdd));
 
-// Predicate function takes an argument and return boolean
+// Predicate function:
+//
+// A predicate is a function that returns a value
+// interpreted as true or false.
+//
+// For filter(), truthy → keep the element.
+//           falsy  → discard the element.
 
-// Filter function always return an array
-myarr2.filter(function (x) {
-  return x > 1;
-}); //?
+console.log(
+  myarr2.filter(function (x) {
+    return x > 1;
+  }),
+);
 
-// Reduce(previous, current, initial value for previous?)
+// filter() ALWAYS returns a new array.
 
-myarr2.reduce((x, y) => {
-  return x + y;
-}, 10); //?
+// ============================================================
+// reduce()
+// ============================================================
 
-// ReduceRight to start from right
+// reduce() processes array elements and combines them
+// into a single accumulated result.
+//
+// Syntax:
+//
+// array.reduce(callback, initialValue)
+//
+// Callback parameters:
+//
+// (accumulator, currentValue, index, array)
 
-// Slice recreate a new array with diff identity and modified state of the operated array
+console.log(
+  myarr2.reduce((x, y) => {
+    return x + y;
+  }, 10),
+);
 
-myarr2.slice(1, 3); //?
+// 10 is the initial accumulator value.
+//
+// Example:
+//
+// [1, 2, 3].reduce((acc, current) => acc + current, 10)
+//
+// → 16
 
-myarr2.map(function (n) {
-  return n.toString();
-}); //?
-// map does not change the original object
+// ============================================================
+// reduceRight()
+// ============================================================
 
-myarr2; //?
+// reduceRight() works similarly to reduce(),
+// but processes the array from RIGHT to LEFT.
 
-// Math object
-Math.PI.toFixed(2); //?
+// ============================================================
+// slice()
+// ============================================================
 
-Math.random(); //?
-Math.random() * 10; //?
+// slice() creates a NEW array.
+//
+// It does NOT modify the original array.
+//
+// Syntax:
+//
+// array.slice(start, end)
+//
+// end is NOT included.
 
-// (min, max)
-Math.random() * (10, 20); //?
+console.log(myarr2.slice(1, 3));
 
-// Boolean value is false by default
-var bool = new Boolean().valueOf(); //?
+// ============================================================
+// map()
+// ============================================================
 
-new Boolean(null).valueOf(); //?
-new Boolean(0).valueOf(); //?
-new Boolean(NaN).valueOf(); //?
-new Boolean("").valueOf(); //?
-new Boolean("Ahmed").valueOf(); //?
-new Boolean(10).valueOf(); //?
+// map() creates a NEW array.
+//
+// It transforms every element according to
+// the callback function.
+//
+// It does NOT modify the original array.
 
-// && ==> if cond 1 (true) ==> return cond 2
-// && ==> if cond 1 (false) ==> return cond 1
+console.log(
+  myarr2.map(function (n) {
+    return n.toString();
+  }),
+);
 
-20 > 30 && 10 > 5; //?
+// Example:
+//
+// [1, 2, 3]
+// → ["1", "2", "3"]
 
-"Ahmed" && "Mostafa"; //?
-"" && "Mostafa"; //?
-null && undefined; //?
+// ============================================================
+// MATH OBJECT
+// ============================================================
 
-// || ==> if cond 1 (true) ==> return cond 2
-// || ==> if cond 1 (false) ==> return cond 1
+// Math is a built-in object containing mathematical
+// constants and functions.
 
-"Ahmed " || "Mostafa"; //?
-"" || "Mostafa"; //?
-null || undefined; //?
+console.log(Math.PI.toFixed(2));
+// "3.14"
 
-// Date => 3 methods categories
-// Set, Get, To
+console.log(Math.random());
+// Random number >= 0 and < 1
 
-var today = new Date().getMonth(); //?
+console.log(Math.random() * 10);
+// Random number >= 0 and < 10
 
-// days and month indexed from 0
+// ============================================================
+// RANDOM NUMBER RANGE
+// ============================================================
 
-new Date().toLocaleString(); //?
-new Date().toLocaleString("ar-EG"); //?
-new Date().toLocaleString("ar-SA"); //?
+// IMPORTANT:
+//
+// Math.random() * (10, 20)
+//
+// does NOT generate a random number between 10 and 20.
+//
+// The comma operator evaluates both expressions
+// and returns the last one.
+//
+// Therefore:
+//
+// (10, 20)
+// → 20
+//
+// So:
+//
+// Math.random() * (10, 20)
+//
+// is effectively:
+//
+// Math.random() * 20
 
-(12124564213).toString(); //?
+// To generate a random floating-point number
+// between min and max:
+//
+// Math.random() * (max - min) + min
+//
+// Example:
+//
+// Math.random() * (20 - 10) + 10
+//
+// → range: 10 <= result < 20
 
-new Number(11213213).toLocaleString("ar-EG"); //?
-new Number(11213213).toLocaleString("en-EG"); //?
-new Number(11213213).toLocaleString("en-US"); //?
+// ============================================================
+// BOOLEAN OBJECT
+// ============================================================
+
+// Boolean values are:
+//
+// true
+// false
+//
+// Boolean objects can be created with new Boolean(),
+// but this is usually unnecessary.
+//
+// Prefer primitive booleans.
+
+var bool = new Boolean().valueOf();
+
+console.log(bool);
+// false
+
+console.log(new Boolean(null).valueOf());
+// false
+
+console.log(new Boolean(0).valueOf());
+// false
+
+console.log(new Boolean(NaN).valueOf());
+// false
+
+console.log(new Boolean("").valueOf());
+// false
+
+console.log(new Boolean("Ahmed").valueOf());
+// true
+
+console.log(new Boolean(10).valueOf());
+// true
+
+// ============================================================
+// TRUTHY AND FALSY VALUES
+// ============================================================
+
+// Common falsy values:
+//
+// false
+// 0
+// -0
+// 0n
+// ""
+// null
+// undefined
+// NaN
+//
+// Most other values are truthy.
+//
+// IMPORTANT:
+//
+// "0" is truthy.
+// [] is truthy.
+// {} is truthy.
+
+// ============================================================
+// LOGICAL AND: &&
+// ============================================================
+
+// && does NOT necessarily return true or false.
+//
+// It returns one of its operands.
+//
+// Rule:
+//
+// If the first operand is FALSY:
+// → return the first operand.
+//
+// If the first operand is TRUTHY:
+// → return the second operand.
+
+console.log(20 > 30 && 10 > 5);
+// false
+
+console.log("Ahmed" && "Mostafa");
+// "Mostafa"
+
+console.log("" && "Mostafa");
+// ""
+
+console.log(null && undefined);
+// null
+
+// ============================================================
+// LOGICAL OR: ||
+// ============================================================
+
+// || does NOT necessarily return true or false.
+//
+// It returns one of its operands.
+//
+// Rule:
+//
+// If the first operand is TRUTHY:
+// → return the first operand.
+//
+// If the first operand is FALSY:
+// → return the second operand.
+
+console.log("Ahmed" || "Mostafa");
+// "Ahmed"
+
+console.log("" || "Mostafa");
+// "Mostafa"
+
+console.log(null || undefined);
+// undefined
+
+// ============================================================
+// NULLISH COALESCING: ??
+// ============================================================
+
+// ?? returns the right-hand operand ONLY when
+// the left-hand operand is null or undefined.
+//
+// Example:
+//
+// null ?? "Ahmed"
+// → "Ahmed"
+//
+// undefined ?? "Ahmed"
+// → "Ahmed"
+//
+// 0 ?? "Ahmed"
+// → 0
+//
+// "" ?? "Ahmed"
+// → ""
+
+// ============================================================
+// DATE
+// ============================================================
+
+// Date is used to represent dates and times.
+//
+// Date methods can be grouped conceptually into:
+//
+// 1. Set
+// 2. Get
+// 3. Convert / Format
+
+// Example:
+
+var today = new Date().getMonth();
+
+console.log(today);
+
+// IMPORTANT:
+//
+// Months returned by getMonth() are zero-based:
+//
+// January → 0
+// February → 1
+// March → 2
+// ...
+// December → 11
+//
+// Date.getDay() is also zero-based:
+//
+// Sunday → 0
+// Monday → 1
+// ...
+// Saturday → 6
+
+// ============================================================
+// DATE TO LOCALE STRING
+// ============================================================
+
+console.log(new Date().toLocaleString());
+
+console.log(new Date().toLocaleString("ar-EG"));
+
+console.log(new Date().toLocaleString("ar-SA"));
+
+// Output depends on the environment,
+// locale, timezone, and current date/time.
+
+// ============================================================
+// NUMBER TO STRING
+// ============================================================
+
+console.log((12124564213).toString());
+
+// toString() converts the number into a string.
+
+// ============================================================
+// NUMBER TO LOCALE STRING
+// ============================================================
+
+console.log(new Number(11213213).toLocaleString("ar-EG"));
+
+console.log(new Number(11213213).toLocaleString("en-EG"));
+
+console.log(new Number(11213213).toLocaleString("en-US"));
+
+// toLocaleString() formats a number according
+// to the requested locale.
+//
+// The exact formatting can depend on the
+// JavaScript runtime and available locale data.
