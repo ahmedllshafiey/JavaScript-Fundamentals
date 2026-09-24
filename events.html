@@ -1,0 +1,1583 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Events</title>
+
+    <style>
+      body {
+        font-family: monospace;
+        line-height: 1.6;
+        margin: 30px;
+      }
+
+      section {
+        border: 1px solid #999;
+        padding: 20px;
+        margin-bottom: 30px;
+      }
+
+      button {
+        margin: 4px;
+        padding: 7px 12px;
+      }
+
+      input,
+      textarea,
+      select {
+        margin: 5px;
+        padding: 6px;
+      }
+
+      .box {
+        border: 2px solid black;
+        padding: 30px;
+        margin: 10px 0;
+      }
+
+      #mouseBox {
+        height: 120px;
+      }
+
+      #dragBox {
+        width: 150px;
+        padding: 30px;
+        border: 2px solid black;
+        cursor: grab;
+      }
+
+      #dropZone {
+        min-height: 100px;
+        border: 2px dashed black;
+        padding: 30px;
+      }
+
+      .active {
+        background-color: yellow;
+      }
+
+      #output {
+        white-space: pre-wrap;
+        background-color: #eee;
+        padding: 15px;
+        min-height: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--
+    =================================================================
+    JAVASCRIPT EVENTS
+    =================================================================
+
+    An event represents an occurrence that happens in the browser.
+
+    Examples:
+
+        click
+        dblclick
+        mouseenter
+        mouseleave
+        mousemove
+
+        keydown
+        keyup
+
+        input
+        change
+        submit
+
+        focus
+        blur
+
+        load
+        DOMContentLoaded
+
+        scroll
+        resize
+
+        drag
+        drop
+
+        touchstart
+        touchend
+
+        pointerdown
+        pointerup
+
+
+    JavaScript can respond to events using:
+
+        1. HTML event attributes
+        2. DOM event properties
+        3. addEventListener()
+
+
+    =================================================================
+    -->
+
+    <h1>JavaScript Events Playground</h1>
+
+    <!--
+    =================================================================
+    1. INLINE EVENT HANDLERS
+    =================================================================
+    -->
+
+    <section>
+      <h2>1. Inline Event Handler</h2>
+
+      <button onclick="inlineClick()">Click Me</button>
+    </section>
+
+    <!--
+    =================================================================
+    2. EVENT PROPERTY
+    =================================================================
+    -->
+
+    <section>
+      <h2>2. Event Property</h2>
+
+      <button id="propertyButton">Click Me</button>
+    </section>
+
+    <!--
+    =================================================================
+    3. addEventListener()
+    =================================================================
+    -->
+
+    <section>
+      <h2>3. addEventListener()</h2>
+
+      <button id="listenerButton">Click Me</button>
+    </section>
+
+    <!--
+    =================================================================
+    4. REMOVE EVENT LISTENER
+    =================================================================
+    -->
+
+    <section>
+      <h2>4. removeEventListener()</h2>
+
+      <button id="removeListenerButton">Click Me</button>
+
+      <button onclick="removeClickListener()">Remove Listener</button>
+    </section>
+
+    <!--
+    =================================================================
+    5. CLICK EVENTS
+    =================================================================
+    -->
+
+    <section>
+      <h2>5. Click Events</h2>
+
+      <button id="clickButton">click</button>
+
+      <button id="doubleClickButton">dblclick</button>
+    </section>
+
+    <!--
+    =================================================================
+    6. MOUSE EVENTS
+    =================================================================
+    -->
+
+    <section>
+      <h2>6. Mouse Events</h2>
+
+      <div id="mouseBox" class="box">Move your mouse here.</div>
+    </section>
+
+    <!--
+    =================================================================
+    7. MOUSE BUTTON
+    =================================================================
+    -->
+
+    <section>
+      <h2>7. Mouse Button</h2>
+
+      <div id="mouseButtonBox" class="box">
+        Click with different mouse buttons.
+      </div>
+    </section>
+
+    <!--
+    =================================================================
+    8. MOUSE COORDINATES
+    =================================================================
+    -->
+
+    <section>
+      <h2>8. Mouse Coordinates</h2>
+
+      <div id="coordinateBox" class="box">Move the mouse.</div>
+
+      <p id="coordinates"></p>
+    </section>
+
+    <!--
+    =================================================================
+    9. KEYBOARD EVENTS
+    =================================================================
+    -->
+
+    <section>
+      <h2>9. Keyboard Events</h2>
+
+      <input id="keyboardInput" placeholder="Press a key" />
+
+      <p id="keyboardOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    10. KEYDOWN / KEYUP
+    =================================================================
+    -->
+
+    <section>
+      <h2>10. keydown / keyup</h2>
+
+      <input id="keyInput" placeholder="Type here" />
+
+      <p id="keyStatus"></p>
+    </section>
+
+    <!--
+    =================================================================
+    11. MODIFIER KEYS
+    =================================================================
+    -->
+
+    <section>
+      <h2>11. Modifier Keys</h2>
+
+      <input id="modifierInput" placeholder="Try Ctrl / Shift / Alt" />
+    </section>
+
+    <!--
+    =================================================================
+    12. INPUT EVENT
+    =================================================================
+    -->
+
+    <section>
+      <h2>12. input</h2>
+
+      <input id="liveInput" placeholder="Type something" />
+
+      <p id="liveOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    13. CHANGE EVENT
+    =================================================================
+    -->
+
+    <section>
+      <h2>13. change</h2>
+
+      <input id="changeInput" value="Change me" />
+
+      <select id="changeSelect">
+        <option value="one">One</option>
+
+        <option value="two">Two</option>
+
+        <option value="three">Three</option>
+      </select>
+
+      <p id="changeOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    14. FOCUS / BLUR
+    =================================================================
+    -->
+
+    <section>
+      <h2>14. focus / blur</h2>
+
+      <input id="focusInput" placeholder="Focus me" />
+
+      <p id="focusOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    15. FOCUSIN / FOCUSOUT
+    =================================================================
+    -->
+
+    <section>
+      <h2>15. focusin / focusout</h2>
+
+      <div id="focusContainer">
+        <input placeholder="Input 1" />
+
+        <input placeholder="Input 2" />
+      </div>
+    </section>
+
+    <!--
+    =================================================================
+    16. FORM SUBMIT
+    =================================================================
+    -->
+
+    <section>
+      <h2>16. Form Submit</h2>
+
+      <form id="userForm">
+        <input id="nameInput" name="name" placeholder="Name" required />
+
+        <input
+          id="emailInput"
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+        />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <p id="formOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    17. FORM RESET
+    =================================================================
+    -->
+
+    <section>
+      <h2>17. Form Reset</h2>
+
+      <form id="resetForm">
+        <input name="username" value="Ahmed" />
+
+        <button type="reset">Reset</button>
+      </form>
+    </section>
+
+    <!--
+    =================================================================
+    18. CHECKBOX
+    =================================================================
+    -->
+
+    <section>
+      <h2>18. Checkbox</h2>
+
+      <label>
+        <input id="checkbox" type="checkbox" />
+
+        Accept terms
+      </label>
+
+      <p id="checkboxOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    19. RADIO BUTTON
+    =================================================================
+    -->
+
+    <section>
+      <h2>19. Radio Buttons</h2>
+
+      <label>
+        <input type="radio" name="gender" value="male" />
+        Male
+      </label>
+
+      <label>
+        <input type="radio" name="gender" value="female" />
+        Female
+      </label>
+
+      <p id="radioOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    20. SELECT
+    =================================================================
+    -->
+
+    <section>
+      <h2>20. Select</h2>
+
+      <select id="countrySelect">
+        <option value="egypt">Egypt</option>
+
+        <option value="usa">USA</option>
+
+        <option value="japan">Japan</option>
+      </select>
+
+      <p id="selectOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    21. EVENT OBJECT
+    =================================================================
+    -->
+
+    <section>
+      <h2>21. Event Object</h2>
+
+      <button id="eventObjectButton">Click</button>
+    </section>
+
+    <!--
+    =================================================================
+    22. target
+    =================================================================
+    -->
+
+    <section>
+      <h2>22. event.target</h2>
+
+      <div id="targetContainer">
+        <button>Button 1</button>
+
+        <button>Button 2</button>
+
+        <button>Button 3</button>
+      </div>
+    </section>
+
+    <!--
+    =================================================================
+    23. currentTarget
+    =================================================================
+    -->
+
+    <section>
+      <h2>23. event.currentTarget</h2>
+
+      <div id="currentTargetContainer" class="box">
+        <button>Click Me</button>
+      </div>
+    </section>
+
+    <!--
+    =================================================================
+    24. EVENT BUBBLING
+    =================================================================
+    -->
+
+    <section>
+      <h2>24. Event Bubbling</h2>
+
+      <div id="bubbleOuter" class="box">
+        Outer
+
+        <div id="bubbleInner" class="box">
+          Inner
+
+          <button id="bubbleButton">Button</button>
+        </div>
+      </div>
+    </section>
+
+    <!--
+    =================================================================
+    25. stopPropagation()
+    =================================================================
+    -->
+
+    <section>
+      <h2>25. stopPropagation()</h2>
+
+      <div id="stopOuter" class="box">
+        Outer
+
+        <button id="stopButton">Stop Propagation</button>
+      </div>
+    </section>
+
+    <!--
+    =================================================================
+    26. preventDefault()
+    =================================================================
+    -->
+
+    <section>
+      <h2>26. preventDefault()</h2>
+
+      <a id="preventLink" href="https://example.com"> Click this link </a>
+    </section>
+
+    <!--
+    =================================================================
+    27. EVENT CAPTURING
+    =================================================================
+    -->
+
+    <section>
+      <h2>27. Event Capturing</h2>
+
+      <div id="captureOuter" class="box">
+        Outer
+
+        <div id="captureInner" class="box">
+          Inner
+
+          <button id="captureButton">Button</button>
+        </div>
+      </div>
+    </section>
+
+    <!--
+    =================================================================
+    28. EVENT DELEGATION
+    =================================================================
+    -->
+
+    <section>
+      <h2>28. Event Delegation</h2>
+
+      <ul id="itemList">
+        <li>
+          <button>Item 1</button>
+        </li>
+
+        <li>
+          <button>Item 2</button>
+        </li>
+
+        <li>
+          <button>Item 3</button>
+        </li>
+      </ul>
+    </section>
+
+    <!--
+    =================================================================
+    29. ONCE OPTION
+    =================================================================
+    -->
+
+    <section>
+      <h2>29. once</h2>
+
+      <button id="onceButton">Click Once</button>
+    </section>
+
+    <!--
+    =================================================================
+    30. PASSIVE OPTION
+    =================================================================
+    -->
+
+    <section>
+      <h2>30. passive</h2>
+
+      <div id="passiveBox" class="box">Scroll here.</div>
+    </section>
+
+    <!--
+    =================================================================
+    31. ONCE / CAPTURE / PASSIVE OPTIONS
+    =================================================================
+
+    addEventListener(
+        type,
+        listener,
+        {
+            once: true,
+            capture: true,
+            passive: true
+        }
+    );
+
+    =================================================================
+    -->
+
+    <!--
+    =================================================================
+    32. CONTEXT MENU
+    =================================================================
+    -->
+
+    <section>
+      <h2>32. Context Menu</h2>
+
+      <div id="contextBox" class="box">Right-click me.</div>
+    </section>
+
+    <!--
+    =================================================================
+    33. COPY / CUT / PASTE
+    =================================================================
+    -->
+
+    <section>
+      <h2>33. Clipboard Events</h2>
+
+      <textarea id="clipboardInput" rows="5" cols="40"></textarea>
+
+      <p id="clipboardOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    34. DRAG AND DROP
+    =================================================================
+    -->
+
+    <section>
+      <h2>34. Drag and Drop</h2>
+
+      <div id="dragBox" draggable="true">Drag Me</div>
+
+      <br />
+
+      <div id="dropZone">Drop Here</div>
+    </section>
+
+    <!--
+    =================================================================
+    35. POINTER EVENTS
+    =================================================================
+    -->
+
+    <section>
+      <h2>35. Pointer Events</h2>
+
+      <div id="pointerBox" class="box">Pointer events</div>
+    </section>
+
+    <!--
+    =================================================================
+    36. TOUCH EVENTS
+    =================================================================
+    -->
+
+    <section>
+      <h2>36. Touch Events</h2>
+
+      <div id="touchBox" class="box">Touch this area on a touch device.</div>
+
+      <p id="touchOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    37. WINDOW EVENTS
+    =================================================================
+    -->
+
+    <section>
+      <h2>37. Window Events</h2>
+
+      <p id="windowOutput"></p>
+    </section>
+
+    <!--
+    =================================================================
+    38. SCROLL EVENT
+    =================================================================
+    -->
+
+    <section>
+      <h2>38. Scroll</h2>
+
+      <p>Scroll the page and watch the console.</p>
+    </section>
+
+    <!--
+    =================================================================
+    39. CUSTOM EVENTS
+    =================================================================
+    -->
+
+    <section>
+      <h2>39. Custom Events</h2>
+
+      <button id="customEventButton">Dispatch Custom Event</button>
+    </section>
+
+    <!--
+    =================================================================
+    40. EVENT LOG
+    =================================================================
+    -->
+
+    <section>
+      <h2>Event Output</h2>
+
+      <div id="output"></div>
+    </section>
+
+    <script>
+      /*
+        =================================================================
+        HELPER
+        =================================================================
+        */
+
+      function output(message) {
+        document.getElementById("output").textContent = String(message);
+      }
+
+      /*
+        =================================================================
+        1. INLINE EVENT HANDLER
+        =================================================================
+        */
+
+      function inlineClick() {
+        output("Inline onclick event fired.");
+      }
+
+      /*
+        =================================================================
+        2. EVENT PROPERTY
+        =================================================================
+        */
+
+      document.getElementById("propertyButton").onclick = function () {
+        output("Event property onclick fired.");
+      };
+
+      /*
+        =================================================================
+        3. addEventListener()
+        =================================================================
+        */
+
+      document
+        .getElementById("listenerButton")
+        .addEventListener("click", function () {
+          output("addEventListener() fired.");
+        });
+
+      /*
+        =================================================================
+        4. removeEventListener()
+        =================================================================
+        */
+
+      const removeButton = document.getElementById("removeListenerButton");
+
+      function removeButtonClick() {
+        output("Listener is active.");
+      }
+
+      removeButton.addEventListener("click", removeButtonClick);
+
+      function removeClickListener() {
+        removeButton.removeEventListener("click", removeButtonClick);
+
+        output("Listener removed.");
+      }
+
+      /*
+        =================================================================
+        5. CLICK EVENTS
+        =================================================================
+        */
+
+      document
+        .getElementById("clickButton")
+        .addEventListener("click", function () {
+          output("click event");
+        });
+
+      document
+        .getElementById("doubleClickButton")
+        .addEventListener("dblclick", function () {
+          output("dblclick event");
+        });
+
+      /*
+        =================================================================
+        6. MOUSE EVENTS
+        =================================================================
+        */
+
+      const mouseBox = document.getElementById("mouseBox");
+
+      mouseBox.addEventListener("mouseenter", function () {
+        mouseBox.textContent = "mouseenter";
+      });
+
+      mouseBox.addEventListener("mouseleave", function () {
+        mouseBox.textContent = "mouseleave";
+      });
+
+      mouseBox.addEventListener("mousedown", function () {
+        mouseBox.textContent = "mousedown";
+      });
+
+      mouseBox.addEventListener("mouseup", function () {
+        mouseBox.textContent = "mouseup";
+      });
+
+      /*
+        =================================================================
+        7. MOUSE BUTTON
+        =================================================================
+        */
+
+      document
+        .getElementById("mouseButtonBox")
+        .addEventListener("mousedown", function (event) {
+          output("Mouse button: " + event.button);
+        });
+
+      /*
+        event.button:
+
+            0 = primary button
+            1 = middle button
+            2 = secondary button
+        */
+
+      /*
+        =================================================================
+        8. MOUSE COORDINATES
+        =================================================================
+        */
+
+      document
+        .getElementById("coordinateBox")
+        .addEventListener("mousemove", function (event) {
+          document.getElementById("coordinates").textContent =
+            "clientX: " +
+            event.clientX +
+            " | clientY: " +
+            event.clientY +
+            " | pageX: " +
+            event.pageX +
+            " | pageY: " +
+            event.pageY +
+            " | offsetX: " +
+            event.offsetX +
+            " | offsetY: " +
+            event.offsetY;
+        });
+
+      /*
+        =================================================================
+        9. KEYBOARD EVENTS
+        =================================================================
+        */
+
+      document
+        .getElementById("keyboardInput")
+        .addEventListener("keydown", function (event) {
+          document.getElementById("keyboardOutput").textContent =
+            "key: " + event.key + " | code: " + event.code;
+        });
+
+      /*
+        =================================================================
+        10. KEYDOWN / KEYUP
+        =================================================================
+        */
+
+      const keyInput = document.getElementById("keyInput");
+
+      keyInput.addEventListener("keydown", function () {
+        document.getElementById("keyStatus").textContent = "Key down";
+      });
+
+      keyInput.addEventListener("keyup", function () {
+        document.getElementById("keyStatus").textContent = "Key up";
+      });
+
+      /*
+        =================================================================
+        11. MODIFIER KEYS
+        =================================================================
+        */
+
+      document
+        .getElementById("modifierInput")
+        .addEventListener("keydown", function (event) {
+          output(
+            "Ctrl: " +
+              event.ctrlKey +
+              "\nShift: " +
+              event.shiftKey +
+              "\nAlt: " +
+              event.altKey +
+              "\nMeta: " +
+              event.metaKey,
+          );
+        });
+
+      /*
+        =================================================================
+        12. INPUT
+        =================================================================
+        */
+
+      document
+        .getElementById("liveInput")
+        .addEventListener("input", function (event) {
+          document.getElementById("liveOutput").textContent =
+            event.target.value;
+        });
+
+      /*
+        =================================================================
+        13. CHANGE
+        =================================================================
+        */
+
+      document
+        .getElementById("changeInput")
+        .addEventListener("change", function (event) {
+          document.getElementById("changeOutput").textContent =
+            "Input changed: " + event.target.value;
+        });
+
+      document
+        .getElementById("changeSelect")
+        .addEventListener("change", function (event) {
+          document.getElementById("changeOutput").textContent =
+            "Selected: " + event.target.value;
+        });
+
+      /*
+        =================================================================
+        14. FOCUS / BLUR
+        =================================================================
+        */
+
+      const focusInput = document.getElementById("focusInput");
+
+      focusInput.addEventListener("focus", function () {
+        document.getElementById("focusOutput").textContent =
+          "Input received focus.";
+      });
+
+      focusInput.addEventListener("blur", function () {
+        document.getElementById("focusOutput").textContent =
+          "Input lost focus.";
+      });
+
+      /*
+        =================================================================
+        15. FOCUSIN / FOCUSOUT
+        =================================================================
+        */
+
+      document
+        .getElementById("focusContainer")
+        .addEventListener("focusin", function () {
+          console.log("focusin");
+        });
+
+      document
+        .getElementById("focusContainer")
+        .addEventListener("focusout", function () {
+          console.log("focusout");
+        });
+
+      /*
+        =================================================================
+        16. FORM SUBMIT
+        =================================================================
+        */
+
+      document
+        .getElementById("userForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const form = event.currentTarget;
+
+          const formData = new FormData(form);
+
+          document.getElementById("formOutput").textContent =
+            "Name: " +
+            formData.get("name") +
+            " | Email: " +
+            formData.get("email");
+        });
+
+      /*
+        =================================================================
+        17. FORM RESET
+        =================================================================
+        */
+
+      document
+        .getElementById("resetForm")
+        .addEventListener("reset", function () {
+          console.log("Form reset.");
+        });
+
+      /*
+        =================================================================
+        18. CHECKBOX
+        =================================================================
+        */
+
+      document
+        .getElementById("checkbox")
+        .addEventListener("change", function (event) {
+          document.getElementById("checkboxOutput").textContent =
+            "Checked: " + event.target.checked;
+        });
+
+      /*
+        =================================================================
+        19. RADIO BUTTON
+        =================================================================
+        */
+
+      document
+        .querySelectorAll('input[name="gender"]')
+        .forEach(function (radio) {
+          radio.addEventListener("change", function (event) {
+            document.getElementById("radioOutput").textContent =
+              "Selected: " + event.target.value;
+          });
+        });
+
+      /*
+        =================================================================
+        20. SELECT
+        =================================================================
+        */
+
+      document
+        .getElementById("countrySelect")
+        .addEventListener("change", function (event) {
+          document.getElementById("selectOutput").textContent =
+            "Selected: " + event.target.value;
+        });
+
+      /*
+        =================================================================
+        21. EVENT OBJECT
+        =================================================================
+        */
+
+      document
+        .getElementById("eventObjectButton")
+        .addEventListener("click", function (event) {
+          output(
+            "type: " +
+              event.type +
+              "\ntarget: " +
+              event.target.tagName +
+              "\ncurrentTarget: " +
+              event.currentTarget.tagName +
+              "\ntimeStamp: " +
+              event.timeStamp,
+          );
+        });
+
+      /*
+        =================================================================
+        22. EVENT TARGET
+        =================================================================
+        */
+
+      document
+        .getElementById("targetContainer")
+        .addEventListener("click", function (event) {
+          output("Target: " + event.target.textContent);
+        });
+
+      /*
+        =================================================================
+        23. CURRENT TARGET
+        =================================================================
+        */
+
+      document
+        .getElementById("currentTargetContainer")
+        .addEventListener("click", function (event) {
+          output(
+            "target: " +
+              event.target.tagName +
+              "\ncurrentTarget: " +
+              event.currentTarget.id,
+          );
+        });
+
+      /*
+        =================================================================
+        24. EVENT BUBBLING
+        =================================================================
+        */
+
+      document
+        .getElementById("bubbleOuter")
+        .addEventListener("click", function () {
+          console.log("Outer");
+        });
+
+      document
+        .getElementById("bubbleInner")
+        .addEventListener("click", function () {
+          console.log("Inner");
+        });
+
+      document
+        .getElementById("bubbleButton")
+        .addEventListener("click", function () {
+          console.log("Button");
+        });
+
+      /*
+        Event bubbles:
+
+            Button
+               ↓
+            Inner
+               ↓
+            Outer
+        */
+
+      /*
+        =================================================================
+        25. stopPropagation()
+        =================================================================
+        */
+
+      document
+        .getElementById("stopOuter")
+        .addEventListener("click", function () {
+          console.log("Outer clicked");
+        });
+
+      document
+        .getElementById("stopButton")
+        .addEventListener("click", function (event) {
+          event.stopPropagation();
+
+          console.log("Button clicked");
+        });
+
+      /*
+        =================================================================
+        26. preventDefault()
+        =================================================================
+        */
+
+      document
+        .getElementById("preventLink")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+
+          output("Default link navigation prevented.");
+        });
+
+      /*
+        =================================================================
+        27. EVENT CAPTURING
+        =================================================================
+        */
+
+      document.getElementById("captureOuter").addEventListener(
+        "click",
+        function () {
+          console.log("Outer - capture");
+        },
+        true,
+      );
+
+      document.getElementById("captureInner").addEventListener(
+        "click",
+        function () {
+          console.log("Inner - capture");
+        },
+        true,
+      );
+
+      document.getElementById("captureButton").addEventListener(
+        "click",
+        function () {
+          console.log("Button - capture");
+        },
+        true,
+      );
+
+      /*
+        =================================================================
+        28. EVENT DELEGATION
+        =================================================================
+        */
+
+      document
+        .getElementById("itemList")
+        .addEventListener("click", function (event) {
+          if (event.target.tagName === "BUTTON") {
+            output("Clicked: " + event.target.textContent);
+          }
+        });
+
+      /*
+        =================================================================
+        29. ONCE
+        =================================================================
+        */
+
+      document.getElementById("onceButton").addEventListener(
+        "click",
+        function () {
+          output("This listener can execute only once.");
+        },
+        {
+          once: true,
+        },
+      );
+
+      /*
+        =================================================================
+        30. PASSIVE
+        =================================================================
+        */
+
+      document.getElementById("passiveBox").addEventListener(
+        "wheel",
+        function () {
+          console.log("Wheel event.");
+        },
+        {
+          passive: true,
+        },
+      );
+
+      /*
+        =================================================================
+        32. CONTEXT MENU
+        =================================================================
+        */
+
+      document
+        .getElementById("contextBox")
+        .addEventListener("contextmenu", function (event) {
+          event.preventDefault();
+
+          output("Context menu prevented.");
+        });
+
+      /*
+        =================================================================
+        33. CLIPBOARD EVENTS
+        =================================================================
+        */
+
+      const clipboardInput = document.getElementById("clipboardInput");
+
+      clipboardInput.addEventListener("copy", function () {
+        document.getElementById("clipboardOutput").textContent = "Copy event.";
+      });
+
+      clipboardInput.addEventListener("cut", function () {
+        document.getElementById("clipboardOutput").textContent = "Cut event.";
+      });
+
+      clipboardInput.addEventListener("paste", function () {
+        document.getElementById("clipboardOutput").textContent = "Paste event.";
+      });
+
+      /*
+        =================================================================
+        34. DRAG AND DROP
+        =================================================================
+        */
+
+      const dragBox = document.getElementById("dragBox");
+
+      const dropZone = document.getElementById("dropZone");
+
+      dragBox.addEventListener("dragstart", function (event) {
+        event.dataTransfer.setData("text/plain", "Dragged item");
+      });
+
+      dropZone.addEventListener("dragover", function (event) {
+        // Required to allow dropping.
+
+        event.preventDefault();
+      });
+
+      dropZone.addEventListener("drop", function (event) {
+        event.preventDefault();
+
+        const data = event.dataTransfer.getData("text/plain");
+
+        dropZone.textContent = "Dropped: " + data;
+      });
+
+      /*
+        =================================================================
+        35. POINTER EVENTS
+        =================================================================
+        */
+
+      const pointerBox = document.getElementById("pointerBox");
+
+      pointerBox.addEventListener("pointerdown", function (event) {
+        pointerBox.textContent = "pointerdown: " + event.pointerType;
+      });
+
+      pointerBox.addEventListener("pointerup", function (event) {
+        pointerBox.textContent = "pointerup: " + event.pointerType;
+      });
+
+      pointerBox.addEventListener("pointermove", function (event) {
+        console.log(event.clientX, event.clientY);
+      });
+
+      /*
+        =================================================================
+        36. TOUCH EVENTS
+        =================================================================
+        */
+
+      const touchBox = document.getElementById("touchBox");
+
+      touchBox.addEventListener("touchstart", function () {
+        document.getElementById("touchOutput").textContent = "touchstart";
+      });
+
+      touchBox.addEventListener("touchend", function () {
+        document.getElementById("touchOutput").textContent = "touchend";
+      });
+
+      /*
+        =================================================================
+        37. WINDOW EVENTS
+        =================================================================
+        */
+
+      window.addEventListener("resize", function () {
+        document.getElementById("windowOutput").textContent =
+          "Width: " + window.innerWidth + " | Height: " + window.innerHeight;
+      });
+
+      /*
+        =================================================================
+        38. SCROLL
+        =================================================================
+        */
+
+      window.addEventListener("scroll", function () {
+        console.log("Scroll position:", window.scrollY);
+      });
+
+      /*
+        =================================================================
+        39. CUSTOM EVENTS
+        =================================================================
+        */
+
+      const customButton = document.getElementById("customEventButton");
+
+      document.addEventListener("userLogin", function (event) {
+        output("Custom event received." + "\nUser: " + event.detail.username);
+      });
+
+      customButton.addEventListener("click", function () {
+        const customEvent = new CustomEvent("userLogin", {
+          detail: {
+            username: "Ahmed",
+          },
+        });
+
+        document.dispatchEvent(customEvent);
+      });
+
+      /*
+        =================================================================
+        EVENT PHASES
+        =================================================================
+
+        An event generally travels through three phases:
+
+            1. Capturing phase
+
+                window
+                  ↓
+                document
+                  ↓
+                html
+                  ↓
+                body
+                  ↓
+                target
+
+            2. Target phase
+
+                target element
+
+            3. Bubbling phase
+
+                target
+                  ↓
+                parent
+                  ↓
+                body
+                  ↓
+                html
+                  ↓
+                document
+                  ↓
+                window
+
+
+        =================================================================
+        COMMON EVENT METHODS
+        =================================================================
+
+            event.preventDefault()
+
+                Prevents the browser's default action.
+
+
+            event.stopPropagation()
+
+                Stops propagation to other elements.
+
+
+            event.stopImmediatePropagation()
+
+                Stops propagation and prevents other listeners
+                on the same element from running.
+
+
+        =================================================================
+        COMMON EVENT PROPERTIES
+        =================================================================
+
+            event.type
+            event.target
+            event.currentTarget
+            event.timeStamp
+
+            event.key
+            event.code
+
+            event.clientX
+            event.clientY
+            event.pageX
+            event.pageY
+            event.offsetX
+            event.offsetY
+
+            event.ctrlKey
+            event.shiftKey
+            event.altKey
+            event.metaKey
+
+
+        =================================================================
+        COMMON EVENT CATEGORIES
+        =================================================================
+
+        Mouse:
+
+            click
+            dblclick
+            mousedown
+            mouseup
+            mousemove
+            mouseenter
+            mouseleave
+            mouseover
+            mouseout
+            contextmenu
+
+
+        Keyboard:
+
+            keydown
+            keyup
+
+
+        Form:
+
+            submit
+            reset
+            input
+            change
+            invalid
+
+
+        Focus:
+
+            focus
+            blur
+            focusin
+            focusout
+
+
+        Clipboard:
+
+            copy
+            cut
+            paste
+
+
+        Drag and Drop:
+
+            dragstart
+            drag
+            dragenter
+            dragover
+            dragleave
+            drop
+            dragend
+
+
+        Pointer:
+
+            pointerdown
+            pointerup
+            pointermove
+            pointerenter
+            pointerleave
+            pointerover
+            pointerout
+
+
+        Touch:
+
+            touchstart
+            touchmove
+            touchend
+            touchcancel
+
+
+        Window:
+
+            load
+            beforeunload
+            unload
+            resize
+            scroll
+
+
+        =================================================================
+        */
+    </script>
+  </body>
+</html>
