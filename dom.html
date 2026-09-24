@@ -1,0 +1,1459 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>DOM Concepts</title>
+
+    <style>
+      /*
+        ============================================================
+        BASIC STYLING
+        ============================================================
+        */
+
+      body {
+        font-family: monospace;
+        margin: 30px;
+        line-height: 1.6;
+      }
+
+      section {
+        margin-bottom: 40px;
+        padding: 20px;
+        border: 1px solid #999;
+      }
+
+      button {
+        margin: 4px;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+
+      input,
+      select,
+      textarea {
+        margin: 4px;
+        padding: 5px;
+      }
+
+      .box {
+        padding: 15px;
+        margin: 10px 0;
+        border: 2px solid black;
+      }
+
+      .highlight {
+        background-color: yellow;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .red {
+        color: red;
+      }
+
+      .blue {
+        color: blue;
+      }
+
+      .large {
+        font-size: 30px;
+      }
+
+      #output {
+        white-space: pre-wrap;
+        background-color: #eee;
+        padding: 15px;
+        min-height: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--
+    ================================================================
+    DOM - DOCUMENT OBJECT MODEL
+    ================================================================
+
+    The DOM represents an HTML document as a tree of objects.
+
+    HTML:
+
+        html
+        ├── head
+        │   ├── meta
+        │   └── title
+        │
+        └── body
+            ├── h1
+            ├── p
+            └── button
+
+
+    JavaScript can use the DOM to:
+
+    - Find elements
+    - Create elements
+    - Change elements
+    - Change text
+    - Change HTML
+    - Change attributes
+    - Change styles
+    - Change classes
+    - Add/remove elements
+    - Traverse the DOM tree
+    - Handle events
+    - Work with forms
+    - Observe DOM changes
+
+    The main DOM object is:
+
+        document
+
+
+    ================================================================
+    -->
+
+    <header>
+      <h1 id="mainTitle">DOM Concepts Playground</h1>
+
+      <p id="description">This page demonstrates common DOM concepts.</p>
+    </header>
+
+    <!--
+    ================================================================
+    1. SELECTING ELEMENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>1. Selecting Elements</h2>
+
+      <p id="selectById">Select me using getElementById().</p>
+
+      <p class="selectByClass">Select me using getElementsByClassName().</p>
+
+      <p class="selectByClass">Another element with the same class.</p>
+
+      <div>
+        <p>Select me using getElementsByTagName().</p>
+      </div>
+
+      <button onclick="selectById()">getElementById()</button>
+
+      <button onclick="selectByClass()">getElementsByClassName()</button>
+
+      <button onclick="selectByTag()">getElementsByTagName()</button>
+
+      <button onclick="selectWithQuerySelector()">querySelector()</button>
+
+      <button onclick="selectWithQuerySelectorAll()">querySelectorAll()</button>
+    </section>
+
+    <!--
+    ================================================================
+    2. TEXT CONTENT
+    ================================================================
+    -->
+
+    <section>
+      <h2>2. Text Content</h2>
+
+      <p id="textExample">Original text</p>
+
+      <button onclick="changeTextContent()">textContent</button>
+
+      <button onclick="changeInnerText()">innerText</button>
+
+      <button onclick="changeInnerHTML()">innerHTML</button>
+    </section>
+
+    <!--
+    ================================================================
+    3. ATTRIBUTES
+    ================================================================
+    -->
+
+    <section>
+      <h2>3. Attributes</h2>
+
+      <input
+        id="attributeInput"
+        type="text"
+        placeholder="Original placeholder"
+      />
+
+      <br />
+
+      <button onclick="getAttributeExample()">getAttribute()</button>
+
+      <button onclick="setAttributeExample()">setAttribute()</button>
+
+      <button onclick="removeAttributeExample()">removeAttribute()</button>
+
+      <button onclick="hasAttributeExample()">hasAttribute()</button>
+    </section>
+
+    <!--
+    ================================================================
+    4. DATA ATTRIBUTES
+    ================================================================
+    -->
+
+    <section>
+      <h2>4. Data Attributes</h2>
+
+      <div id="dataElement" data-user-id="100" data-role="student" class="box">
+        Element with data-* attributes
+      </div>
+
+      <button onclick="readDataAttributes()">Read dataset</button>
+
+      <button onclick="changeDataAttribute()">Change dataset</button>
+    </section>
+
+    <!--
+    ================================================================
+    5. CLASS MANIPULATION
+    ================================================================
+    -->
+
+    <section>
+      <h2>5. Classes</h2>
+
+      <p id="classExample">Class manipulation example.</p>
+
+      <button onclick="addClass()">classList.add()</button>
+
+      <button onclick="removeClass()">classList.remove()</button>
+
+      <button onclick="toggleClass()">classList.toggle()</button>
+
+      <button onclick="checkClass()">classList.contains()</button>
+
+      <button onclick="replaceClass()">classList.replace()</button>
+    </section>
+
+    <!--
+    ================================================================
+    6. INLINE STYLES
+    ================================================================
+    -->
+
+    <section>
+      <h2>6. Styles</h2>
+
+      <p id="styleExample">Change my style.</p>
+
+      <button onclick="changeStyle()">Change Style</button>
+
+      <button onclick="resetStyle()">Reset Style</button>
+
+      <button onclick="readComputedStyle()">getComputedStyle()</button>
+    </section>
+
+    <!--
+    ================================================================
+    7. DOM TRAVERSAL
+    ================================================================
+    -->
+
+    <section>
+      <h2>7. DOM Traversal</h2>
+
+      <div id="parent">
+        <p id="childOne">First child</p>
+
+        <p id="childTwo">Second child</p>
+
+        <p id="childThree">Third child</p>
+      </div>
+
+      <button onclick="parentExample()">parentElement</button>
+
+      <button onclick="childrenExample()">children</button>
+
+      <button onclick="firstChildExample()">firstElementChild</button>
+
+      <button onclick="lastChildExample()">lastElementChild</button>
+
+      <button onclick="nextSiblingExample()">nextElementSibling</button>
+
+      <button onclick="previousSiblingExample()">previousElementSibling</button>
+    </section>
+
+    <!--
+    ================================================================
+    8. NODE PROPERTIES
+    ================================================================
+    -->
+
+    <section>
+      <h2>8. Nodes</h2>
+
+      <p id="nodeExample">Node example</p>
+
+      <button onclick="showNodeInformation()">Show Node Information</button>
+    </section>
+
+    <!--
+    ================================================================
+    9. CREATE ELEMENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>9. Creating Elements</h2>
+
+      <div id="createContainer"></div>
+
+      <button onclick="createElementExample()">createElement()</button>
+
+      <button onclick="createTextNodeExample()">createTextNode()</button>
+    </section>
+
+    <!--
+    ================================================================
+    10. APPENDING ELEMENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>10. Append Elements</h2>
+
+      <div id="appendContainer"></div>
+
+      <button onclick="appendExample()">append()</button>
+
+      <button onclick="appendChildExample()">appendChild()</button>
+
+      <button onclick="prependExample()">prepend()</button>
+    </section>
+
+    <!--
+    ================================================================
+    11. INSERT ELEMENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>11. Insert Elements</h2>
+
+      <div id="insertContainer">
+        <p id="insertTarget">Target element</p>
+      </div>
+
+      <button onclick="beforeExample()">before()</button>
+
+      <button onclick="afterExample()">after()</button>
+
+      <button onclick="insertAdjacentHTMLExample()">
+        insertAdjacentHTML()
+      </button>
+    </section>
+
+    <!--
+    ================================================================
+    12. REMOVE ELEMENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>12. Remove Elements</h2>
+
+      <div id="removeContainer">
+        <p id="removeTarget">Remove me</p>
+      </div>
+
+      <button onclick="removeExample()">remove()</button>
+
+      <button onclick="removeChildExample()">removeChild()</button>
+    </section>
+
+    <!--
+    ================================================================
+    13. CLONING
+    ================================================================
+    -->
+
+    <section>
+      <h2>13. Cloning Elements</h2>
+
+      <div id="cloneContainer">
+        <p id="cloneTarget">Clone me</p>
+      </div>
+
+      <button onclick="cloneExample()">cloneNode()</button>
+    </section>
+
+    <!--
+    ================================================================
+    14. DOCUMENT FRAGMENT
+    ================================================================
+    -->
+
+    <section>
+      <h2>14. DocumentFragment</h2>
+
+      <div id="fragmentContainer"></div>
+
+      <button onclick="fragmentExample()">Create Fragment</button>
+    </section>
+
+    <!--
+    ================================================================
+    15. EVENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>15. Events</h2>
+
+      <button id="eventButton">Click Me</button>
+
+      <p id="eventOutput">No event yet.</p>
+    </section>
+
+    <!--
+    ================================================================
+    16. EVENT OBJECT
+    ================================================================
+    -->
+
+    <section>
+      <h2>16. Event Object</h2>
+
+      <button id="eventObjectButton">Click Me</button>
+    </section>
+
+    <!--
+    ================================================================
+    17. EVENT TARGET
+    ================================================================
+    -->
+
+    <section>
+      <div id="targetContainer">
+        <button>Button 1</button>
+
+        <button>Button 2</button>
+
+        <button>Button 3</button>
+      </div>
+    </section>
+
+    <!--
+    ================================================================
+    18. EVENT BUBBLING
+    ================================================================
+    -->
+
+    <section>
+      <h2>18. Event Bubbling</h2>
+
+      <div id="outerBox" class="box">
+        Outer
+
+        <div id="innerBox" class="box">
+          Inner
+
+          <button id="bubbleButton">Click</button>
+        </div>
+      </div>
+    </section>
+
+    <!--
+    ================================================================
+    19. EVENT CAPTURING
+    ================================================================
+    -->
+
+    <section>
+      <h2>19. Event Capturing</h2>
+
+      <div id="captureOuter" class="box">
+        Outer
+
+        <div id="captureInner" class="box">
+          Inner
+
+          <button id="captureButton">Click</button>
+        </div>
+      </div>
+    </section>
+
+    <!--
+    ================================================================
+    20. FORMS
+    ================================================================
+    -->
+
+    <section>
+      <h2>20. Forms</h2>
+
+      <form id="userForm">
+        <label>
+          Name:
+          <input id="nameInput" type="text" />
+        </label>
+
+        <br />
+
+        <label>
+          Email:
+          <input id="emailInput" type="email" />
+        </label>
+
+        <br />
+
+        <label>
+          Age:
+          <input id="ageInput" type="number" />
+        </label>
+
+        <br />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <p id="formOutput"></p>
+    </section>
+
+    <!--
+    ================================================================
+    21. CHECKBOX
+    ================================================================
+    -->
+
+    <section>
+      <h2>21. Checkbox</h2>
+
+      <label>
+        <input id="checkBox" type="checkbox" />
+
+        Accept
+      </label>
+
+      <button onclick="checkCheckbox()">Check</button>
+    </section>
+
+    <!--
+    ================================================================
+    22. SELECT
+    ================================================================
+    -->
+
+    <section>
+      <h2>22. Select Element</h2>
+
+      <select id="country">
+        <option value="egypt">Egypt</option>
+
+        <option value="usa">USA</option>
+
+        <option value="japan">Japan</option>
+      </select>
+
+      <button onclick="getSelectedOption()">Get Selection</button>
+    </section>
+
+    <!--
+    ================================================================
+    23. FORM EVENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>23. Input Events</h2>
+
+      <input id="liveInput" type="text" placeholder="Type something" />
+
+      <p id="liveOutput"></p>
+    </section>
+
+    <!--
+    ================================================================
+    24. MOUSE EVENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>24. Mouse Events</h2>
+
+      <div id="mouseBox" class="box">Move the mouse over me.</div>
+    </section>
+
+    <!--
+    ================================================================
+    25. KEYBOARD EVENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>25. Keyboard Events</h2>
+
+      <input id="keyboardInput" type="text" placeholder="Press a key" />
+
+      <p id="keyOutput"></p>
+    </section>
+
+    <!--
+    ================================================================
+    26. FOCUS AND BLUR
+    ================================================================
+    -->
+
+    <section>
+      <h2>26. Focus and Blur</h2>
+
+      <input id="focusInput" type="text" placeholder="Focus me" />
+    </section>
+
+    <!--
+    ================================================================
+    27. DOM CONTENT LOADED
+    ================================================================
+    -->
+
+    <section>
+      <h2>27. DOMContentLoaded</h2>
+
+      <p id="domReady">Waiting...</p>
+    </section>
+
+    <!--
+    ================================================================
+    28. WINDOW LOAD
+    ================================================================
+    -->
+
+    <section>
+      <h2>28. Load Event</h2>
+
+      <p id="loadOutput">Page loading...</p>
+    </section>
+
+    <!--
+    ================================================================
+    29. TABLE DOM
+    ================================================================
+    -->
+
+    <section>
+      <h2>29. Tables</h2>
+
+      <table id="studentTable" border="1">
+        <thead>
+          <tr>
+            <th>Name</th>
+
+            <th>Grade</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Ahmed</td>
+
+            <td>90</td>
+          </tr>
+
+          <tr>
+            <td>Sara</td>
+
+            <td>95</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button onclick="readTable()">Read Table</button>
+    </section>
+
+    <!--
+    ================================================================
+    30. MUTATION OBSERVER
+    ================================================================
+    -->
+
+    <section>
+      <h2>30. MutationObserver</h2>
+
+      <div id="observerContainer">Original content</div>
+
+      <button onclick="changeObservedElement()">Change Element</button>
+    </section>
+
+    <!--
+    ================================================================
+    31. DOM MEASUREMENTS
+    ================================================================
+    -->
+
+    <section>
+      <h2>31. Element Measurements</h2>
+
+      <div id="measureBox" class="box" style="width: 300px; height: 100px">
+        Measure me.
+      </div>
+
+      <button onclick="measureElement()">Measure</button>
+    </section>
+
+    <!--
+    ================================================================
+    32. SCROLLING
+    ================================================================
+    -->
+
+    <section>
+      <h2>32. Scrolling</h2>
+
+      <button onclick="scrollToTop()">Scroll To Top</button>
+
+      <button onclick="scrollToBottom()">Scroll To Bottom</button>
+    </section>
+
+    <!--
+    ================================================================
+    OUTPUT
+    ================================================================
+    -->
+
+    <section>
+      <h2>Output</h2>
+
+      <div id="output"></div>
+    </section>
+
+    <script>
+      /*
+        ============================================================
+        1. SELECTING ELEMENTS
+        ============================================================
+        */
+
+      function output(value) {
+        document.getElementById("output").textContent = String(value);
+      }
+
+      function selectById() {
+        const element = document.getElementById("selectById");
+
+        element.classList.add("highlight");
+
+        output(element.textContent);
+      }
+
+      function selectByClass() {
+        const elements = document.getElementsByClassName("selectByClass");
+
+        output("Number of elements: " + elements.length);
+      }
+
+      function selectByTag() {
+        const elements = document.getElementsByTagName("p");
+
+        output("Number of <p> elements: " + elements.length);
+      }
+
+      function selectWithQuerySelector() {
+        const element = document.querySelector(".selectByClass");
+
+        output(element.textContent);
+      }
+
+      function selectWithQuerySelectorAll() {
+        const elements = document.querySelectorAll(".selectByClass");
+
+        output("Number of matched elements: " + elements.length);
+      }
+
+      /*
+        ============================================================
+        2. TEXT CONTENT
+        ============================================================
+        */
+
+      function changeTextContent() {
+        document.getElementById("textExample").textContent =
+          "Changed using textContent.";
+      }
+
+      function changeInnerText() {
+        document.getElementById("textExample").innerText =
+          "Changed using innerText.";
+      }
+
+      function changeInnerHTML() {
+        document.getElementById("textExample").innerHTML =
+          "<strong>Changed using innerHTML.</strong>";
+      }
+
+      /*
+        ============================================================
+        3. ATTRIBUTES
+        ============================================================
+        */
+
+      function getAttributeExample() {
+        const input = document.getElementById("attributeInput");
+
+        output(input.getAttribute("placeholder"));
+      }
+
+      function setAttributeExample() {
+        const input = document.getElementById("attributeInput");
+
+        input.setAttribute("placeholder", "New placeholder");
+      }
+
+      function removeAttributeExample() {
+        const input = document.getElementById("attributeInput");
+
+        input.removeAttribute("placeholder");
+      }
+
+      function hasAttributeExample() {
+        const input = document.getElementById("attributeInput");
+
+        output(input.hasAttribute("placeholder"));
+      }
+
+      /*
+        ============================================================
+        4. DATA ATTRIBUTES
+        ============================================================
+        */
+
+      function readDataAttributes() {
+        const element = document.getElementById("dataElement");
+
+        output(
+          "User ID: " +
+            element.dataset.userId +
+            "\nRole: " +
+            element.dataset.role,
+        );
+      }
+
+      function changeDataAttribute() {
+        const element = document.getElementById("dataElement");
+
+        element.dataset.role = "teacher";
+      }
+
+      /*
+        ============================================================
+        5. CLASSLIST
+        ============================================================
+        */
+
+      function addClass() {
+        document.getElementById("classExample").classList.add("highlight");
+      }
+
+      function removeClass() {
+        document.getElementById("classExample").classList.remove("highlight");
+      }
+
+      function toggleClass() {
+        document.getElementById("classExample").classList.toggle("highlight");
+      }
+
+      function checkClass() {
+        output(
+          document
+            .getElementById("classExample")
+            .classList.contains("highlight"),
+        );
+      }
+
+      function replaceClass() {
+        const element = document.getElementById("classExample");
+
+        element.classList.remove("red");
+        element.classList.add("blue");
+      }
+
+      /*
+        ============================================================
+        6. STYLE
+        ============================================================
+        */
+
+      function changeStyle() {
+        const element = document.getElementById("styleExample");
+
+        element.style.color = "red";
+        element.style.fontSize = "30px";
+        element.style.backgroundColor = "yellow";
+      }
+
+      function resetStyle() {
+        const element = document.getElementById("styleExample");
+
+        element.style.color = "";
+        element.style.fontSize = "";
+        element.style.backgroundColor = "";
+      }
+
+      function readComputedStyle() {
+        const element = document.getElementById("styleExample");
+
+        const styles = window.getComputedStyle(element);
+
+        output("Color: " + styles.color + "\nFont size: " + styles.fontSize);
+      }
+
+      /*
+        ============================================================
+        7. DOM TRAVERSAL
+        ============================================================
+        */
+
+      function parentExample() {
+        const element = document.getElementById("childTwo");
+
+        output(element.parentElement.id);
+      }
+
+      function childrenExample() {
+        const parent = document.getElementById("parent");
+
+        output("Children: " + parent.children.length);
+      }
+
+      function firstChildExample() {
+        const parent = document.getElementById("parent");
+
+        output(parent.firstElementChild.textContent);
+      }
+
+      function lastChildExample() {
+        const parent = document.getElementById("parent");
+
+        output(parent.lastElementChild.textContent);
+      }
+
+      function nextSiblingExample() {
+        const element = document.getElementById("childOne");
+
+        output(element.nextElementSibling.textContent);
+      }
+
+      function previousSiblingExample() {
+        const element = document.getElementById("childThree");
+
+        output(element.previousElementSibling.textContent);
+      }
+
+      /*
+        ============================================================
+        8. NODE PROPERTIES
+        ============================================================
+        */
+
+      function showNodeInformation() {
+        const node = document.getElementById("nodeExample");
+
+        output(
+          "nodeName: " +
+            node.nodeName +
+            "\nnodeType: " +
+            node.nodeType +
+            "\nnodeValue: " +
+            node.nodeValue,
+        );
+      }
+
+      /*
+        ============================================================
+        9. CREATE ELEMENT
+        ============================================================
+        */
+
+      function createElementExample() {
+        const paragraph = document.createElement("p");
+
+        paragraph.textContent = "Created with createElement().";
+
+        document.getElementById("createContainer").appendChild(paragraph);
+      }
+
+      function createTextNodeExample() {
+        const text = document.createTextNode("Created with createTextNode().");
+
+        document.getElementById("createContainer").appendChild(text);
+      }
+
+      /*
+        ============================================================
+        10. APPEND
+        ============================================================
+        */
+
+      function appendExample() {
+        const container = document.getElementById("appendContainer");
+
+        const paragraph = document.createElement("p");
+
+        paragraph.textContent = "Added using append().";
+
+        container.append(paragraph, " Additional text.");
+      }
+
+      function appendChildExample() {
+        const paragraph = document.createElement("p");
+
+        paragraph.textContent = "Added using appendChild().";
+
+        document.getElementById("appendContainer").appendChild(paragraph);
+      }
+
+      function prependExample() {
+        const paragraph = document.createElement("p");
+
+        paragraph.textContent = "Added at the beginning using prepend().";
+
+        document.getElementById("appendContainer").prepend(paragraph);
+      }
+
+      /*
+        ============================================================
+        11. INSERT
+        ============================================================
+        */
+
+      function beforeExample() {
+        const target = document.getElementById("insertTarget");
+
+        const paragraph = document.createElement("p");
+
+        paragraph.textContent = "Inserted before the target.";
+
+        target.before(paragraph);
+      }
+
+      function afterExample() {
+        const target = document.getElementById("insertTarget");
+
+        const paragraph = document.createElement("p");
+
+        paragraph.textContent = "Inserted after the target.";
+
+        target.after(paragraph);
+      }
+
+      function insertAdjacentHTMLExample() {
+        const target = document.getElementById("insertTarget");
+
+        target.insertAdjacentHTML(
+          "afterend",
+          "<p>Inserted using insertAdjacentHTML().</p>",
+        );
+      }
+
+      /*
+        ============================================================
+        12. REMOVE
+        ============================================================
+        */
+
+      function removeExample() {
+        const element = document.getElementById("removeTarget");
+
+        if (element) {
+          element.remove();
+        }
+      }
+
+      function removeChildExample() {
+        const container = document.getElementById("removeContainer");
+
+        const element = container.firstElementChild;
+
+        if (element) {
+          container.removeChild(element);
+        }
+      }
+
+      /*
+        ============================================================
+        13. CLONE
+        ============================================================
+        */
+
+      function cloneExample() {
+        const original = document.getElementById("cloneTarget");
+
+        const clone = original.cloneNode(true);
+
+        clone.textContent = "I am a clone.";
+
+        document.getElementById("cloneContainer").appendChild(clone);
+      }
+
+      /*
+        ============================================================
+        14. DOCUMENT FRAGMENT
+        ============================================================
+        */
+
+      function fragmentExample() {
+        const fragment = document.createDocumentFragment();
+
+        for (let i = 1; i <= 5; i++) {
+          const paragraph = document.createElement("p");
+
+          paragraph.textContent = "Item " + i;
+
+          fragment.appendChild(paragraph);
+        }
+
+        document.getElementById("fragmentContainer").appendChild(fragment);
+      }
+
+      /*
+        ============================================================
+        15. EVENTS
+        ============================================================
+        */
+
+      const eventButton = document.getElementById("eventButton");
+
+      eventButton.addEventListener("click", function () {
+        document.getElementById("eventOutput").textContent = "Button clicked.";
+      });
+
+      /*
+        ============================================================
+        16. EVENT OBJECT
+        ============================================================
+        */
+
+      document
+        .getElementById("eventObjectButton")
+        .addEventListener("click", function (event) {
+          output(
+            "type: " +
+              event.type +
+              "\ntarget: " +
+              event.target.tagName +
+              "\ncurrentTarget: " +
+              event.currentTarget.tagName,
+          );
+        });
+
+      /*
+        ============================================================
+        17. EVENT TARGET
+        ============================================================
+        */
+
+      document
+        .getElementById("targetContainer")
+        .addEventListener("click", function (event) {
+          if (event.target.tagName === "BUTTON") {
+            output("Clicked: " + event.target.textContent);
+          }
+        });
+
+      /*
+        ============================================================
+        18. EVENT BUBBLING
+        ============================================================
+        */
+
+      document
+        .getElementById("outerBox")
+        .addEventListener("click", function () {
+          console.log("Outer clicked");
+        });
+
+      document
+        .getElementById("innerBox")
+        .addEventListener("click", function () {
+          console.log("Inner clicked");
+        });
+
+      document
+        .getElementById("bubbleButton")
+        .addEventListener("click", function () {
+          console.log("Button clicked");
+        });
+
+      /*
+        Clicking the button causes the event to bubble:
+
+            button
+              ↓
+            inner
+              ↓
+            outer
+        */
+
+      /*
+        ============================================================
+        19. EVENT CAPTURING
+        ============================================================
+        */
+
+      document.getElementById("captureOuter").addEventListener(
+        "click",
+        function () {
+          console.log("Outer - capture");
+        },
+        true,
+      );
+
+      document.getElementById("captureInner").addEventListener(
+        "click",
+        function () {
+          console.log("Inner - capture");
+        },
+        true,
+      );
+
+      document.getElementById("captureButton").addEventListener(
+        "click",
+        function () {
+          console.log("Button - capture");
+        },
+        true,
+      );
+
+      /*
+        ============================================================
+        20. FORM
+        ============================================================
+        */
+
+      document
+        .getElementById("userForm")
+        .addEventListener("submit", function (event) {
+          // Prevent normal form submission.
+
+          event.preventDefault();
+
+          const name = document.getElementById("nameInput").value;
+
+          const email = document.getElementById("emailInput").value;
+
+          const age = document.getElementById("ageInput").value;
+
+          document.getElementById("formOutput").textContent =
+            "Name: " + name + " | Email: " + email + " | Age: " + age;
+        });
+
+      /*
+        ============================================================
+        21. CHECKBOX
+        ============================================================
+        */
+
+      function checkCheckbox() {
+        const checkbox = document.getElementById("checkBox");
+
+        output("Checked: " + checkbox.checked);
+      }
+
+      /*
+        ============================================================
+        22. SELECT
+        ============================================================
+        */
+
+      function getSelectedOption() {
+        const select = document.getElementById("country");
+
+        output(
+          "Value: " +
+            select.value +
+            "\nText: " +
+            select.options[select.selectedIndex].text,
+        );
+      }
+
+      /*
+        ============================================================
+        23. INPUT EVENTS
+        ============================================================
+        */
+
+      document
+        .getElementById("liveInput")
+        .addEventListener("input", function (event) {
+          document.getElementById("liveOutput").textContent =
+            event.target.value;
+        });
+
+      /*
+        ============================================================
+        24. MOUSE EVENTS
+        ============================================================
+        */
+
+      const mouseBox = document.getElementById("mouseBox");
+
+      mouseBox.addEventListener("mouseenter", function () {
+        mouseBox.textContent = "Mouse entered.";
+      });
+
+      mouseBox.addEventListener("mouseleave", function () {
+        mouseBox.textContent = "Mouse left.";
+      });
+
+      mouseBox.addEventListener("mousemove", function (event) {
+        mouseBox.textContent = "X: " + event.offsetX + " | Y: " + event.offsetY;
+      });
+
+      /*
+        ============================================================
+        25. KEYBOARD EVENTS
+        ============================================================
+        */
+
+      document
+        .getElementById("keyboardInput")
+        .addEventListener("keydown", function (event) {
+          document.getElementById("keyOutput").textContent =
+            "Key: " + event.key + "\nCode: " + event.code;
+        });
+
+      /*
+        ============================================================
+        26. FOCUS / BLUR
+        ============================================================
+        */
+
+      const focusInput = document.getElementById("focusInput");
+
+      focusInput.addEventListener("focus", function () {
+        focusInput.style.backgroundColor = "yellow";
+      });
+
+      focusInput.addEventListener("blur", function () {
+        focusInput.style.backgroundColor = "";
+      });
+
+      /*
+        ============================================================
+        27. DOMContentLoaded
+        ============================================================
+        */
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("domReady").textContent = "DOM is ready.";
+      });
+
+      /*
+        ============================================================
+        28. LOAD
+        ============================================================
+        */
+
+      window.addEventListener("load", function () {
+        document.getElementById("loadOutput").textContent =
+          "Page and resources loaded.";
+      });
+
+      /*
+        ============================================================
+        29. TABLE
+        ============================================================
+        */
+
+      function readTable() {
+        const table = document.getElementById("studentTable");
+
+        const rows = table.rows;
+
+        let result = "";
+
+        for (const row of rows) {
+          for (const cell of row.cells) {
+            result += cell.textContent + " | ";
+          }
+
+          result += "\n";
+        }
+
+        output(result);
+      }
+
+      /*
+        ============================================================
+        30. MUTATION OBSERVER
+        ============================================================
+        */
+
+      const observer = new MutationObserver(function (mutations) {
+        for (const mutation of mutations) {
+          console.log("DOM mutation:", mutation);
+        }
+      });
+
+      observer.observe(document.getElementById("observerContainer"), {
+        childList: true,
+        attributes: true,
+        subtree: true,
+      });
+
+      function changeObservedElement() {
+        const element = document.getElementById("observerContainer");
+
+        element.textContent = "The DOM was changed.";
+
+        element.setAttribute("data-changed", "true");
+      }
+
+      /*
+        ============================================================
+        31. MEASUREMENTS
+        ============================================================
+        */
+
+      function measureElement() {
+        const element = document.getElementById("measureBox");
+
+        const rect = element.getBoundingClientRect();
+
+        output(
+          "Width: " +
+            rect.width +
+            "\nHeight: " +
+            rect.height +
+            "\nTop: " +
+            rect.top +
+            "\nLeft: " +
+            rect.left,
+        );
+      }
+
+      /*
+        ============================================================
+        32. SCROLLING
+        ============================================================
+        */
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function scrollToBottom() {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
