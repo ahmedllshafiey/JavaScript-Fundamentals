@@ -28,18 +28,19 @@
 // ============================================================
 
 // 1. EXTERNAL JAVASCRIPT
+// ------------------------------------------------------------
 //
-// JavaScript is written in a separate .js file
-// and connected to the HTML document.
+// JavaScript is written in a separate .js file and connected
+// to the HTML document.
 //
 // Example:
 //
 // <script src="script.js"></script>
 
 // 2. INTERNAL JAVASCRIPT
+// ------------------------------------------------------------
 //
-// JavaScript is written directly inside a <script> element
-// in the HTML document.
+// JavaScript is written directly inside a <script> element.
 //
 // Example:
 //
@@ -49,19 +50,19 @@
 //
 // A <script> element can be placed in the <head> or <body>.
 //
-// Attributes such as defer and async affect when an external
-// script is downloaded and executed.
+// For external scripts, attributes such as defer and async
+// affect when the script is downloaded and executed.
 //
 // defer:
 // → Downloads the script while HTML is being parsed.
-// → Executes it after HTML parsing is complete.
+// → Executes the script after HTML parsing is complete.
 //
 // async:
 // → Downloads the script while HTML is being parsed.
-// → Executes it as soon as it finishes downloading.
+// → Executes the script as soon as it finishes downloading.
 //
-// Note:
-// The exact execution behavior depends on how the script
+// NOTE:
+// The exact behavior also depends on how and where the script
 // is included in the document.
 
 // ============================================================
@@ -69,7 +70,7 @@
 // ============================================================
 
 // A program is a set of instructions designed to perform
-// one or more specific tasks.
+// one or more tasks.
 
 // ============================================================
 // NULL
@@ -77,8 +78,8 @@
 
 // null represents an intentional absence of a value.
 //
-// It is commonly used when a variable should explicitly
-// contain "no value".
+// It is commonly used when a variable explicitly represents
+// "no value" or "no object".
 
 var user = null;
 
@@ -117,9 +118,9 @@ console.log(user); // null
 //
 // NOTE:
 //
-// The stack/heap model is a useful mental model for understanding
-// references, but it is simplified. JavaScript does not require
-// every engine to implement memory exactly this way.
+// The stack/heap model is only a simplified mental model.
+// JavaScript does not require every engine to implement memory
+// in exactly this way.
 
 // ============================================================
 // PRIMITIVE VALUES
@@ -147,10 +148,7 @@ var myvarone = new Number(10);
 // new Number(10) creates a Number OBJECT.
 //
 // It does NOT create a primitive number.
-
-console.log(myvarone);
-console.log(typeof myvarone); // "object"
-
+//
 // Compare:
 //
 // 10
@@ -159,8 +157,10 @@ console.log(typeof myvarone); // "object"
 // new Number(10)
 // → Number object
 //
-// Usually, primitive numbers should be used instead of
-// Number wrapper objects.
+// Prefer primitive numbers in normal JavaScript code.
+
+console.log(myvarone);
+console.log(typeof myvarone); // "object"
 
 // ============================================================
 // ARRAYS AND REFERENCES
@@ -171,13 +171,13 @@ var arr2 = [10, 20, 50];
 
 // arr1 and arr2 refer to two DIFFERENT array objects.
 //
-// Even if two arrays contain exactly the same values,
+// Even if two arrays contain the same values,
 // they are still different objects.
 
 console.log(arr1 == arr2); // false
 console.log(arr1 === arr2); // false
 
-// The values at index 0 are both primitive numbers.
+// The values at index 0 are primitive numbers.
 
 console.log(arr1[0] == arr2[0]); // true
 console.log(arr1[0] === arr2[0]); // true
@@ -205,10 +205,10 @@ console.log(arr1 === arr2); // true
 //           ↑
 // arr2 ─────┘
 //
-// Important:
+// IMPORTANT:
 //
-// Assigning an object variable to another object variable
-// copies the REFERENCE, not the object itself.
+// Assigning one object variable to another copies
+// the REFERENCE, not the object itself.
 //
 // If the old object is no longer reachable,
 // it becomes eligible for garbage collection.
@@ -233,11 +233,11 @@ console.log(arr1 === arr2); // true
 // IMPLICIT GLOBAL VARIABLES
 // ============================================================
 
-// In non-strict mode, assigning a value to an undeclared
-// identifier can create a property on the global object.
+// In non-strict mode, assigning to an undeclared identifier
+// can create a property on the global object.
 //
 // This is BAD PRACTICE and should be avoided.
-
+//
 // Example:
 //
 // name = "Ahmed";
@@ -245,7 +245,6 @@ console.log(arr1 === arr2); // true
 // In strict mode:
 //
 // "use strict";
-//
 // name = "Ahmed";
 //
 // → ReferenceError
@@ -287,9 +286,8 @@ console.log(fname);
 // HOISTING
 // ============================================================
 
-// Hoisting is the behavior in which declarations are processed
-// during the creation of an execution context before execution
-// reaches the corresponding line of code.
+// Hoisting describes how declarations are processed before
+// execution reaches the corresponding line of code.
 //
 // Example:
 
@@ -297,18 +295,18 @@ console.log(x); // undefined
 
 var x = 10;
 
-// Conceptually, this behaves like:
-
-var x;
-
-console.log(x); // undefined
-
-x = 10;
-
+// Conceptually:
+//
+// var x;
+//
+// console.log(x); // undefined
+//
+// x = 10;
+//
 // IMPORTANT:
 //
-// Only the declaration is hoisted.
-// The assignment is NOT hoisted.
+// The declaration is processed before execution,
+// but the assignment is not.
 //
 // var x;
 // → declaration
@@ -321,7 +319,8 @@ x = 10;
 // ============================================================
 
 // let and const declarations are also processed before execution,
-// but they cannot be accessed before their declaration is reached.
+// but accessing them before their declaration is reached causes
+// a ReferenceError.
 //
 // This period is called the TEMPORAL DEAD ZONE (TDZ).
 //
@@ -365,6 +364,8 @@ console.log(sum(10, 20)); // 30
 console.log(sum(10)); // "dd"
 console.log(sum(10, "Ahmed")); // "10Ahmed"
 
+// If an argument is not supplied, its parameter receives undefined.
+//
 // The + operator can perform:
 //
 // 1. Numeric addition
@@ -400,7 +401,7 @@ console.log(h.toFixed(1));
 
 // toFixed() returns a STRING.
 //
-// It formats a number with the specified number
+// It formats a number with a specified number
 // of digits after the decimal point.
 //
 // It also performs rounding.
@@ -417,8 +418,8 @@ console.log((11111.234).toFixed(2));
 
 // Primitive values can use methods such as toFixed().
 //
-// Conceptually, JavaScript temporarily provides access to
-// appropriate wrapper-object behavior.
+// Conceptually, JavaScript temporarily provides access
+// to the corresponding wrapper-object behavior.
 //
 // Example:
 
@@ -492,21 +493,22 @@ console.log(nm5); // 1000000
 console.log(0.1 + 0.4);
 // 0.5
 
-console.log(0.1 + 0.2 == 0.3);
+console.log(0.1 + 0.2 === 0.3);
 // false
 
 console.log(0.1 + 0.2);
 // 0.30000000000000004
 
-// The issue is NOT caused by adding a double to a float.
+// This is a floating-point representation issue.
 //
 // JavaScript Number values use double-precision
 // floating-point representation.
 
 console.log((0.1 + 0.2).toFixed(2));
 // "0.30"
-
-// toFixed() returns a string.
+//
+// toFixed() formats the result; it does not change
+// the underlying floating-point representation.
 
 // ============================================================
 // NUMBER RANGE
@@ -525,20 +527,22 @@ console.log(Number.MAX_SAFE_INTEGER);
 //
 // MAX_SAFE_INTEGER:
 //
-// → Largest integer that can be represented safely
-//   with exact integer precision.
+// → Largest integer that can be represented exactly
+//   using the safe integer range.
 
 console.log(Number.MIN_VALUE);
 
-// Smallest positive non-zero Number value.
+// MIN_VALUE:
+//
+// → Smallest positive non-zero Number.
 //
 // IMPORTANT:
 //
 // MIN_VALUE is NOT the most negative number.
+//
+// The most negative finite Number is:
 
 console.log(-Number.MAX_VALUE);
-
-// Smallest finite Number.
 
 console.log(Number.MIN_SAFE_INTEGER);
 // -9007199254740991
@@ -584,7 +588,7 @@ console.log(f == s);
 //
 // → Loose equality
 // → May perform type coercion
-
+//
 // ===
 //
 // → Strict equality
@@ -654,13 +658,13 @@ console.log(false === 0);
 // parseInt()
 // ------------------------------------------------------------
 
-console.log(Number.parseInt("1234.45adas"));
+console.log(Number.parseInt("1234.45adas", 10));
 // 1234
 
 // parseInt() reads an integer from the beginning of a string
-// and stops when the numeric part ends.
+// and stops when the numeric portion ends.
 
-console.log(Number.parseInt("dsfsdf45"));
+console.log(Number.parseInt("dsfsdf45", 10));
 // NaN
 
 // ------------------------------------------------------------
@@ -683,7 +687,7 @@ console.log(+"34");
 console.log(typeof +"34");
 // "number"
 
-// Unary + attempts to convert its operand to a number.
+// Unary + attempts to convert its operand into a number.
 
 // ============================================================
 // PROMPT
@@ -695,9 +699,7 @@ console.log(typeof +"34");
 //
 // → a STRING if the user enters a value and clicks OK.
 // → null if the user clicks Cancel.
-
-const pr = () => prompt();
-
+//
 // Example:
 //
 // User enters: 123
@@ -710,6 +712,8 @@ const pr = () => prompt();
 //
 // Even if the user enters a number,
 // prompt() returns a STRING.
+
+const pr = () => prompt();
 
 // ============================================================
 // NaN
@@ -765,10 +769,10 @@ console.log(isNaN(123));
 console.log(isNaN(Infinity / Infinity));
 // true
 
-console.log(isNaN(parseInt(true)));
+console.log(isNaN(parseInt(true, 10)));
 // true
 
-console.log(isNaN(parseInt("wsd")));
+console.log(isNaN(parseInt("wsd", 10)));
 // true
 
 console.log(isNaN("   "));
@@ -824,7 +828,7 @@ console.log(Number(" "));
 
 // Important difference:
 //
-// parseInt("4545abc")
+// parseInt("4545abc", 10)
 // → 4545
 //
 // Number("4545abc")
@@ -844,6 +848,8 @@ console.log(Number(" "));
 // A string is a sequence of characters.
 //
 // Strings are primitive values.
+//
+// Strings are IMMUTABLE.
 //
 // Example:
 
@@ -908,13 +914,15 @@ console.log(mystr.substring(5));
 console.log(mystr.substring(1, 5));
 // "mazi"
 
-// If start > end, substring() swaps them.
+// If start > end, substring() swaps the values.
 
 console.log(mystr.substring(9, 2));
+// "azing N"
 
 // Negative values are treated as 0.
 
 console.log(mystr.substring(-1));
+// "Amazing Nasr City"
 
 // ============================================================
 // slice()
@@ -927,13 +935,15 @@ console.log(mystr.substring(-1));
 // The end index is NOT included.
 
 console.log(mystr.slice(5));
+// "ing Nasr City"
 
 console.log(mystr.slice(1, 5));
+// "mazi"
 
 // Negative indexes count from the end.
 
 console.log(mystr.slice(-3));
-// Last 3 characters
+// "ity"
 
 // ============================================================
 // substr()
@@ -949,10 +959,13 @@ console.log(mystr.slice(-3));
 // Prefer slice() in modern JavaScript.
 
 console.log(mystr.substr(5, 4));
+// "ing "
 
 console.log(mystr.substr(-4, 3));
+// "Cit"
 
 console.log(mystr.substr(-4, 4));
+// "City"
 
 // ============================================================
 // STRING IMMUTABILITY
@@ -961,7 +974,6 @@ console.log(mystr.substr(-4, 4));
 // Strings are IMMUTABLE.
 //
 // String methods do NOT modify the original string.
-//
 // Instead, they return a new string.
 
 console.log(mystr);
@@ -970,8 +982,8 @@ mystr.toUpperCase();
 
 console.log(mystr);
 // Original value is unchanged.
-
-// If you want to store the result:
+//
+// To store the result:
 //
 // mystr = mystr.toUpperCase();
 
@@ -980,10 +992,10 @@ console.log(mystr);
 // ============================================================
 
 console.log(mystr.indexOf("C"));
-// Returns the index of the first occurrence.
+// 13
 
 console.log(mystr.indexOf("u"));
-// -1 because "u" does not exist.
+// -1
 
 console.log(mystr.indexOf("A"));
 // 0
@@ -995,6 +1007,7 @@ console.log(mystr.indexOf("A"));
 // ============================================================
 
 console.log(mystr.lastIndexOf("C"));
+// 13
 
 console.log(mystr.lastIndexOf("u"));
 // -1
@@ -1007,12 +1020,14 @@ console.log(mystr.lastIndexOf("u"));
 // matching occurrence.
 
 console.log(mystr.replace("a", "@"));
+// "Am@zing Nasr City"
 
 // Regular expression with g flag:
 //
 // g = global
 
 console.log(mystr.replace(/a/g, "$"));
+// "Am$zing N$sr City"
 
 // General regular expression syntax:
 //
@@ -1042,10 +1057,13 @@ console.log(mystr.toUpperCase().replace(/A/g, "#"));
 // split() returns an ARRAY.
 
 console.log(mystr.split(""));
+// Array of individual characters
 
 console.log(mystr.split(" "));
+// ["Amazing", "Nasr", "City"]
 
 console.log(mystr.split("k"));
+// ["Amazing Nasr City"]
 
 // If the separator does not exist,
 // the result is an array containing the original string.
@@ -1111,6 +1129,11 @@ console.log(typeof myarr2);
 // "object"
 
 // Arrays are objects in JavaScript.
+//
+// To specifically check whether a value is an array:
+//
+// Array.isArray(myarr2)
+// → true
 
 // ============================================================
 // ARRAY CONSTRUCTOR
@@ -1138,12 +1161,10 @@ console.log(myarr4);
 //
 // []
 //
-// or:
-//
 // [1, 2, 3]
 
 // ============================================================
-// ARRAY CONSTRUCTOR
+// ARRAY CONSTRUCTOR NAME
 // ============================================================
 
 console.log(myarr4.constructor.name);
@@ -1176,7 +1197,7 @@ console.log(myarr4);
 
 // This can create empty slots.
 //
-// Generally, use array methods such as push()
+// Generally, use methods such as push()
 // when adding elements to the end.
 
 // ============================================================
@@ -1209,6 +1230,8 @@ myarr4.length = 10;
 
 console.log(myarr4.length);
 
+// Increasing length creates empty slots.
+//
 // Reducing length removes elements beyond
 // the new length.
 
@@ -1237,7 +1260,7 @@ console.log(myarr4);
 // Both methods modify the original array.
 
 // ============================================================
-// SPLICE()
+// splice()
 // ============================================================
 
 // splice() can add, remove, or replace elements.
@@ -1323,7 +1346,7 @@ console.log(myarr4);
 // splice()
 // reverse()
 // sort()
-
+//
 // NON-MUTATING METHODS:
 //
 // These do not modify the original array.
@@ -1357,7 +1380,7 @@ console.log(myarr2);
 // sort() MODIFIES the original array.
 //
 // By default, sort() converts elements to strings
-// and compares their UTF-16 code units.
+// and compares them as UTF-16 code units.
 //
 // Therefore, numeric sorting requires a compare function.
 
@@ -1371,7 +1394,7 @@ console.log(myarr2);
 //
 // → [10, 2, 5]
 //
-// This is because the values are compared as strings:
+// The values are compared as strings:
 //
 // "10"
 // "2"
@@ -1396,7 +1419,7 @@ myarr2.sort(mysorter);
 // → y comes before x
 //
 // x - y === 0
-// → relative order remains unchanged
+// → equivalent ordering
 
 // ============================================================
 // filter()
@@ -1408,7 +1431,7 @@ myarr2.sort(mysorter);
 // returns a truthy value.
 
 function isOdd(x) {
-  return x % 2;
+  return x % 2 !== 0;
 }
 
 console.log(myarr2.filter(isOdd));
@@ -1418,8 +1441,10 @@ console.log(myarr2.filter(isOdd));
 // A predicate is a function that returns a value
 // interpreted as true or false.
 //
-// For filter(), truthy → keep the element.
-//           falsy  → discard the element.
+// For filter():
+//
+// truthy → keep the element
+// falsy  → discard the element
 
 console.log(
   myarr2.filter(function (x) {
@@ -1454,7 +1479,10 @@ console.log(
 //
 // Example:
 //
-// [1, 2, 3].reduce((acc, current) => acc + current, 10)
+// [1, 2, 3].reduce(
+//   (acc, current) => acc + current,
+//   10
+// )
 //
 // → 16
 
@@ -1545,8 +1573,7 @@ console.log(Math.random() * 10);
 //
 // Math.random() * 20
 
-// To generate a random floating-point number
-// between min and max:
+// Random floating-point number:
 //
 // Math.random() * (max - min) + min
 //
@@ -1554,7 +1581,17 @@ console.log(Math.random() * 10);
 //
 // Math.random() * (20 - 10) + 10
 //
-// → range: 10 <= result < 20
+// → 10 <= result < 20
+
+// Random integer from min to max, inclusive:
+//
+// Math.floor(Math.random() * (max - min + 1)) + min
+//
+// Example:
+//
+// Math.floor(Math.random() * 11) + 10
+//
+// → integer from 10 through 20
 
 // ============================================================
 // BOOLEAN OBJECT
@@ -1592,6 +1629,28 @@ console.log(new Boolean("Ahmed").valueOf());
 
 console.log(new Boolean(10).valueOf());
 // true
+
+// IMPORTANT:
+//
+// Boolean wrapper OBJECTS are themselves truthy,
+// even when they contain false.
+//
+// Example:
+//
+// Boolean object:
+// new Boolean(false)
+//
+// The object itself is truthy.
+//
+// Therefore:
+//
+// if (new Boolean(false)) {
+//   // This WILL execute.
+// }
+//
+// Prefer primitive:
+//
+// false
 
 // ============================================================
 // TRUTHY AND FALSY VALUES
@@ -1676,7 +1735,7 @@ console.log(null || undefined);
 // ?? returns the right-hand operand ONLY when
 // the left-hand operand is null or undefined.
 //
-// Example:
+// Examples:
 //
 // null ?? "Ahmed"
 // → "Ahmed"
@@ -1702,8 +1761,6 @@ console.log(null || undefined);
 // 2. Get
 // 3. Convert / Format
 
-// Example:
-
 var today = new Date().getMonth();
 
 console.log(today);
@@ -1712,18 +1769,26 @@ console.log(today);
 //
 // Months returned by getMonth() are zero-based:
 //
-// January → 0
+// January  → 0
 // February → 1
-// March → 2
+// March    → 2
 // ...
 // December → 11
 //
-// Date.getDay() is also zero-based:
+// getDay() is also zero-based:
 //
-// Sunday → 0
-// Monday → 1
+// Sunday    → 0
+// Monday    → 1
 // ...
-// Saturday → 6
+// Saturday  → 6
+//
+// NOTE:
+//
+// getDate() is different:
+//
+// It returns the day of the month:
+//
+// 1 → 31
 
 // ============================================================
 // DATE TO LOCALE STRING
@@ -1735,14 +1800,19 @@ console.log(new Date().toLocaleString("ar-EG"));
 
 console.log(new Date().toLocaleString("ar-SA"));
 
-// Output depends on the environment,
-// locale, timezone, and current date/time.
+// Output depends on:
+//
+// → Environment
+// → Locale
+// → Time zone
+// → Current date/time
 
 // ============================================================
 // NUMBER TO STRING
 // ============================================================
 
 console.log((12124564213).toString());
+// "12124564213"
 
 // toString() converts the number into a string.
 
@@ -1759,5 +1829,275 @@ console.log(new Number(11213213).toLocaleString("en-US"));
 // toLocaleString() formats a number according
 // to the requested locale.
 //
-// The exact formatting can depend on the
-// JavaScript runtime and available locale data.
+// The exact separators and formatting depend on
+// the JavaScript runtime and locale data.
+
+// ============================================================
+// FUNCTION OVERLOADING
+// ============================================================
+
+// JavaScript does NOT support traditional function overloading
+// based on the number or types of parameters.
+//
+// If multiple function declarations have the same name,
+// the later declaration replaces the earlier one.
+
+function Sum(x, y) {
+  return x + y;
+}
+
+function Sum(x, y, z) {
+  return x + y + z;
+}
+
+// The second Sum() declaration replaces the first one.
+//
+// Therefore:
+//
+// Sum(1, 2)
+// → NaN
+//
+// because:
+//
+// x = 1
+// y = 2
+// z = undefined
+//
+// 1 + 2 + undefined
+// → NaN
+//
+// Sum(1, 2, 3)
+// → 6
+//
+// JavaScript functions can still accept a variable number
+// of arguments.
+
+function Sum() {
+  var result = 0;
+
+  for (var i = 0; i < arguments.length; i++) {
+    result += arguments[i];
+  }
+
+  return result;
+}
+
+console.log(Sum(4, 5, 4, 5, 5, 12));
+// 35
+
+console.log(Sum(4, 5, 3, 12));
+// 24
+
+// arguments:
+//
+// → An array-like object available inside traditional
+//   non-arrow functions.
+//
+// It contains the arguments passed to the function.
+//
+// arguments.length
+// → Number of arguments passed.
+//
+// NOTE:
+//
+// Arrow functions do NOT have their own arguments object.
+
+// ============================================================
+// THIS
+// ============================================================
+
+// Traditional functions can use:
+//
+// this
+//
+// The value of this depends on HOW the function is called.
+//
+// It is NOT simply determined by where the function
+// was declared.
+//
+// When a method is called through an object:
+//
+// object.method()
+//
+// this generally refers to the object before the dot.
+
+// ============================================================
+// OBJECT METHODS AND this
+// ============================================================
+
+var ID = 95;
+var Name = "Sayed";
+
+var Student = {
+  ID: 100,
+  Name: "Ahmed",
+
+  Print: function () {
+    return "ID = " + this.ID + " ,Name = " + this.Name;
+  },
+};
+
+console.log(Student.Name);
+// "Ahmed"
+
+console.log(Student.ID);
+// 100
+
+console.log(Student.Print());
+// "ID = 100 ,Name = Ahmed"
+
+// Inside Student.Print():
+//
+// this → Student
+//
+// Therefore:
+//
+// this.ID
+// → Student.ID
+//
+// this.Name
+// → Student.Name
+
+// ============================================================
+// FUNCTION EXPRESSION
+// ============================================================
+
+// A function expression assigns a function
+// to a variable.
+
+var Add = function (x, y) {
+  return x + y;
+};
+
+console.log(Add(5, 10));
+// 15
+
+// ============================================================
+// FUNCTIONS ARE FIRST-CLASS OBJECTS
+// ============================================================
+
+// Functions are first-class values in JavaScript.
+//
+// This means a function can:
+//
+// 1. Be assigned to a variable.
+//
+// 2. Be passed to another function as an argument.
+//
+//    → callback
+//
+// 3. Be returned from another function.
+//
+//    → commonly used with closures
+//
+// 4. Be stored as a property of an object.
+//
+// 5. Be stored inside arrays or other data structures.
+
+// ============================================================
+// CONSTRUCTOR FUNCTIONS
+// ============================================================
+
+// Before ES6 classes, constructor functions were commonly
+// used to create objects with a shared structure.
+//
+// ES6 introduced the class syntax.
+//
+// Constructor functions are still part of JavaScript
+// and remain useful for understanding how objects and
+// prototypes work.
+//
+// IMPORTANT:
+//
+// A function does not automatically become a constructor
+// simply because it is named with a capital letter.
+//
+// It becomes constructor-like when called with new.
+
+function Person(name, age) {
+  this.cl = "Math";
+
+  return name + age;
+}
+
+// ============================================================
+// NORMAL FUNCTION CALL
+// ============================================================
+
+var student = Person("Ahmed", 100);
+
+// Without new:
+//
+// Person() is called as a normal function.
+//
+// In non-strict mode, this inside Person()
+// may refer to the global object.
+//
+// In strict mode, this is undefined.
+//
+// The explicit return value is:
+//
+// "Ahmed" + 100
+// → "Ahmed100"
+//
+// Therefore:
+//
+// student
+// → "Ahmed100"
+
+// ============================================================
+// CONSTRUCTOR CALL WITH new
+// ============================================================
+
+var new_student = new Person("Sayed", 100);
+
+// With new:
+//
+// 1. A new object is created.
+// 2. The new object's prototype is linked to
+//    Person.prototype.
+// 3. this refers to the new object.
+// 4. The function body executes.
+// 5. Unless the function explicitly returns another
+//    object, the newly created object is returned.
+//
+// The explicit return value:
+//
+// "Sayed" + 100
+// → "Sayed100"
+//
+// is a primitive string.
+//
+// Therefore, it does NOT replace the newly created object.
+//
+// new_student is the newly created Person instance.
+
+console.log(new_student.cl);
+// "Math"
+
+// ============================================================
+// this IN A CONSTRUCTOR FUNCTION
+// ============================================================
+
+// Inside a constructor function called with new:
+//
+// this
+//
+// refers to the newly created object.
+//
+// Example:
+//
+// function Person(name, age) {
+//   this.name = name;
+//   this.age = age;
+// }
+//
+// var student = new Person("Ahmed", 20);
+//
+// student.name
+// → "Ahmed"
+//
+// student.age
+// → 20
+//
+// The properties are attached to the newly created instance.
