@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BOM - Child Window</title>
+
+
+    <style>
+        body {
+            background-color: cadetblue;
+            color: white;
+            font-family: monospace;
+        }
+    </style>
+
+
+    <script>
+
+        // ============================================================
+        // window.opener
+        // ============================================================
+        //
+        // opener refers to the window that opened the current window.
+        //
+        // In this example:
+        //
+        //     parent.html
+        //          |
+        //          | window.open()
+        //          v
+        //     child.html
+        //
+        // Therefore:
+        //
+        //     window.opener
+        //
+        // refers to the parent window.
+        //
+        // ============================================================
+
+
+        function closeParentWindow() {
+
+            // window.opener gives us access to the parent window.
+
+            if (window.opener) {
+
+                window.opener.close();
+            }
+        }
+
+
+        function showParentTitle() {
+
+            // Because opener references the parent window,
+            // we can access its document.
+
+            if (window.opener) {
+
+                console.log(
+                    window.opener.document.getElementById("title").textContent
+                );
+            }
+        }
+
+
+        function moveParentTitle() {
+
+            if (window.opener) {
+
+                window.opener.document
+                    .getElementById("title")
+                    .style.transform = "translateX(200px)";
+            }
+        }
+
+
+        // ============================================================
+        // window
+        // ============================================================
+
+        function showChildWindowInformation() {
+
+            console.log("Width:", window.innerWidth);
+            console.log("Height:", window.innerHeight);
+
+            console.log("URL:", window.location.href);
+
+            console.log(
+                "Parent window:",
+                window.opener
+            );
+        }
+
+    </script>
+
+</head>
+
+
+<body>
+
+    <h2>
+        Child Window
+    </h2>
+
+
+    <h3>
+        Parent Window
+    </h3>
+
+    <button onclick="closeParentWindow()">
+        Close Parent
+    </button>
+
+    <button onclick="showParentTitle()">
+        Get Parent Title
+    </button>
+
+    <button onclick="moveParentTitle()">
+        Move Parent Title
+    </button>
+
+
+    <h3>
+        Child Window
+    </h3>
+
+    <button onclick="showChildWindowInformation()">
+        Show Window Information
+    </button>
+
+</body>
+
+</html>

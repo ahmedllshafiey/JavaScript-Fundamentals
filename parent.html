@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BOM - Parent Window</title>
+
+    <script>
+
+        // ============================================================
+        // BOM - BROWSER OBJECT MODEL
+        // ============================================================
+        //
+        // The BOM provides JavaScript with objects and methods for
+        // interacting with the browser environment.
+        //
+        // The main BOM object is:
+        //
+        //     window
+        //
+        // Many browser APIs are properties or methods of window.
+        //
+        // Examples:
+        //
+        //     window.open()
+        //     window.close()
+        //     window.location
+        //     window.history
+        //     window.navigator
+        //     window.screen
+        //
+        // The "window." prefix is usually optional:
+        //
+        //     window.alert("Hello");
+        //
+        // is equivalent to:
+        //
+        //     alert("Hello");
+        //
+        // ============================================================
+
+
+        // ------------------------------------------------------------
+        // CHILD WINDOW
+        // ------------------------------------------------------------
+
+        // Store a reference to the child window.
+        let child;
+
+
+        function openChildWindow() {
+
+            // window.open() opens a new browser window/tab.
+            //
+            // Arguments:
+            //
+            // 1. URL
+            // 2. target/window name
+            // 3. window features
+            //
+            // Note:
+            // The feature separator is usually "," rather than ";".
+
+            child = window.open(
+                "child.html",
+                "",
+                "width=400,height=300"
+            );
+        }
+
+
+        function closeChildWindow() {
+
+            // close() closes the window represented by "child".
+            //
+            // A window opened by JavaScript can generally be closed
+            // through its window reference.
+
+            if (child && !child.closed) {
+                child.close();
+            }
+        }
+
+
+        // ------------------------------------------------------------
+        // WINDOW MOVEMENT / DOM
+        // ------------------------------------------------------------
+
+        function move200() {
+
+            // This is DOM manipulation, not BOM.
+            //
+            // document belongs to the Window object, but manipulating
+            // an HTML element is generally considered DOM work.
+
+            document.getElementById("title").style.transform =
+                "translateX(200px)";
+        }
+
+
+        function back200() {
+
+            document.getElementById("title").style.transform =
+                "translateX(-200px)";
+        }
+
+
+        function center() {
+
+            document.getElementById("title").style.textAlign =
+                "center";
+
+            document.getElementById("title").style.transform =
+                "translateX(0)";
+        }
+
+
+        // ------------------------------------------------------------
+        // window.alert()
+        // ------------------------------------------------------------
+
+        function showAlert() {
+
+            // alert() is a BOM/browser API.
+
+            window.alert("Hello from the parent window!");
+        }
+
+
+        // ------------------------------------------------------------
+        // window.location
+        // ------------------------------------------------------------
+
+        function showLocation() {
+
+            // location contains information about the current URL.
+
+            console.log(window.location.href);
+            console.log(window.location.hostname);
+            console.log(window.location.pathname);
+            console.log(window.location.protocol);
+        }
+
+
+        function reloadPage() {
+
+            // Reload the current page.
+
+            window.location.reload();
+        }
+
+
+        // ------------------------------------------------------------
+        // window.history
+        // ------------------------------------------------------------
+
+        function goBack() {
+
+            // Move one step backward in browser history.
+
+            window.history.back();
+        }
+
+
+        function goForward() {
+
+            // Move one step forward in browser history.
+
+            window.history.forward();
+        }
+
+
+        // ------------------------------------------------------------
+        // window.navigator
+        // ------------------------------------------------------------
+
+        function showBrowserInformation() {
+
+            // navigator provides information about the browser
+            // and the user's environment.
+
+            console.log("Browser:", window.navigator.userAgent);
+            console.log("Language:", window.navigator.language);
+            console.log(
+                "Online:",
+                window.navigator.onLine
+            );
+        }
+
+
+        // ------------------------------------------------------------
+        // window.screen
+        // ------------------------------------------------------------
+
+        function showScreenInformation() {
+
+            // screen provides information about the user's screen.
+
+            console.log("Screen width:", window.screen.width);
+            console.log("Screen height:", window.screen.height);
+            console.log(
+                "Available width:",
+                window.screen.availWidth
+            );
+            console.log(
+                "Available height:",
+                window.screen.availHeight
+            );
+        }
+
+
+        // ------------------------------------------------------------
+        // WINDOW SIZE
+        // ------------------------------------------------------------
+
+        function showWindowSize() {
+
+            // innerWidth / innerHeight represent the viewport size.
+
+            console.log("Window width:", window.innerWidth);
+            console.log("Window height:", window.innerHeight);
+        }
+
+
+        // ------------------------------------------------------------
+        // setTimeout()
+        // ------------------------------------------------------------
+
+        let timeoutId;
+
+
+        function startTimeout() {
+
+            // setTimeout() executes a function once after
+            // the specified delay.
+
+            timeoutId = window.setTimeout(function () {
+
+                alert("3 seconds have passed.");
+
+            }, 3000);
+        }
+
+
+        function cancelTimeout() {
+
+            // clearTimeout() cancels a scheduled timeout.
+
+            window.clearTimeout(timeoutId);
+        }
+
+
+        // ------------------------------------------------------------
+        // setInterval()
+        // ------------------------------------------------------------
+
+        let intervalId;
+
+
+        function startInterval() {
+
+            // setInterval() repeatedly executes a function.
+
+            intervalId = window.setInterval(function () {
+
+                console.log("Interval is running...");
+
+            }, 1000);
+        }
+
+
+        function stopInterval() {
+
+            // clearInterval() stops the interval.
+
+            window.clearInterval(intervalId);
+        }
+
+    </script>
+
+
+    <style>
+        body {
+            background-color: cadetblue;
+            color: white;
+            font-family: monospace;
+        }
+
+        button {
+            margin: 3px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <h2 id="title" style="text-align: center;">
+        Parent Window
+    </h2>
+
+
+    <!-- ============================================================
+         CHILD WINDOW
+         ============================================================ -->
+
+    <h3>Child Window</h3>
+
+    <button onclick="openChildWindow()">
+        Open Child
+    </button>
+
+    <button onclick="closeChildWindow()">
+        Close Child
+    </button>
+
+
+    <!-- ============================================================
+         DOM EXAMPLE
+         ============================================================ -->
+
+    <h3>DOM</h3>
+
+    <button onclick="move200()">
+        Move +200
+    </button>
+
+    <button onclick="back200()">
+        Move -200
+    </button>
+
+    <button onclick="center()">
+        Center
+    </button>
+
+
+    <!-- ============================================================
+         WINDOW
+         ============================================================ -->
+
+    <h3>Window</h3>
+
+    <button onclick="showAlert()">
+        Alert
+    </button>
+
+    <button onclick="showWindowSize()">
+        Window Size
+    </button>
+
+
+    <!-- ============================================================
+         LOCATION
+         ============================================================ -->
+
+    <h3>Location</h3>
+
+    <button onclick="showLocation()">
+        Show Location
+    </button>
+
+    <button onclick="reloadPage()">
+        Reload
+    </button>
+
+
+    <!-- ============================================================
+         HISTORY
+         ============================================================ -->
+
+    <h3>History</h3>
+
+    <button onclick="goBack()">
+        Back
+    </button>
+
+    <button onclick="goForward()">
+        Forward
+    </button>
+
+
+    <!-- ============================================================
+         NAVIGATOR
+         ============================================================ -->
+
+    <h3>Navigator</h3>
+
+    <button onclick="showBrowserInformation()">
+        Browser Information
+    </button>
+
+
+    <!-- ============================================================
+         SCREEN
+         ============================================================ -->
+
+    <h3>Screen</h3>
+
+    <button onclick="showScreenInformation()">
+        Screen Information
+    </button>
+
+
+    <!-- ============================================================
+         TIMERS
+         ============================================================ -->
+
+    <h3>Timers</h3>
+
+    <button onclick="startTimeout()">
+        Start Timeout
+    </button>
+
+    <button onclick="cancelTimeout()">
+        Cancel Timeout
+    </button>
+
+    <button onclick="startInterval()">
+        Start Interval
+    </button>
+
+    <button onclick="stopInterval()">
+        Stop Interval
+    </button>
+
+</body>
+
+</html>
