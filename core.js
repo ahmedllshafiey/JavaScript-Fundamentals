@@ -1192,3 +1192,103 @@ console.log(myarr4);
 //
 // Always check whether a method mutates the original
 // array before using it.
+
+// Array methods that mutate original object
+myarr2.reverse(); //?
+
+console.log(myarr2); //?
+
+// Sorting algorithm in JS
+myarr2.sort(); //?
+myarr2.reverse(); //?
+// Sort by ASCII --> can sort string well but number maybe problematic
+
+function mysorter(x, y) {
+  return x - y;
+}
+
+myarr2.sort(mysorter); //?
+
+function isOdd(x) {
+  return x % 2;
+}
+
+myarr2.filter(isOdd); //?
+
+// Predicate function takes an argument and return boolean
+
+// Filter function always return an array
+myarr2.filter(function (x) {
+  return x > 1;
+}); //?
+
+// Reduce(previous, current, initial value for previous?)
+
+myarr2.reduce((x, y) => {
+  return x + y;
+}, 10); //?
+
+// ReduceRight to start from right
+
+// Slice recreate a new array with diff identity and modified state of the operated array
+
+myarr2.slice(1, 3); //?
+
+myarr2.map(function (n) {
+  return n.toString();
+}); //?
+// map does not change the original object
+
+myarr2; //?
+
+// Math object
+Math.PI.toFixed(2); //?
+
+Math.random(); //?
+Math.random() * 10; //?
+
+// (min, max)
+Math.random() * (10, 20); //?
+
+// Boolean value is false by default
+var bool = new Boolean().valueOf(); //?
+
+new Boolean(null).valueOf(); //?
+new Boolean(0).valueOf(); //?
+new Boolean(NaN).valueOf(); //?
+new Boolean("").valueOf(); //?
+new Boolean("Ahmed").valueOf(); //?
+new Boolean(10).valueOf(); //?
+
+// && ==> if cond 1 (true) ==> return cond 2
+// && ==> if cond 1 (false) ==> return cond 1
+
+20 > 30 && 10 > 5; //?
+
+"Ahmed" && "Mostafa"; //?
+"" && "Mostafa"; //?
+null && undefined; //?
+
+// || ==> if cond 1 (true) ==> return cond 2
+// || ==> if cond 1 (false) ==> return cond 1
+
+"Ahmed " || "Mostafa"; //?
+"" || "Mostafa"; //?
+null || undefined; //?
+
+// Date => 3 methods categories
+// Set, Get, To
+
+var today = new Date().getMonth(); //?
+
+// days and month indexed from 0
+
+new Date().toLocaleString(); //?
+new Date().toLocaleString("ar-EG"); //?
+new Date().toLocaleString("ar-SA"); //?
+
+(12124564213).toString(); //?
+
+new Number(11213213).toLocaleString("ar-EG"); //?
+new Number(11213213).toLocaleString("en-EG"); //?
+new Number(11213213).toLocaleString("en-US"); //?
