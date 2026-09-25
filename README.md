@@ -839,8 +839,6 @@ Understanding the older patterns is still valuable because many JavaScript conce
 
 ---
 
-
-
 ## Purpose
 
 These notes are intended to provide a personal reference for understanding:
