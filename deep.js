@@ -1,223 +1,1513 @@
-// JAVASCRIPT DEEP TOPICS
+// JAVASCRIPT FUNDAMENTALS + DEEP TOPICS
 // ============================================================
 //
-// Topics:
+// A comprehensive personal reference covering:
 //
-// 1.  IIFE
-// 2.  setTimeout() and callback arguments
-// 3.  var + closure + asynchronous callbacks
-// 4.  let + loop closures
-// 5.  this
-// 6.  call()
-// 7.  apply()
-// 8.  bind()
-// 9.  Method borrowing
-// 10. Math.min() + apply()
-// 11. Closures
-// 12. Lexical scope
-// 13. Persistent private state
-// 14. arguments object
-// 15. Constructor functions
-// 16. Factory functions
-// 17. instanceof
-// 18. Static methods vs instance methods
-// 19. Object property descriptors
-// 20. Prototypes
-// 21. Prototype inheritance
-// 22. Prototype chain
-// 23. Object.create()
-// 24. Prototype methods
-// 25. Constructor.prototype
+// FUNDAMENTALS
+// 1.  JavaScript basics
+// 2.  JavaScript execution
+// 3.  JavaScript in HTML
+// 4.  Values and data types
+// 5.  Primitive values
+// 6.  null
+// 7.  undefined
+// 8.  Variables
+// 9.  Scope
+// 10. Hoisting
+// 11. Temporal Dead Zone
+// 12. Implicit globals
+// 13. Type coercion
+// 14. Explicit conversion
+// 15. Equality
+// 16. Truthy / falsy
+// 17. Logical operators
+// 18. Strings
+// 19. Numbers
+// 20. IEEE 754
+// 21. NaN
+// 22. Infinity
+// 23. Number methods
+// 24. Arrays
+// 25. Array methods
+// 26. Objects
+// 27. References
+// 28. Math
+// 29. Date
+// 30. Functions
+// 31. Function expressions
+// 32. Callbacks
+// 33. First-class functions
+// 34. Function overloading
+// 35. arguments
+// 36. prompt()
+//
+// ASYNCHRONOUS JAVASCRIPT
+// 37. setTimeout()
+// 38. Closures + timers
+// 39. AJAX
+// 40. XMLHttpRequest
+// 41. JSON
+// 42. fetch()
+// 43. Promises
+// 44. async / await
+// 45. Event loop concept
+//
+// FUNCTIONS + OBJECTS
+// 46. this
+// 47. call()
+// 48. apply()
+// 49. bind()
+// 50. Method borrowing
+// 51. IIFE
+// 52. Closures
+// 53. Constructor functions
+// 54. Factory functions
+// 55. instanceof
+// 56. Property descriptors
+// 57. Prototypes
+// 58. Prototype chain
+// 59. Object.create()
+// 60. Prototype methods
+// 61. Inheritance
+// 62. Pseudo-classical inheritance
+// 63. Method overriding
+// 64. class
+// 65. extends
+// 66. super
+//
+// MODERN JAVASCRIPT
+// 67. Template literals
+// 68. Default parameters
+// 69. Rest parameters
+// 70. Spread syntax
+// 71. Destructuring
+// 72. Optional chaining
+// 73. Nullish coalescing
+// 74. Modules
+//
+// BROWSER JAVASCRIPT
+// 75. DOM
+// 76. DOM selection
+// 77. DOM manipulation
+// 78. DOM traversal
+// 79. DOM creation/removal
+// 80. DOM events
+// 81. Event propagation
+// 82. Event delegation
+// 83. Forms
+// 84. BOM
+// 85. window
+// 86. location
+// 87. history
+// 88. navigator
+// 89. screen
 //
 // ============================================================
 
 // ============================================================
-// 1. IIFE
+// 1. JAVASCRIPT BASICS
 // ============================================================
 //
-// IIFE = Immediately Invoked Function Expression.
+// JavaScript is:
 //
-// The function is:
+// - A high-level programming language.
+// - Dynamically typed.
+// - Object-based and prototype-based.
+// - A language commonly used for scripting.
+// - Used in browsers and other environments such as Node.js.
 //
-// 1. Created as a function expression.
-// 2. Immediately invoked.
+// JavaScript itself is the language.
 //
-// Syntax:
+// The environment provides APIs such as:
 //
-// (function () {
+// Browser:
+//     DOM
+//     BOM
+//     fetch
+//     localStorage
+//     timers
 //
-// })();
-//
-// ============================================================
-
-(function sum() {
-  return 10 + 5;
-})();
-
-// The return value is not stored,
-// so the returned value is discarded.
-
-const iifeResult = (function sum() {
-  return 10 + 5;
-})();
-
-console.log("IIFE result:", iifeResult);
-
-// 15
-
-// ============================================================
-// 2. setTimeout() + CALLBACK ARGUMENTS
-// ============================================================
-//
-// Syntax:
-//
-// setTimeout(callback, delay, arg1, arg2, ...);
-//
-// Arguments after the delay are passed to the callback
-// when the callback executes.
+// Node.js:
+//     filesystem
+//     networking
+//     process
+//     modules
 //
 // ============================================================
 
-const nameArray = ["Ahmed", "Ali", "Mohammed"];
+// ============================================================
+// 2. JAVASCRIPT EXECUTION
+// ============================================================
+//
+// JavaScript code is executed by a JavaScript engine.
+//
+// Examples of engines:
+//
+// - V8
+// - SpiderMonkey
+// - JavaScriptCore
+//
+// Modern engines use JIT compilation techniques.
+//
+// JavaScript generally evaluates code according to the
+// language's execution and evaluation rules.
+//
+// ============================================================
 
-function printNames() {
-  for (var i = 0; i < nameArray.length; i++) {
-    setTimeout(
-      function (_name) {
-        console.log("Name:", _name);
-      },
+// ============================================================
+// 3. JAVASCRIPT IN HTML
+// ============================================================
+//
+// External script:
+//
+// <script src="script.js"></script>
+//
+// Internal script:
+//
+// <script>
+//   console.log("Hello");
+// </script>
+//
+// `defer`:
+//
+// <script src="script.js" defer></script>
+//
+// Deferred scripts are downloaded while HTML is parsed
+// and executed after parsing has completed.
+//
+// `async`:
+//
+// <script src="script.js" async></script>
+//
+// Async scripts execute as soon as they finish downloading,
+// so execution order between multiple async scripts should
+// not be relied upon.
+//
+// ============================================================
 
-      2000,
+// ============================================================
+// 4. VALUES AND DATA TYPES
+// ============================================================
+//
+// JavaScript has primitive values and objects.
+//
+// Primitive types:
+//
+// string
+// number
+// bigint
+// boolean
+// undefined
+// symbol
+// null
+//
+// Everything else is an object.
+//
+// Functions are objects with callable behavior.
+//
+// ============================================================
 
-      nameArray[i],
-    );
-  }
+// ============================================================
+// 5. PRIMITIVE VALUES
+// ============================================================
+//
+// Primitive values are immutable values.
+//
+// Examples:
+//
+// "Ahmed"
+// 100
+// true
+// undefined
+// null
+// 10n
+// Symbol("id")
+//
+// Primitive values are not objects.
+//
+// ============================================================
+
+const userName = "Ahmed";
+const age = 25;
+const active = true;
+
+console.log(typeof userName);
+// string
+
+console.log(typeof age);
+// number
+
+console.log(typeof active);
+// boolean
+
+// ============================================================
+// 6. null
+// ============================================================
+//
+// null represents an intentional absence of a value.
+//
+// Example:
+//
+// let selectedUser = null;
+//
+// This means:
+//
+// "There is intentionally no selected user."
+//
+// Important historical behavior:
+//
+// typeof null === "object"
+//
+// This is a long-standing JavaScript language quirk.
+//
+// ============================================================
+
+let selectedUser = null;
+
+console.log(selectedUser);
+// null
+
+console.log(typeof selectedUser);
+// object
+
+// ============================================================
+// 7. undefined
+// ============================================================
+//
+// undefined generally means a value has not been assigned.
+//
+// ============================================================
+
+let result;
+
+console.log(result);
+// undefined
+
+function testUndefined() {
+  // No return statement.
 }
 
-printNames();
+console.log(testUndefined());
+// undefined
 
-// Output after approximately 2 seconds:
+// ============================================================
+// 8. VARIABLES
+// ============================================================
 //
-// Name: Ahmed
-// Name: Ali
-// Name: Mohammed
+// JavaScript provides:
+//
+// var
+// let
+// const
+//
+// `var` is function-scoped.
+//
+// `let` and `const` are block-scoped.
+//
+// Prefer `const` when a variable does not need reassignment.
+//
+// Use `let` when reassignment is required.
+//
+// `var` is mainly encountered in older JavaScript code.
+//
+// ============================================================
+
+// ============================================================
+// 9. SCOPE
+// ============================================================
+//
+// Important scopes:
+//
+// - Global scope
+// - Function scope
+// - Block scope
+//
+// `var`:
+//
+// function-scoped
+//
+// `let` / `const`:
+//
+// block-scoped
+//
+// ============================================================
+
+function scopeExample() {
+  var functionScoped = 10;
+
+  if (true) {
+    let blockScoped = 20;
+    const anotherBlockScoped = 30;
+
+    console.log(functionScoped);
+    console.log(blockScoped);
+    console.log(anotherBlockScoped);
+  }
+
+  console.log(functionScoped);
+
+  // blockScoped is not accessible here.
+  // anotherBlockScoped is not accessible here.
+}
+
+// ============================================================
+// 10. HOISTING
+// ============================================================
+//
+// JavaScript processes declarations before execution
+// according to the language's execution rules.
+//
+// Example:
+//
+// console.log(value);
+//
+// var value = 10;
+//
+// With var, the binding exists and is initialized to
+// undefined before the assignment executes.
+//
+// ============================================================
+
+console.log(hoistedVar);
+// undefined
+
+var hoistedVar = 100;
+
+// ============================================================
+// 11. TEMPORAL DEAD ZONE
+// ============================================================
+//
+// let and const are hoisted in the broader specification
+// sense, but they cannot be accessed before initialization.
+//
+// The period between entering the scope and initialization
+// is called the Temporal Dead Zone (TDZ).
+//
+// Example:
+//
+// console.log(myValue);
+// let myValue = 10;
+//
+// This throws ReferenceError.
+//
+// ============================================================
+
+// ============================================================
+// 12. IMPLICIT GLOBALS
+// ============================================================
+//
+// In non-strict legacy JavaScript:
+//
+// undeclaredName = 100;
+//
+// can create a property on the global object.
+//
+// This is bad practice.
+//
+// In strict mode:
+//
+// "use strict";
+//
+// undeclaredName = 100;
+//
+// throws ReferenceError.
+//
+// Always declare variables explicitly.
+//
+// ============================================================
+
+// ============================================================
+// 13. TYPE COERCION
+// ============================================================
+//
+// JavaScript can automatically convert values between types.
+//
+// This is called implicit type coercion.
+//
+// ============================================================
+
+console.log(3 * "2");
+
+// 6
+
+console.log(3 + "2");
+
+// "32"
+//
+// `+` has special string-concatenation behavior.
+//
+// ============================================================
+
+// ============================================================
+// 14. EXPLICIT CONVERSION
+// ============================================================
+//
+// Common conversion functions:
+//
+// Number()
+// String()
+// Boolean()
+// parseInt()
+// parseFloat()
+//
+// ============================================================
+
+console.log(Number("100"));
+// 100
+
+console.log(String(100));
+// "100"
+
+console.log(Boolean(1));
+// true
+
+console.log(parseInt("100px", 10));
+// 100
+
+console.log(parseFloat("10.50px"));
+// 10.5
+
+// Unary plus:
+
+console.log(+"50");
+// 50
+
+// ============================================================
+// 15. EQUALITY
+// ============================================================
+//
+// ==
+//
+// Performs type coercion when necessary.
+//
+// ===
+//
+// Strict equality.
+//
+// It compares type and value without performing the
+// usual implicit coercion associated with ==.
+//
+// Prefer === in most application code.
+//
+// ============================================================
+
+console.log(5 == "5");
+// true
+
+console.log(5 === "5");
+// false
+
+console.log(5 === 5);
+// true
+
+// ============================================================
+// 16. TRUTHY / FALSY
+// ============================================================
+//
+// Falsy values include:
+//
+// false
+// 0
+// -0
+// 0n
+// ""
+// null
+// undefined
+// NaN
+//
+// Most other values are truthy.
 //
 // Important:
 //
-// nameArray[i] is evaluated when setTimeout() is called.
+// [] is truthy.
+// {} is truthy.
 //
-// The resulting value is passed to the callback later.
+// ============================================================
+
+console.log(Boolean(0));
+// false
+
+console.log(Boolean(""));
+// false
+
+console.log(Boolean([]));
+// true
+
+console.log(Boolean({}));
+// true
+
+// ============================================================
+// 17. LOGICAL OPERATORS
+// ============================================================
+//
+// &&
+// ||
+// !
+// ??
+//
+// `&&` returns the first falsy operand,
+// or the last operand if all are truthy.
+//
+// `||` returns the first truthy operand,
+// or the last operand if all are falsy.
+//
+// `??` returns the right side only when the left side
+// is null or undefined.
+//
+// ============================================================
+
+console.log(true && "Hello");
+// Hello
+
+console.log(false || "Default");
+// Default
+
+console.log(null ?? "Default");
+// Default
+
+console.log(0 ?? 100);
+// 0
+
+// ============================================================
+// 18. STRINGS
+// ============================================================
+//
+// Strings are primitive immutable values.
+//
+// ============================================================
+
+const text = "JavaScript";
+
+console.log(text.length);
+// 10
+
+console.log(text[0]);
+// J
+
+console.log(text.charAt(0));
+// J
+
+console.log(text.toUpperCase());
+// JAVASCRIPT
+
+console.log(text.toLowerCase());
+// javascript
+
+console.log(text.includes("Script"));
+// true
+
+console.log(text.indexOf("Script"));
+// 4
+
+// ============================================================
+// STRING METHODS
+// ============================================================
+
+const message = "Hello JavaScript";
+
+console.log(message.slice(0, 5));
+// Hello
+
+console.log(message.substring(0, 5));
+// Hello
+
+console.log(message.replace("JavaScript", "World"));
+// Hello World
+
+console.log(message.split(" "));
+// ["Hello", "JavaScript"]
+
+// ============================================================
+// 19. NUMBERS
+// ============================================================
+//
+// JavaScript's ordinary Number type uses IEEE 754
+// double-precision floating-point representation.
+//
+// ============================================================
+
+const integer = 100;
+const decimal = 10.5;
+
+console.log(typeof integer);
+// number
+
+console.log(typeof decimal);
+// number
+
+// Number literals:
+
+const decimalNumber = 100;
+const hexadecimal = 0xff;
+const binary = 0b1010;
+const octal = 0o17;
+const scientific = 1.5e3;
+
+console.log(hexadecimal);
+// 255
+
+console.log(binary);
+// 10
+
+console.log(octal);
+// 15
+
+console.log(scientific);
+// 1500
+
+// ============================================================
+// 20. IEEE 754 FLOATING-POINT
+// ============================================================
+//
+// JavaScript Number values are generally IEEE 754
+// binary64 floating-point values.
+//
+// Some decimal fractions cannot be represented exactly
+// in binary floating-point.
+//
+// ============================================================
+
+console.log(0.1 + 0.2);
+
+// 0.30000000000000004
+
+console.log(0.1 + 0.2 === 0.3);
+
+// false
+
+// ============================================================
+// 21. NaN
+// ============================================================
+//
+// NaN = Not-a-Number.
+//
+// typeof NaN is:
+//
+// "number"
+//
+// NaN is not equal to itself.
+//
+// ============================================================
+
+console.log(typeof NaN);
+// number
+
+console.log(NaN === NaN);
+// false
+
+console.log(Number.isNaN(NaN));
+// true
+
+// ============================================================
+// 22. Infinity
+// ============================================================
+
+console.log(10 / 0);
+// Infinity
+
+console.log(10 / -0);
+// -Infinity
+
+console.log(Number.isFinite(100));
+// true
+
+console.log(Number.isFinite(Infinity));
+// false
+
+// ============================================================
+// 23. NUMBER METHODS
+// ============================================================
+
+const numberValue = 123.456789;
+
+console.log(numberValue.toFixed(2));
+// "123.46"
+
+console.log(numberValue.toPrecision(4));
+// "123.5"
+
+console.log(numberValue.toString());
+// "123.456789"
+
+console.log(numberValue.toLocaleString());
+// Locale-dependent formatted string
+
+// Useful constants:
+
+console.log(Number.MAX_VALUE);
+
+console.log(Number.MAX_SAFE_INTEGER);
+
+console.log(Number.MIN_SAFE_INTEGER);
+
+console.log(Number.MIN_VALUE);
+
+// ============================================================
+// 24. ARRAYS
+// ============================================================
+//
+// Arrays are objects representing ordered collections.
+//
+// They can contain values of different types.
+//
+// ============================================================
+
+const array = [10, "Ahmed", true, null];
+
+console.log(array[0]);
+// 10
+
+console.log(Array.isArray(array));
+// true
+
+console.log(array.length);
+// 4
+
+// ============================================================
+// ARRAY REFERENCES
+// ============================================================
+
+const arr1 = [10, 20, 30];
+
+const arr2 = [10, 20, 30];
+
+console.log(arr1 === arr2);
+
+// false
+//
+// They are two different objects.
+
+const arr3 = arr1;
+
+console.log(arr1 === arr3);
+
+// true
+//
+// Both variables reference the same array.
 //
 // ============================================================
 
 // ============================================================
-// 3. setTimeout() DOES NOT PAUSE THE LOOP
+// 25. ARRAY METHODS
+// ============================================================
+
+const values = [10, 20, 30, 40];
+
+values.push(50);
+
+values.pop();
+
+values.unshift(5);
+
+values.shift();
+
+console.log(values);
+
+// map()
+
+const doubled = values.map(function (value) {
+  return value * 2;
+});
+
+console.log(doubled);
+
+// filter()
+
+const greaterThan20 = values.filter(function (value) {
+  return value > 20;
+});
+
+console.log(greaterThan20);
+
+// reduce()
+
+const totalValue = values.reduce(function (sum, value) {
+  return sum + value;
+}, 0);
+
+console.log(totalValue);
+
+// find()
+
+console.log(
+  values.find(function (value) {
+    return value > 20;
+  }),
+);
+
+// some()
+
+console.log(
+  values.some(function (value) {
+    return value > 30;
+  }),
+);
+
+// every()
+
+console.log(
+  values.every(function (value) {
+    return value > 0;
+  }),
+);
+
+// includes()
+
+console.log(values.includes(20));
+
+// slice() - does not mutate the original array.
+
+console.log(values.slice(1, 3));
+
+// splice() - mutates the original array.
+
+const spliceArray = [10, 20, 30, 40];
+
+spliceArray.splice(1, 2);
+
+console.log(spliceArray);
+
+// [10, 40]
+
+// sort()
+
+const numbersToSort = [10, 2, 30, 5];
+
+numbersToSort.sort(function (a, b) {
+  return a - b;
+});
+
+console.log(numbersToSort);
+
+// [2, 5, 10, 30]
+
+// ============================================================
+// 26. OBJECTS
+// ============================================================
+//
+// Objects store properties.
+//
+// A property consists of:
+//
+// key -> value
+//
+// ============================================================
+
+const person = {
+  ID: 100,
+  Name: "Ahmed",
+  Age: 25,
+};
+
+console.log(person.Name);
+
+console.log(person["Name"]);
+
+// Add:
+
+person.City = "Cairo";
+
+// Modify:
+
+person.Age = 26;
+
+// Delete:
+
+delete person.City;
+
+// ============================================================
+// 27. OBJECT REFERENCES
+// ============================================================
+
+const objectA = {
+  Name: "Ahmed",
+};
+
+const objectB = objectA;
+
+objectB.Name = "Ali";
+
+console.log(objectA.Name);
+
+// Ali
+//
+// Both variables reference the same object.
+//
+// ============================================================
+
+// ============================================================
+// 28. Math
+// ============================================================
+
+console.log(Math.PI);
+
+console.log(Math.max(10, 20, 5));
+
+console.log(Math.min(10, 20, 5));
+
+console.log(Math.floor(4.9));
+
+console.log(Math.ceil(4.1));
+
+console.log(Math.round(4.5));
+
+console.log(Math.abs(-10));
+
+// Random number between 0 and 1:
+
+console.log(Math.random());
+
+// Integer from 0 to 9:
+
+console.log(Math.floor(Math.random() * 10));
+
+// Integer from 1 to 10:
+
+console.log(Math.floor(Math.random() * 10) + 1);
+
+// ============================================================
+// 29. Date
+// ============================================================
+
+const now = new Date();
+
+console.log(now);
+
+console.log(now.getFullYear());
+
+console.log(now.getMonth());
+
+// 0 = January
+// 11 = December
+
+console.log(now.getDate());
+
+// 1 - 31
+
+console.log(now.getDay());
+
+// 0 = Sunday
+// 6 = Saturday
+
+console.log(now.toLocaleString());
+
+// ============================================================
+// 30. FUNCTIONS
+// ============================================================
+//
+// Functions are reusable blocks of behavior.
+//
+// ============================================================
+
+function add(a, b) {
+  return a + b;
+}
+
+console.log(add(10, 20));
+
+// 30
+
+// Missing arguments:
+
+function showValues(a, b) {
+  console.log(a);
+  console.log(b);
+}
+
+showValues(10);
+
+// 10
+// undefined
+
+// ============================================================
+// 31. FUNCTION EXPRESSIONS
+// ============================================================
+
+const multiplyNumbers = function (a, b) {
+  return a * b;
+};
+
+console.log(multiplyNumbers(10, 20));
+
+// Arrow function:
+
+const subtract = (a, b) => {
+  return a - b;
+};
+
+console.log(subtract(20, 5));
+
+// ============================================================
+// 32. CALLBACKS
+// ============================================================
+//
+// A callback is a function passed to another function
+// to be called later or during another operation.
+//
+// ============================================================
+
+function processNumber(value, callback) {
+  return callback(value);
+}
+
+const res = processNumber(10, function (value) {
+  return value * 2;
+});
+
+console.log(res);
+
+// 20
+
+// ============================================================
+// 33. FIRST-CLASS FUNCTIONS
+// ============================================================
+//
+// Functions can:
+//
+// - Be stored in variables.
+// - Be passed as arguments.
+// - Be returned from functions.
+// - Be stored in objects.
+// - Be stored in arrays.
+//
+// ============================================================
+
+function greet() {
+  return "Hello";
+}
+
+const functionReference = greet;
+
+console.log(functionReference());
+
+// Function returned from another function:
+
+function createGreeting() {
+  return function () {
+    return "Hello Ahmed";
+  };
+}
+
+const greeting = createGreeting();
+
+console.log(greeting());
+
+// ============================================================
+// 34. FUNCTION OVERLOADING
+// ============================================================
+//
+// JavaScript does not provide traditional function
+// overloading by parameter signature.
+//
+// If two function declarations have the same name
+// in the same scope, the later declaration replaces
+// the earlier one.
+//
+// ============================================================
+
+function example(value) {
+  return "one";
+}
+
+function example(value, anotherValue) {
+  return "two";
+}
+
+console.log(example(10));
+
+// two
+
+// JavaScript instead commonly handles different argument
+// patterns manually or with rest parameters.
+//
+// ============================================================
+
+// ============================================================
+// 35. arguments OBJECT
+// ============================================================
+//
+// Traditional non-arrow functions have an `arguments`
+// object.
+//
+// It is array-like, but it is not a real Array.
+//
+// ============================================================
+
+function inspectArguments() {
+  console.log(arguments);
+
+  console.log(arguments.length);
+}
+
+inspectArguments(10, 20, 30);
+
+// Convert to Array:
+
+function totalNumbers() {
+  return Array.prototype.slice.call(arguments).reduce(function (x, y) {
+    return x + y;
+  }, 0);
+}
+
+console.log(totalNumbers(5, 6, 8, 4, 5, 4, 5, 7, 1, 2, 2, 11, 2, 4));
+
+// 67
+
+// ============================================================
+// 36. prompt()
+// ============================================================
+//
+// Browser API.
+//
+// prompt() displays a dialog and returns:
+//
+// - a string when the user enters a value
+// - null when the user cancels
+//
+// ============================================================
+
+// const userInput = prompt("Enter your name");
+
+// console.log(userInput);
+
+// ============================================================
+// 37. setTimeout()
 // ============================================================
 //
 // setTimeout() schedules a callback for later.
 //
-// It does NOT stop JavaScript and wait for the delay.
+// It does not pause the current JavaScript execution.
 //
-// The current synchronous code continues executing.
+// Syntax:
+//
+// setTimeout(callback, delay);
 //
 // ============================================================
 
-for (var i = 0; i < 3; i++) {
-  console.log("Loop:", i);
+setTimeout(function () {
+  console.log("Executed later");
+}, 1000);
 
+// ============================================================
+// 38. setTimeout() + CLOSURES
+// ============================================================
+
+function createTimer(message) {
   setTimeout(function () {
-    console.log("Timer");
-  }, 2000);
+    console.log(message);
+  }, 1000);
 }
 
-console.log("Loop finished");
+createTimer("Hello");
 
-// Immediate output:
+// ============================================================
+// 39. AJAX
+// ============================================================
 //
-// Loop: 0
-// Loop: 1
-// Loop: 2
-// Loop finished
+// AJAX = Asynchronous JavaScript and XML.
 //
-// Approximately 2 seconds later:
+// The term historically describes making asynchronous
+// HTTP requests from JavaScript without reloading the
+// entire page.
 //
-// Timer
-// Timer
-// Timer
+// Despite the name, AJAX does NOT require XML.
+//
+// Modern applications commonly exchange JSON.
+//
+// Typical flow:
+//
+// JavaScript
+//      ↓
+// HTTP request
+//      ↓
+// Server
+//      ↓
+// HTTP response
+//      ↓
+// JavaScript processes response
 //
 // ============================================================
 
 // ============================================================
-// 4. CLASSIC var + CLOSURE PROBLEM
+// 40. XMLHttpRequest
 // ============================================================
 //
-// Here the callback reads `i` when the callback executes.
-//
-// All callbacks share the same function-scoped `i`.
+// XMLHttpRequest (XHR) is the traditional browser API
+// commonly associated with AJAX.
 //
 // ============================================================
 
-const numbers = [10, 20, 30];
+const xhr = new XMLHttpRequest();
 
-for (var i = 0; i < numbers.length; i++) {
-  setTimeout(function () {
-    console.log("var:", numbers[i]);
-  }, 2000);
+xhr.open("GET", "https://example.com/data.json", true);
+
+xhr.onload = function () {
+  if (xhr.status >= 200 && xhr.status < 300) {
+    console.log(xhr.responseText);
+  } else {
+    console.log("HTTP error:", xhr.status);
+  }
+};
+
+xhr.onerror = function () {
+  console.log("Network error");
+};
+
+xhr.send();
+
+// Important:
+//
+// open() configures the request.
+//
+// send() sends the request.
+//
+// onload runs when the response has completed.
+//
+// status contains the HTTP status code.
+//
+// responseText contains the response body as text.
+//
+// ============================================================
+
+// ============================================================
+// 41. JSON
+// ============================================================
+//
+// JSON = JavaScript Object Notation.
+//
+// It is a text-based data format commonly used when
+// communicating between clients and servers.
+//
+// ============================================================
+
+const userObject = {
+  ID: 100,
+  Name: "Ahmed",
+};
+
+// Object -> JSON string:
+
+const jsonText = JSON.stringify(userObject);
+
+console.log(jsonText);
+
+// {"ID":100,"Name":"Ahmed"}
+
+// JSON string -> JavaScript object:
+
+const parsedObject = JSON.parse(jsonText);
+
+console.log(parsedObject.Name);
+
+// Ahmed
+
+// ============================================================
+// 42. fetch()
+// ============================================================
+//
+// fetch() is the modern Promise-based browser API
+// for making HTTP requests.
+//
+// ============================================================
+//
+// Basic structure:
+//
+// fetch(url)
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log(data);
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });
+//
+// ============================================================
+
+// Example:
+//
+// fetch("https://example.com/data.json")
+//   .then(function (response) {
+//
+//     if (!response.ok) {
+//       throw new Error("HTTP error: " + response.status);
+//     }
+//
+//     return response.json();
+//
+//   })
+//   .then(function (data) {
+//
+//     console.log(data);
+//
+//   })
+//   .catch(function (error) {
+//
+//     console.error(error);
+//
+//   });
+//
+// ============================================================
+
+// IMPORTANT:
+//
+// fetch() rejects its Promise for network-level failures,
+// but an HTTP 404 or 500 does not automatically reject it.
+//
+// Check:
+//
+// response.ok
+//
+// or:
+//
+// response.status
+//
+// ============================================================
+
+// ============================================================
+// 43. PROMISES
+// ============================================================
+//
+// A Promise represents the eventual result of an
+// asynchronous operation.
+//
+// States:
+//
+// pending
+// fulfilled
+// rejected
+//
+// ============================================================
+
+const promise = new Promise(function (resolve, reject) {
+  const success = true;
+
+  if (success) {
+    resolve("Operation successful");
+  } else {
+    reject(new Error("Operation failed"));
+  }
+});
+
+promise
+  .then(function (value) {
+    console.log(value);
+  })
+  .catch(function (error) {
+    console.error(error);
+  });
+
+// ============================================================
+// Promise chaining
+// ============================================================
+
+Promise.resolve(10)
+  .then(function (value) {
+    return value * 2;
+  })
+  .then(function (value) {
+    return value + 5;
+  })
+  .then(function (value) {
+    console.log(value);
+  });
+
+// 25
+
+// ============================================================
+// Promise.all()
+// ============================================================
+//
+// Waits for all Promises to fulfill.
+//
+// If one rejects, Promise.all() rejects.
+//
+// ============================================================
+
+const promiseOne = Promise.resolve(10);
+
+const promiseTwo = Promise.resolve(20);
+
+Promise.all([promiseOne, promiseTwo]).then(function (values) {
+  console.log(values);
+});
+
+// [10, 20]
+
+// ============================================================
+// 44. async / await
+// ============================================================
+//
+// async functions always return a Promise.
+//
+// await pauses execution of the async function until
+// the awaited Promise settles.
+//
+// It does not block the entire JavaScript runtime.
+//
+// ============================================================
+
+async function getData() {
+  try {
+    const response = await fetch("https://example.com/data.json");
+
+    if (!response.ok) {
+      throw new Error("HTTP error: " + response.status);
+    }
+
+    const data = await response.json();
+
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-// After the loop:
+// ============================================================
+// 45. EVENT LOOP CONCEPT
+// ============================================================
 //
-// i === 3
+// JavaScript execution involves concepts such as:
 //
-// Therefore every callback effectively executes:
+// - Call stack
+// - Host environment
+// - Task queues
+// - Microtask queue
 //
-// numbers[3]
+// Example:
 //
-// numbers[3] === undefined
+// console.log("A");
+//
+// setTimeout(function () {
+//   console.log("B");
+// }, 0);
+//
+// console.log("C");
 //
 // Output:
 //
-// undefined
-// undefined
-// undefined
+// A
+// C
+// B
+//
+// The timer callback does not execute before the current
+// synchronous code finishes.
+//
+// Promise reactions are generally processed through the
+// microtask queue.
 //
 // ============================================================
 
 // ============================================================
-// 5. let + LOOP CLOSURE
-// ============================================================
-//
-// `let` creates a separate binding for each loop iteration.
-//
-// Therefore each callback retains the appropriate value.
-//
-// ============================================================
-
-for (let i = 0; i < numbers.length; i++) {
-  setTimeout(function () {
-    console.log("let:", numbers[i]);
-  }, 2000);
-}
-
-// Output:
-//
-// 10
-// 20
-// 30
-//
-// ============================================================
-
-// ============================================================
-// 6. this
+// 46. this
 // ============================================================
 //
 // `this` depends on how a function is called.
 //
-// When a function is called as an object method:
+// Method call:
 //
 // object.method()
 //
-// `this` refers to the object used for the method call.
+// `this` is the object used as the receiver.
 //
 // ============================================================
 
@@ -235,11 +1525,17 @@ console.log(myObjectOne.Print());
 
 // 100 : Ahmed
 
+// Arrow functions do not create their own `this`.
+// They capture `this` lexically from the surrounding scope.
+//
 // ============================================================
-// 7. METHOD BORROWING
+
+// ============================================================
+// 47. call()
 // ============================================================
 //
-// Another object has compatible properties:
+// call() executes a function immediately and allows
+// explicit control over `this`.
 //
 // ============================================================
 
@@ -249,60 +1545,17 @@ const myObjectTwo = {
   Name: "Mostafa",
 };
 
-// myObjectTwo does not contain Print().
-//
-// Instead of creating another Print() function,
-// we can borrow the existing function from myObjectOne.
-//
-// ============================================================
-
-// ============================================================
-// 8. call()
-// ============================================================
-//
-// call() allows us to explicitly specify `this`.
-//
-// Syntax:
-//
-// function.call(thisArg, arg1, arg2, ...);
-//
-// ============================================================
-
 console.log(myObjectOne.Print.call(myObjectTwo));
 
 // 101 : Mostafa
-//
-// Inside Print():
-//
-// this === myObjectTwo
-//
-// Therefore:
-//
-// this.ID
-//     ↓
-// 101
-//
-// this.Name
-//     ↓
-// "Mostafa"
-//
-// ============================================================
 
 // ============================================================
-// 9. apply()
+// 48. apply()
 // ============================================================
 //
 // apply() is similar to call().
 //
-// The main difference is how arguments are supplied.
-//
-// call():
-//
-// function.call(thisArg, arg1, arg2);
-//
-// apply():
-//
-// function.apply(thisArg, [arg1, arg2]);
+// Arguments are supplied as an array-like value.
 //
 // ============================================================
 
@@ -310,145 +1563,37 @@ console.log(myObjectOne.Print.apply(myObjectTwo));
 
 // 101 : Mostafa
 
-// ============================================================
-// 10. call() vs apply()
-// ============================================================
-
 function sumThreeNumbers(a, b, c) {
   return a + b + c;
 }
 
-// call()
-// Arguments are supplied individually.
-
 console.log(sumThreeNumbers.call(null, 10, 20, 30));
 
 // 60
-
-// apply()
-// Arguments are supplied as an array-like value.
 
 console.log(sumThreeNumbers.apply(null, [10, 20, 30]));
 
 // 60
 
 // ============================================================
-// 11. Math.min() + ARRAY
-// ============================================================
-
-const arr = [100, 10, 20, 50, 12, 62, -52];
-
-// Math.min() expects individual numeric arguments:
-//
-// Math.min(100, 10, 20, ...);
-//
-// It does not expect an array as one argument.
-
-console.log(Math.min(arr));
-
-// NaN
-
-// ============================================================
-// 12. Math.min() + apply()
+// 49. bind()
 // ============================================================
 //
-// apply() passes the array elements as individual arguments.
+// bind() creates and returns a new function.
+//
+// It does not execute the function immediately.
 //
 // ============================================================
 
-console.log(Math.min.apply(null, arr));
+const boundPrint = myObjectOne.Print.bind(myObjectTwo);
 
-// -52
-
-// Conceptually similar to:
-//
-// Math.min(
-//     100,
-//     10,
-//     20,
-//     50,
-//     12,
-//     62,
-//     -52
-// );
-
-// ============================================================
-// 13. MODERN ALTERNATIVE: SPREAD SYNTAX
-// ============================================================
-//
-// Modern JavaScript provides a simpler approach.
-//
-// ============================================================
-
-console.log(Math.min(...arr));
-
-// -52
-//
-// `...arr` expands the array into individual arguments.
-//
-// ============================================================
-
-// ============================================================
-// 14. bind()
-// ============================================================
-//
-// bind() does NOT execute the function immediately.
-//
-// It returns a NEW function.
-//
-// The returned function has `this` bound to the supplied
-// object.
-//
-// ============================================================
-
-const objectTwoPrint = myObjectOne.Print.bind(myObjectTwo);
-
-// The function has not executed yet.
-//
-// Execute it:
-
-console.log(objectTwoPrint());
+console.log(boundPrint());
 
 // 101 : Mostafa
-
-// ============================================================
-// 15. call() vs apply() vs bind()
-// ============================================================
-//
-// call()
-//
-//     Explicitly set `this`.
-//     Execute immediately.
-//
-//
-//
-// apply()
-//
-//     Explicitly set `this`.
-//     Execute immediately.
-//     Arguments supplied as an array-like value.
-//
-//
-//
-// bind()
-//
-//     Explicitly bind `this`.
-//     Return a new function.
-//     Execute the new function later.
-//
-// ============================================================
-
-// ============================================================
-// 16. bind() + PRE-FILLED ARGUMENTS
-// ============================================================
 
 function multiply(a, b) {
   return a * b;
 }
-
-// Bind the first argument:
-//
-// a = 2
 
 const double = multiply.bind(null, 2);
 
@@ -456,109 +1601,41 @@ console.log(double(10));
 
 // 20
 
-console.log(double(20));
-
-// 40
-
-console.log(double(50));
-
-// 100
-
-// Conceptually:
+// ============================================================
+// 50. METHOD BORROWING
+// ============================================================
 //
-// double(10)
-//
-// becomes:
-//
-// multiply(2, 10)
+// A function can be borrowed from one object and invoked
+// with another object as its `this` value.
 //
 // ============================================================
 
+console.log(myObjectOne.Print.call(myObjectTwo));
+
+// 101 : Mostafa
+
 // ============================================================
-// 17. CLOSURE
+// 51. IIFE
+// ============================================================
+//
+// Immediately Invoked Function Expression.
+//
+// ============================================================
+
+const iifeResult = (function () {
+  return 10 + 5;
+})();
+
+console.log(iifeResult);
+
+// 15
+
+// ============================================================
+// 52. CLOSURES
 // ============================================================
 //
 // A closure occurs when a function retains access to
 // variables from its surrounding lexical environment.
-//
-// ============================================================
-
-function increaseCounter() {
-  let counter = 0;
-
-  return function () {
-    return counter++;
-  };
-}
-
-const count = increaseCounter();
-
-// increaseCounter() has finished executing.
-//
-// However, the returned function still has access to:
-//
-// counter
-//
-// This retained access is the closure.
-//
-// ============================================================
-
-// ============================================================
-// 18. CALLING THE CLOSURE
-// ============================================================
-
-console.log("Counter:", count());
-
-// 0
-
-console.log("Counter:", count());
-
-// 1
-
-console.log("Counter:", count());
-
-// 2
-
-console.log("Counter:", count());
-
-// 3
-
-console.log("Counter:", count());
-
-// 4
-
-// ============================================================
-// 19. HOW counter++ WORKS
-// ============================================================
-//
-// return counter++;
-//
-// Post-increment:
-//
-// 1. Return the current value.
-// 2. Increment the variable.
-//
-// First call:
-//
-// counter = 0
-// return 0
-// counter becomes 1
-//
-// Second call:
-//
-// counter = 1
-// return 1
-// counter becomes 2
-//
-// ============================================================
-
-// ============================================================
-// 20. CLOSURE = PERSISTENT STATE
-// ============================================================
-//
-// `counter` is local to createCounter().
-//
-// It cannot be accessed directly from outside.
 //
 // ============================================================
 
@@ -570,202 +1647,37 @@ function createCounter() {
   };
 }
 
-const privateCounter = createCounter();
+const count = createCounter();
 
-console.log(privateCounter());
-
+console.log(count());
 // 0
 
-console.log(privateCounter());
-
+console.log(count());
 // 1
 
-console.log(privateCounter());
-
+console.log(count());
 // 2
 
-// There is no direct access to the local variable:
-//
-// privateCounter.counter
-//
-// The function retains access to `counter` through
-// its lexical environment.
-//
-// ============================================================
-
-// ============================================================
-// 21. MULTIPLE CLOSURES
-// ============================================================
-//
-// Every execution of createCounter() creates a new
-// lexical environment.
-//
-// Therefore each counter has independent state.
-//
-// ============================================================
+// Each execution creates independent state:
 
 const countOne = createCounter();
 
 const countTwo = createCounter();
 
-console.log("countOne:", countOne());
-
+console.log(countOne());
 // 0
 
-console.log("countOne:", countOne());
-
+console.log(countOne());
 // 1
 
-console.log("countTwo:", countTwo());
-
+console.log(countTwo());
 // 0
 
-console.log("countTwo:", countTwo());
-
+console.log(countTwo());
 // 1
 
-console.log("countOne:", countOne());
-
-// 2
-
-console.log("countTwo:", countTwo());
-
-// 2
-
 // ============================================================
-// 22. LEXICAL SCOPE
-// ============================================================
-//
-// The inner function can access variables from its
-// surrounding lexical environment.
-//
-// ============================================================
-
-function outer() {
-  const value = 100;
-
-  function inner() {
-    console.log(value);
-  }
-
-  return inner;
-}
-
-const innerFunction = outer();
-
-innerFunction();
-
-// 100
-//
-// Even though outer() has finished executing,
-// innerFunction still has access to `value`.
-//
-// ============================================================
-
-// ============================================================
-// 23. CLOSURE + setTimeout()
-// ============================================================
-//
-// Closures are very important in asynchronous JavaScript.
-//
-// ============================================================
-
-function createTimer(message) {
-  setTimeout(function () {
-    console.log("Timer message:", message);
-  }, 2000);
-}
-
-createTimer("Hello");
-
-// The callback executes later,
-// but it still retains access to `message`.
-//
-// ============================================================
-
-// ============================================================
-// 24. arguments OBJECT
-// ============================================================
-//
-// Traditional non-arrow functions have an `arguments`
-// object.
-//
-// It contains the arguments passed to the function.
-//
-// ============================================================
-
-function total() {
-  console.log(arguments);
-
-  console.log("Number of arguments:", arguments.length);
-}
-
-total(5, 6, 8, 4, 5);
-
-// `arguments` is:
-//
-// - array-like
-// - indexed
-// - has a length property
-//
-// But it is NOT a real Array.
-//
-// Therefore:
-//
-// arguments.map(...)
-//
-// does not work directly.
-//
-// ============================================================
-
-// ============================================================
-// 25. arguments + Array.prototype methods
-// ============================================================
-//
-// We can borrow Array.prototype.slice().
-//
-// ============================================================
-
-function totalNumbers() {
-  return Array.prototype.slice.call(arguments).reduce(function (x, y) {
-    return x + y;
-  }, 0);
-}
-
-console.log(totalNumbers(5, 6, 8, 4, 5, 4, 5, 7, 1, 2, 2, 11, 2, 4));
-
-// 67
-
-// ============================================================
-// 26. MODERN ALTERNATIVE: REST PARAMETERS
-// ============================================================
-//
-// Modern JavaScript can collect arguments directly into
-// a real Array.
-//
-// ============================================================
-
-function totalModern(...numbers) {
-  return numbers.reduce(function (x, y) {
-    return x + y;
-  }, 0);
-}
-
-console.log(totalModern(5, 6, 8, 4, 5));
-
-// 28
-//
-// `numbers` is a real Array.
-//
-// ============================================================
-
-// ============================================================
-// 27. CONSTRUCTOR FUNCTION
-// ============================================================
-//
-// A constructor function is traditionally used with `new`
-// to create objects.
-//
+// 53. CONSTRUCTOR FUNCTIONS
 // ============================================================
 
 function Member(_id, _name) {
@@ -779,42 +1691,44 @@ const memberOne = new Member(100, "Ahmed");
 const memberTwo = new Member(101, "Mostafa");
 
 // ============================================================
-// 28. WHAT new DOES
+// 54. WHAT new DOES
 // ============================================================
 //
-// When:
-//
-// new Member(100, "Ahmed")
-//
-// is executed, JavaScript conceptually:
+// Conceptually:
 //
 // 1. Creates a new object.
-// 2. Links the object to Member.prototype.
-// 3. Calls Member with `this` referring to the new object.
-// 4. Returns the new object.
+// 2. Links it to Constructor.prototype.
+// 3. Calls the constructor with `this` set to the object.
+// 4. Returns the resulting object unless the constructor
+//    explicitly returns an object.
 //
 // ============================================================
 
-console.log(memberOne.ID);
-// 100
+// ============================================================
+// 55. FACTORY FUNCTIONS
+// ============================================================
 
-console.log(memberOne.Name);
-// Ahmed
+function Factory(_id, _name) {
+  return {
+    ID: _id,
+    Name: _name,
+  };
+}
+
+const factoryOne = Factory(100, "Ahmed");
+
+console.log(factoryOne);
 
 // ============================================================
-// 29. instanceof
+// 56. instanceof
 // ============================================================
 //
-// instanceof checks whether a constructor's prototype
-// exists in the object's prototype chain.
+// Checks whether Constructor.prototype occurs somewhere
+// in the object's prototype chain.
 //
 // ============================================================
 
 console.log(memberOne instanceof Member);
-
-// true
-
-console.log(memberTwo instanceof Member);
 
 // true
 
@@ -823,368 +1737,85 @@ console.log(memberOne instanceof Object);
 // true
 
 // ============================================================
-// 30. CONSTRUCTOR FUNCTION + INHERITED PROTOTYPE
-// ============================================================
-//
-// Objects created with new Member() have:
-//
-// memberOne
-//     ↓
-// Member.prototype
-//     ↓
-// Object.prototype
-//     ↓
-// null
-//
-// ============================================================
-
-// ============================================================
-// 31. FACTORY FUNCTION
-// ============================================================
-//
-// A factory function is a normal function that creates
-// and returns an object.
-//
-// It does NOT require `new`.
-//
-// ============================================================
-
-function Factory(_id, _name) {
-  return {
-    ID: _id,
-
-    Name: _name,
-  };
-}
-
-const factoryOne = Factory(100, "Ahmed");
-
-const factoryTwo = Factory(factoryOne.ID, factoryOne.Name);
-
-console.log(factoryOne);
-// { ID: 100, Name: "Ahmed" }
-
-console.log(factoryTwo);
-// { ID: 100, Name: "Ahmed" }
-
-// ============================================================
-// 32. CONSTRUCTOR vs FACTORY
-// ============================================================
-//
-// Constructor:
-//
-//     function Member(id, name) {
-//
-//         this.ID = id;
-//         this.Name = name;
-//
-//     }
-//
-//     const member = new Member(100, "Ahmed");
-//
-//
-//
-// Factory:
-//
-//     function Factory(id, name) {
-//
-//         return {
-//             ID: id,
-//             Name: name
-//         };
-//
-//     }
-//
-//     const object = Factory(100, "Ahmed");
-//
-// ============================================================
-
-// ============================================================
-// 33. INSTANCE METHODS vs STATIC METHODS
-// ============================================================
-//
-// An instance method is normally accessed through an object.
-//
-// Example:
-//
-// memberOne.someMethod()
-//
-//
-// A static method belongs to the constructor/function itself.
-//
-// Example:
-//
-// Object.keys(obj)
-//
-// ============================================================
-
-// ============================================================
-// 34. Object.keys()
-// ============================================================
-//
-// `Object.keys()` is a static method of Object.
-//
-// It receives an object and returns an array containing
-// its own enumerable property names.
-//
-// ============================================================
-
-const obj = {
-  ID: 100,
-
-  Name: "Ahmed",
-};
-
-console.log(Object.keys(obj));
-
-// ["ID", "Name"]
-
-// ============================================================
-// 35. Object.values()
-// ============================================================
-//
-// Returns an array containing the object's own
-// enumerable property values.
-//
-// ============================================================
-
-console.log(Object.values(obj));
-
-// [100, "Ahmed"]
-
-// ============================================================
-// 36. hasOwnProperty()
-// ============================================================
-//
-// hasOwnProperty() checks whether a property belongs
-// directly to the object.
-//
-// It does NOT search the prototype chain.
-//
-// ============================================================
-
-console.log(obj.hasOwnProperty("ID"));
-
-// true
-
-console.log(obj.hasOwnProperty("Salary"));
-
-// false
-
-// ============================================================
-// 37. Object.defineProperty()
-// ============================================================
-//
-// Object.defineProperty() is a static method on Object.
-//
-// It allows us to define or modify a property descriptor.
-//
+// 57. PROPERTY DESCRIPTORS
 // ============================================================
 
 const testObj = {
   ID: 100,
-
   Name: "Sayed",
-
   Hobby: "Art",
 };
 
 Object.defineProperty(testObj, "Serial", {
-  // Value stored in the property.
   value: 200212,
 
-  // If false, the property cannot be reassigned
-  // through normal assignment.
   writable: false,
 
-  // If false, the property does not appear in
-  // Object.keys(), for example.
   enumerable: false,
 
-  // If true, the property descriptor can later
-  // be changed and the property can be deleted.
   configurable: true,
 });
 
-// ============================================================
-// 38. Property descriptor behavior
-// ============================================================
-
 console.log(testObj.Serial);
 
 // 200212
-
-testObj.Serial = 200;
-
-// In non-strict mode, the assignment is ignored.
-//
-// In strict mode, assigning to a non-writable property
-// throws a TypeError.
-
-console.log(testObj.Serial);
-
-// 200212
-
-// Serial is not enumerable.
 
 console.log(Object.keys(testObj));
 
 // ["ID", "Name", "Hobby"]
 
-// But Serial still exists.
-
-console.log(testObj.hasOwnProperty("Serial"));
-
-// true
+console.log(Object.getOwnPropertyDescriptor(testObj, "Serial"));
 
 // ============================================================
-// 39. PROPERTY DESCRIPTORS
+// 58. PROTOTYPES
 // ============================================================
 //
-// A normal data property can have:
+// Ordinary objects have an internal [[Prototype]]
+// relationship.
 //
-// value
-// writable
-// enumerable
-// configurable
-//
-// Example:
-//
-// Object.defineProperty(object, "property", {
-//
-//     value: 100,
-//     writable: true,
-//     enumerable: true,
-//     configurable: true
-//
-// });
+// Property lookup can continue through this prototype.
 //
 // ============================================================
 
-// ============================================================
-// 40. Prototypes
-// ============================================================
-//
-// Every ordinary JavaScript object has an internal
-// [[Prototype]] reference.
-//
-// The prototype can contain properties and methods that
-// the object can access through the prototype chain.
-//
-// ============================================================
+const prototypeObject = {
+  Hobby: "Art",
+};
 
-// ============================================================
-// 41. Object.setPrototypeOf()
-// ============================================================
-//
-// We can explicitly change an object's prototype.
-//
-// ============================================================
+const childObject = Object.create(prototypeObject);
 
-Object.setPrototypeOf(obj, testObj);
-
-// `obj` does not directly contain Hobby.
-//
-// But its prototype, testObj, contains Hobby.
-//
-// Therefore:
-
-console.log(obj.Hobby);
+console.log(childObject.Hobby);
 
 // Art
 
-// Direct properties of obj:
-
-console.log(obj.hasOwnProperty("Hobby"));
-
-// false
-
 // ============================================================
-// 42. Prototype lookup
+// 59. PROTOTYPE CHAIN
 // ============================================================
 //
-// When JavaScript evaluates:
-//
-// obj.Hobby
-//
-// it conceptually searches:
-//
-// 1. obj
-// 2. obj's prototype
-// 3. prototype's prototype
-// 4. continue until found
-// 5. return undefined if not found
-//
-// ============================================================
-
-// ============================================================
-// 43. Prototype chain
-// ============================================================
-//
-// After:
-//
-// Object.setPrototypeOf(obj, testObj);
-//
-// the relationship is:
-//
-// obj
-//  ↓
-// testObj
-//  ↓
-// testObj's prototype
-//  ↓
+// childObject
+//      ↓
+// prototypeObject
+//      ↓
 // Object.prototype
-//  ↓
+//      ↓
 // null
 //
 // ============================================================
 
 // ============================================================
-// 44. Object.create()
-// ============================================================
-//
-// Object.create(prototype)
-//
-// creates a new object whose internal [[Prototype]]
-// points to the supplied object.
-//
+// 60. Object.create()
 // ============================================================
 
-const newObj = Object.create(testObj);
-
-// newObj itself starts without own properties.
-//
-// But its prototype is testObj.
-//
-// Therefore:
+const newObj = Object.create(prototypeObject);
 
 console.log(newObj.Hobby);
 
 // Art
 
-// ============================================================
-// 45. Own property vs inherited property
-// ============================================================
-
 console.log(newObj.hasOwnProperty("Hobby"));
 
 // false
 
-// Hobby is inherited from testObj.
-
-// ============================================================
-// 46. Shadowing an inherited property
-// ============================================================
-//
-// Assigning:
-//
-// newObj.Hobby = "Music";
-//
-// creates an OWN property on newObj.
-//
-// It does not modify testObj.Hobby.
-//
-// ============================================================
+// Shadow inherited property:
 
 newObj.Hobby = "Music";
 
@@ -1192,188 +1823,12 @@ console.log(newObj.Hobby);
 
 // Music
 
-console.log(testObj.Hobby);
+console.log(prototypeObject.Hobby);
 
 // Art
 
-console.log(newObj.hasOwnProperty("Hobby"));
-
-// true
-
 // ============================================================
-// 47. Object.create() DOES NOT CALL A CONSTRUCTOR
-// ============================================================
-//
-// This:
-//
-// Object.create(Member.prototype)
-//
-// creates an object whose prototype is Member.prototype.
-//
-// It does NOT execute:
-//
-// Member()
-//
-// Therefore constructor initialization does not happen.
-//
-// ============================================================
-
-const emptyMember = Object.create(Member.prototype);
-
-console.log(emptyMember instanceof Member);
-
-// true
-
-// But:
-//
-// emptyMember.ID
-//
-// is undefined because Member() was never called.
-//
-// ============================================================
-
-// ============================================================
-// 48. Prototype chain of a constructor instance
-// ============================================================
-
-const reObj = new Member(200, "Ahmed");
-
-// Prototype chain:
-//
-// reObj
-//   ↓
-// Member.prototype
-//   ↓
-// Object.prototype
-//   ↓
-// null
-//
-// ============================================================
-
-// ============================================================
-// 49. __proto__
-// ============================================================
-//
-// `__proto__` is a legacy accessor for an object's
-// [[Prototype]].
-//
-// It can be useful for learning, but modern code should
-// generally prefer:
-//
-// Object.getPrototypeOf()
-// Object.setPrototypeOf()
-//
-// ============================================================
-
-console.log(Object.getPrototypeOf(reObj));
-
-// Member.prototype
-
-console.log(Object.getPrototypeOf(Object.getPrototypeOf(reObj)));
-
-// Object.prototype
-
-console.log(
-  Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(reObj))),
-);
-
-// null
-
-// Equivalent conceptual relationships:
-//
-// reObj.__proto__
-//     === Member.prototype
-//
-// reObj.__proto__.__proto__
-//     === Object.prototype
-//
-// reObj.__proto__.__proto__.__proto__
-//     === null
-//
-// ============================================================
-
-// ============================================================
-// 50. Prototype equality
-// ============================================================
-
-console.log(
-  Object.prototype === Object.getPrototypeOf(Object.getPrototypeOf(reObj)),
-);
-
-// true
-
-// ============================================================
-// 51. instanceof + PROTOTYPE CHAIN
-// ============================================================
-//
-// `instanceof` checks whether:
-//
-// Constructor.prototype
-//
-// exists somewhere in the object's prototype chain.
-//
-// ============================================================
-
-console.log(reObj instanceof Member);
-
-// true
-
-console.log(reObj instanceof Object);
-
-// true
-
-console.log(Member.prototype === Object.getPrototypeOf(reObj));
-
-// true
-
-// ============================================================
-// 52. Constructor's prototype
-// ============================================================
-//
-// Every normal function used as a constructor has a
-// `prototype` property.
-//
-// ============================================================
-
-console.log(Member.prototype);
-
-// Member.prototype is the object that instances created
-// using:
-//
-// new Member()
-//
-// inherit from.
-//
-// ============================================================
-
-// ============================================================
-// 53. Prototype METHODS
-// ============================================================
-//
-// Defining a method inside the constructor creates a
-// separate function for every instance.
-//
-// Example:
-//
-// function Teacher(id, name) {
-//
-//     this.ID = id;
-//     this.Name = name;
-//
-//     this.PrintInfo = function () {
-//
-//         return ...;
-//
-//     };
-//
-// }
-//
-// This means every Teacher instance gets its own
-// PrintInfo function.
-//
-// A more memory-efficient pattern is to put the method
-// on Teacher.prototype.
-//
+// 61. PROTOTYPE METHODS
 // ============================================================
 
 function Teacher(_id, _name) {
@@ -1382,47 +1837,15 @@ function Teacher(_id, _name) {
   this.Name = _name;
 }
 
-// ============================================================
-// 54. Define method on the prototype
-// ============================================================
-
 Teacher.prototype.PrintInfo = function () {
   return "Teacher name: " + this.Name + ", Teacher ID: " + this.ID;
 };
-
-// ============================================================
-// 55. Create instances
-// ============================================================
 
 const teacher = new Teacher(1522, "Ahmed");
 
 console.log(teacher.PrintInfo());
 
 // Teacher name: Ahmed, Teacher ID: 1522
-
-// ============================================================
-// 56. Prototype method lookup
-// ============================================================
-//
-// teacher does NOT own PrintInfo.
-//
-// PrintInfo exists on:
-//
-// Teacher.prototype
-//
-// When JavaScript evaluates:
-//
-// teacher.PrintInfo()
-//
-// it searches:
-//
-// teacher
-//    ↓
-// Teacher.prototype
-//    ↓
-// finds PrintInfo
-//
-// ============================================================
 
 console.log(teacher.hasOwnProperty("PrintInfo"));
 
@@ -1433,304 +1856,923 @@ console.log(Teacher.prototype.hasOwnProperty("PrintInfo"));
 // true
 
 // ============================================================
-// 57. All Teacher instances share the same prototype method
-// ============================================================
-
-const teacherTwo = new Teacher(2000, "Ali");
-
-console.log(teacher.PrintInfo === teacherTwo.PrintInfo);
-
-// true
-
-// ============================================================
-// 58. Constructor property
+// 62. INHERITANCE
 // ============================================================
 //
-// Teacher.prototype.constructor normally points back to:
+// Inheritance means that one object/type can access
+// properties or methods associated with another.
 //
-// Teacher
+// JavaScript supports inheritance through prototypes.
 //
-// ============================================================
-
-console.log(Teacher.prototype.constructor === Teacher);
-
-// true
-
-console.log(teacher.constructor === Teacher);
-
-// true
+// There are several related patterns:
 //
-// `teacher.constructor` is inherited from Teacher.prototype.
+// 1. Prototype inheritance
+// 2. Constructor-function inheritance
+// 3. Pseudo-classical inheritance
+// 4. class / extends inheritance
 //
 // ============================================================
 
 // ============================================================
-// 59. IMPORTANT: Object.create(Teacher)
+// 63. PSEUDO-CLASSICAL INHERITANCE
 // ============================================================
 //
-// This is usually NOT what we want:
-//
-// Object.create(Teacher)
-//
-// because Teacher is the constructor function itself.
-//
-// Its prototype is:
-//
-// Function.prototype
-//
-// not:
-//
-// Teacher.prototype
+// Parent constructor:
 //
 // ============================================================
 
-const wrongPrototypeObject = Object.create(Teacher);
+function Individual(_id, _name) {
+  this.ID = _id;
 
-// This object inherits from the function object `Teacher`,
-// not from Teacher.prototype.
-//
-// ============================================================
+  this.Name = _name;
+}
 
-// ============================================================
-// 60. Correct Object.create() with a constructor prototype
-// ============================================================
-//
-// If we want an object whose prototype is:
-//
-// Teacher.prototype
-//
-// use:
-//
-// Object.create(Teacher.prototype)
-//
-// ============================================================
+// Parent prototype method:
 
-const trainee = Object.create(Teacher.prototype);
+Individual.prototype.getBasicInfo = function () {
+  return this.ID + " : " + this.Name;
+};
 
-console.log(trainee instanceof Teacher);
+// Child constructor:
 
-// true
+function Worker(_id, _name, _address, _serial, _income) {
+  // Inherit instance initialization
+  // from the parent constructor.
 
-// However:
-//
-// Teacher()
-//
-// was NOT executed.
-//
-// Therefore:
+  Individual.call(this, _id, _name);
 
-console.log(trainee.ID);
+  this.Address = _address;
 
-// undefined
+  this.Serial = _serial;
 
-console.log(trainee.Name);
+  this.Income = _income;
+}
 
-// undefined
+// Connect child prototype to parent prototype:
 
-// But the prototype method exists:
+Worker.prototype = Object.create(Individual.prototype);
 
-console.log(typeof trainee.PrintInfo);
+// Restore constructor:
 
-// function
-//
-// Calling PrintInfo() immediately would produce a result
-// based on undefined ID/Name unless we initialize them.
-//
-// ============================================================
+Object.defineProperty(Worker.prototype, "constructor", {
+  value: Worker,
+  writable: true,
+  configurable: true,
+  enumerable: false,
+});
 
-// ============================================================
-// 61. Prototype inheritance with Object.create()
-// ============================================================
-//
-// We can manually initialize the properties:
+// Child prototype method:
 
-trainee.ID = 3000;
+Worker.prototype.getWorkInfo = function () {
+  return this.Address + " : " + this.Serial + " : " + this.Income;
+};
 
-trainee.Name = "Mohammed";
+// Create instance:
 
-console.log(trainee.PrintInfo());
+const workerOne = new Worker(100, "Ahmed", "Cairo", 5001, 15000);
 
-// Teacher name: Mohammed, Teacher ID: 3000
+console.log(workerOne.getBasicInfo());
+
+// 100 : Ahmed
+
+console.log(workerOne.getWorkInfo());
+
+// Cairo : 5001 : 15000
 
 // ============================================================
-// 62. Constructor vs prototype properties
+// PSEUDO-CLASSICAL PROTOTYPE CHAIN
 // ============================================================
 //
-// Instance properties:
-//
-// this.ID
-// this.Name
-//
-// are created directly on each instance.
-//
-// Prototype methods:
-//
-// Teacher.prototype.PrintInfo
-//
-// are shared by all instances.
-//
-// ============================================================
-
-// ============================================================
-// 63. FINAL PROTOTYPE CHAIN
-// ============================================================
-//
-// For:
-//
-// const teacher = new Teacher(1522, "Ahmed");
-//
-// The chain is:
-//
-// teacher
-//    ↓
-// Teacher.prototype
-//    ↓
+// workerOne
+//      ↓
+// Worker.prototype
+//      ↓
+// Individual.prototype
+//      ↓
 // Object.prototype
-//    ↓
+//      ↓
+// null
+//
+// ============================================================
+
+console.log(workerOne instanceof Worker);
+
+// true
+
+console.log(workerOne instanceof Individual);
+
+// true
+
+console.log(workerOne instanceof Object);
+
+// true
+
+// ============================================================
+// 64. METHOD OVERRIDING
+// ============================================================
+//
+// A child prototype can define a method with the same name
+// as a parent method.
+//
+// The child method is found first during lookup.
+//
+// ============================================================
+
+Individual.prototype.describe = function () {
+  return "Individual: " + this.Name;
+};
+
+Worker.prototype.describe = function () {
+  return "Worker: " + this.Name;
+};
+
+console.log(workerOne.describe());
+
+// Worker: Ahmed
+
+// Calling the parent version directly:
+
+Worker.prototype.describeParent = function () {
+  return Individual.prototype.describe.call(this);
+};
+
+console.log(workerOne.describeParent());
+
+// Individual: Ahmed
+
+// ============================================================
+// 65. class
+// ============================================================
+//
+// ES6 introduced class syntax.
+//
+// Classes provide cleaner syntax for constructor and
+// prototype-based object-oriented programming.
+//
+// ============================================================
+
+class Person {
+  constructor(id, name) {
+    this.ID = id;
+    this.Name = name;
+  }
+
+  getInfo() {
+    return this.ID + " : " + this.Name;
+  }
+}
+
+const personOne = new Person(100, "Ahmed");
+
+console.log(personOne.getInfo());
+
+// 100 : Ahmed
+
+// The method is on Person.prototype:
+
+console.log(Person.prototype.hasOwnProperty("getInfo"));
+
+// true
+
+// ============================================================
+// 66. extends + super
+// ============================================================
+
+class Employee extends Person {
+  constructor(id, name, salary) {
+    // Call parent constructor.
+
+    super(id, name);
+
+    this.Salary = salary;
+  }
+
+  getEmployeeInfo() {
+    return this.getInfo() + " : " + this.Salary;
+  }
+}
+
+const employee = new Employee(200, "Ali", 15000);
+
+console.log(employee.getEmployeeInfo());
+
+// 200 : Ali : 15000
+
+console.log(employee instanceof Employee);
+
+// true
+
+console.log(employee instanceof Person);
+
+// true
+
+console.log(employee instanceof Object);
+
+// true
+
+// Prototype chain:
+//
+// employee
+//     ↓
+// Employee.prototype
+//     ↓
+// Person.prototype
+//     ↓
+// Object.prototype
+//     ↓
 // null
 //
 // ============================================================
 
 // ============================================================
-// 64. FINAL SUMMARY
+// 67. TEMPLATE LITERALS
+// ============================================================
+
+const name = "Ahmed";
+const userAge = 25;
+
+const sentence = `Name: ${name}, Age: ${userAge}`;
+
+console.log(sentence);
+
+// ============================================================
+// 68. DEFAULT PARAMETERS
+// ============================================================
+
+function greetUser(user = "Guest") {
+  return `Hello ${user}`;
+}
+
+console.log(greetUser());
+
+// Hello Guest
+
+console.log(greetUser("Ahmed"));
+
+// Hello Ahmed
+
+// ============================================================
+// 69. REST PARAMETERS
 // ============================================================
 //
-// IIFE
-//
-//     (function () {})();
-//
-//     Function expression + immediate invocation.
-//
-//
-//
-// setTimeout()
-//
-//     Schedules a callback for later.
-//     Does not pause the current execution.
-//
-//
-//
-// Closure
-//
-//     A function retains access to variables from its
-//     surrounding lexical environment.
-//
-//
-//
-// var
-//
-//     Function-scoped.
-//
-//
-//
-// let
-//
-//     Block-scoped.
-//     A `for` loop creates a separate binding per iteration.
-//
-//
-//
-// this
-//
-//     Determined by the function's invocation context.
-//
-//
-//
-// call()
-//
-//     Explicitly sets `this`.
-//     Executes immediately.
-//     Arguments are supplied individually.
-//
-//
-//
-// apply()
-//
-//     Explicitly sets `this`.
-//     Executes immediately.
-//     Arguments are supplied as an array-like value.
-//
-//
-//
-// bind()
-//
-//     Explicitly binds `this`.
-//     Returns a new function.
-//     Does not execute immediately.
-//
-//
-//
-// arguments
-//
-//     Array-like object available in traditional
-//     non-arrow functions.
-//
-//
-//
-// Constructor function
-//
-//     Used with `new` to create instances.
-//
-//
-//
-// Factory function
-//
-//     Normal function that returns an object.
-//
-//
-//
-// instanceof
-//
-//     Checks whether Constructor.prototype exists
-//     in the object's prototype chain.
-//
-//
-//
-// Object.defineProperty()
-//
-//     Defines a property and its descriptor.
-//
-//
-//
-// Property descriptor
-//
-//     value
-//     writable
-//     enumerable
-//     configurable
-//
-//
-//
-// Prototype
-//
-//     Objects can inherit properties and methods
-//     through their [[Prototype]].
-//
-//
-//
-// Object.create()
-//
-//     Creates an object with the supplied object as
-//     its prototype.
-//
-//
-//
-// Prototype chain
-//
-//     object
-//        ↓
-//     prototype
-//        ↓
-//     prototype
-//        ↓
-//     null
-//
-//
-//
-// Prototype method
-//
-//     Constructor.prototype.method = function () {};
-//
-//     Shared by instances through the prototype chain.
-//
-//
+// Rest parameters collect remaining arguments into
+// a real Array.
+//
+// ============================================================
+
+function sumAll(...numbers) {
+  return numbers.reduce(function (sum, number) {
+    return sum + number;
+  }, 0);
+}
+
+console.log(sumAll(10, 20, 30));
+
+// 60
+
+// ============================================================
+// 70. SPREAD SYNTAX
+// ============================================================
+
+const firstNumbers = [1, 2, 3];
+
+const secondNumbers = [...firstNumbers, 4, 5];
+
+console.log(secondNumbers);
+
+// [1, 2, 3, 4, 5]
+
+const objectOne = {
+  ID: 100,
+};
+
+const objectTwo = {
+  ...objectOne,
+  Name: "Ahmed",
+};
+
+console.log(objectTwo);
+
+// ============================================================
+// 71. DESTRUCTURING
+// ============================================================
+//
+// Array destructuring:
+//
+// ============================================================
+
+const coordinates = [10, 20];
+
+const [x, y] = coordinates;
+
+console.log(x);
+console.log(y);
+
+// Object destructuring:
+
+const user = {
+  id: 100,
+  name: "Ahmed",
+};
+
+const { id, name: userFullName } = user;
+
+console.log(id);
+console.log(userFullName);
+
+// ============================================================
+// 72. OPTIONAL CHAINING
+// ============================================================
+//
+// Optional chaining prevents an error when a value
+// in a property chain is null or undefined.
+//
+// ============================================================
+
+const account = {
+  profile: {
+    name: "Ahmed",
+  },
+};
+
+console.log(account.profile?.name);
+
+// Ahmed
+
+console.log(account.settings?.theme);
+
+// undefined
+
+// ============================================================
+// 73. NULLISH COALESCING
+// ============================================================
+//
+// ?? uses the fallback only when the left side is:
+//
+// null
+// undefined
+//
+// Unlike ||, it does not treat 0 or "" as missing.
+//
+// ============================================================
+
+const countValue = 0;
+
+console.log(countValue ?? 100);
+
+// 0
+
+console.log(null ?? 100);
+
+// 100
+
+// ============================================================
+// 74. MODULES
+// ============================================================
+//
+// ES modules allow code to be separated into files.
+//
+// Export:
+//
+// export function add(a, b) {
+//   return a + b;
+// }
+//
+// Import:
+//
+// import { add } from "./math.js";
+//
+// Default export:
+//
+// export default function add() {}
+//
+// Import:
+//
+// import add from "./math.js";
+//
+// HTML:
+//
+// <script type="module" src="main.js"></script>
+//
+// Modules have their own scope.
+//
+// ============================================================
+
+// ============================================================
+// 75. DOM
+// ============================================================
+//
+// DOM = Document Object Model.
+//
+// The browser represents HTML as a tree of objects.
+//
+// Example:
+//
+// HTML
+//   ↓
+// document
+//   ↓
+// html
+//   ↓
+// body
+//   ↓
+// elements
+//
+// ============================================================
+
+// ============================================================
+// 76. DOM SELECTION
+// ============================================================
+//
+// Common selection methods:
+//
+// document.getElementById()
+// document.getElementsByClassName()
+// document.getElementsByTagName()
+// document.querySelector()
+// document.querySelectorAll()
+//
+// ============================================================
+
+const titleElement = document.getElementById("title");
+
+const firstElement = document.querySelector(".item");
+
+const allItems = document.querySelectorAll(".item");
+
+// ============================================================
+// 77. DOM MANIPULATION
+// ============================================================
+
+if (titleElement) {
+  titleElement.textContent = "JavaScript";
+}
+
+if (titleElement) {
+  titleElement.style.color = "blue";
+
+  titleElement.style.textAlign = "center";
+
+  titleElement.style.transform = "translateX(200px)";
+}
+
+// ============================================================
+// 78. DOM TRAVERSAL
+// ============================================================
+//
+// parentElement
+// children
+// firstElementChild
+// lastElementChild
+// nextElementSibling
+// previousElementSibling
+//
+// ============================================================
+
+// ============================================================
+// 79. DOM CREATION / REMOVAL
+// ============================================================
+
+const newElement = document.createElement("div");
+
+newElement.textContent = "New element";
+
+document.body.append(newElement);
+
+// Remove:
+
+// newElement.remove();
+
+// ============================================================
+// 80. DOM EVENTS
+// ============================================================
+//
+// Events allow JavaScript to react to user and browser
+// actions.
+//
+// Examples:
+//
+// click
+// dblclick
+// input
+// change
+// submit
+// keydown
+// keyup
+// mouseenter
+// mouseleave
+// focus
+// blur
+//
+// ============================================================
+
+if (titleElement) {
+  titleElement.addEventListener("click", function (event) {
+    console.log("Clicked:", event.target);
+  });
+}
+
+// ============================================================
+// 81. EVENT PROPAGATION
+// ============================================================
+//
+// Event propagation has three conceptual phases:
+//
+// 1. Capturing
+// 2. Target
+// 3. Bubbling
+//
+// ============================================================
+//
+// event.stopPropagation()
+//
+// stops further propagation.
+//
+// event.preventDefault()
+//
+// prevents the browser's default action.
+//
+// ============================================================
+
+// ============================================================
+// 82. EVENT DELEGATION
+// ============================================================
+//
+// Event delegation uses bubbling to handle events from
+// multiple child elements using one parent listener.
+//
+// ============================================================
+
+document.addEventListener("click", function (event) {
+  if (event.target.matches && event.target.matches(".item")) {
+    console.log("Item clicked:", event.target);
+  }
+});
+
+// ============================================================
+// 83. FORMS
+// ============================================================
+//
+// Common form concepts:
+//
+// input.value
+// checkbox.checked
+// select.value
+// submit event
+// preventDefault()
+//
+// Example:
+//
+// form.addEventListener(
+//   "submit",
+//   function (event) {
+//
+//     event.preventDefault();
+//
+//   },
+// );
+//
+// ============================================================
+
+// ============================================================
+// 84. BOM
+// ============================================================
+//
+// BOM = Browser Object Model.
+//
+// It represents browser-related objects and functionality.
+//
+// Important BOM objects:
+//
+// window
+// location
+// history
+// navigator
+// screen
+//
+// DOM:
+//
+// document
+//
+// BOM:
+//
+// window and browser environment
+//
+// ============================================================
+
+// ============================================================
+// 85. window
+// ============================================================
+//
+// `window` is the browser's global object.
+//
+// Examples:
+//
+// window.alert()
+// window.open()
+// window.close()
+// window.setTimeout()
+// window.setInterval()
+//
+// ============================================================
+
+// Open window:
+//
+// const child = window.open(
+//   "child.html",
+//   "",
+//   "width=400,height=300"
+// );
+//
+// Close:
+//
+// child.close();
+//
+// ============================================================
+
+// ============================================================
+// 86. location
+// ============================================================
+//
+// window.location provides information about the current URL.
+//
+// Common properties:
+//
+// location.href
+// location.hostname
+// location.pathname
+// location.protocol
+//
+// Methods:
+//
+// location.reload()
+//
+// Navigation:
+//
+// location.href = "https://example.com";
+//
+// ============================================================
+
+// ============================================================
+// 87. history
+// ============================================================
+//
+// Browser history:
+//
+// history.back()
+// history.forward()
+// history.go()
+//
+// ============================================================
+
+// ============================================================
+// 88. navigator
+// ============================================================
+//
+// Browser/environment information.
+//
+// Examples:
+//
+// navigator.userAgent
+// navigator.language
+// navigator.onLine
+//
+// ============================================================
+
+// ============================================================
+// 89. screen
+// ============================================================
+//
+// Screen information:
+//
+// screen.width
+// screen.height
+// screen.availWidth
+// screen.availHeight
+//
+// ============================================================
+
+// ============================================================
+// FINAL CONCEPTUAL MAP
+// ============================================================
+//
+// JAVASCRIPT
+//
+// ├── Values
+// │   ├── Primitive
+// │   └── Object
+// │
+// ├── Variables
+// │   ├── var
+// │   ├── let
+// │   └── const
+// │
+// ├── Scope
+// │   ├── Global
+// │   ├── Function
+// │   └── Block
+// │
+// ├── Functions
+// │   ├── Declaration
+// │   ├── Expression
+// │   ├── Arrow
+// │   ├── Callback
+// │   ├── First-class
+// │   ├── Closure
+// │   └── Constructor
+// │
+// ├── Objects
+// │   ├── Properties
+// │   ├── Methods
+// │   ├── References
+// │   ├── Descriptors
+// │   └── Prototypes
+// │
+// ├── Prototype System
+// │   ├── [[Prototype]]
+// │   ├── Constructor.prototype
+// │   ├── Prototype chain
+// │   ├── instanceof
+// │   ├── Object.create()
+// │   └── Inheritance
+// │
+// ├── Async JavaScript
+// │   ├── setTimeout
+// │   ├── Callbacks
+// │   ├── Event loop
+// │   ├── AJAX
+// │   ├── XMLHttpRequest
+// │   ├── fetch
+// │   ├── Promise
+// │   └── async / await
+// │
+// ├── Modern JavaScript
+// │   ├── Template literals
+// │   ├── Rest
+// │   ├── Spread
+// │   ├── Destructuring
+// │   ├── Optional chaining
+// │   ├── Nullish coalescing
+// │   └── Modules
+// │
+// └── Browser
+//     ├── DOM
+//     ├── Events
+//     └── BOM
+//
+// ============================================================
+//
+// IMPORTANT INHERITANCE MODEL
+// ============================================================
+//
+// Old-style constructor/prototype:
+//
+// Parent
+//   ↓
+// Parent.prototype
+//   ↑
+// Child.prototype
+//   ↓
+// Child instance
+//
+//
+// More accurately:
+//
+// childInstance
+//       ↓
+// Child.prototype
+//       ↓
+// Parent.prototype
+//       ↓
+// Object.prototype
+//       ↓
+// null
+//
+// Modern class syntax:
+//
+// class Child extends Parent {}
+//
+// expresses the same general prototype relationship
+// using cleaner syntax.
+//
+// ============================================================
+//
+// IMPORTANT ASYNC MODEL
+// ============================================================
+//
+// Synchronous code:
+//
+// Call stack
+//      ↓
+// execute
+//      ↓
+// continue
+//
+// Asynchronous operation:
+//
+// JavaScript
+//      ↓
+// Browser / host API
+//      ↓
+// operation completes
+//      ↓
+// queue
+//      ↓
+// event loop
+//      ↓
+// callback / Promise reaction
+//      ↓
+// call stack
+//
+// ============================================================
+//
+// AJAX MODEL
+// ============================================================
+//
+// Browser
+//    ↓
+// JavaScript
+//    ↓
+// HTTP request
+//    ↓
+// Server
+//    ↓
+// HTTP response
+//    ↓
+// JSON / text / other data
+//    ↓
+// JavaScript
+//    ↓
+// DOM update
+//
+// ============================================================
+//
+// FINAL SUMMARY
+// ============================================================
+//
+// JavaScript fundamentals:
+//
+//     Values
+//     Types
+//     Variables
+//     Scope
+//     Hoisting
+//     Functions
+//     Objects
+//     Arrays
+//     Strings
+//     Numbers
+//     Coercion
+//     Equality
+//
+// Deep JavaScript:
+//
+//     this
+//     call
+//     apply
+//     bind
+//     closures
+//     callbacks
+//     constructor functions
+//     factory functions
+//     prototypes
+//     prototype chains
+//     descriptors
+//     instanceof
+//     inheritance
+//
+// Asynchronous JavaScript:
+//
+//     timers
+//     callbacks
+//     event loop
+//     AJAX
+//     XMLHttpRequest
+//     fetch
+//     Promise
+//     async / await
+//
+// Modern JavaScript:
+//
+//     template literals
+//     default parameters
+//     rest
+//     spread
+//     destructuring
+//     optional chaining
+//     nullish coalescing
+//     modules
+//     classes
+//
+// Browser JavaScript:
+//
+//     DOM
+//     events
+//     BOM
+//     window
+//     location
+//     history
+//     navigator
+//     screen
+//
+// ============================================================
